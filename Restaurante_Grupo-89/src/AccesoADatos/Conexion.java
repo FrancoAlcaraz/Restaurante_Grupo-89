@@ -1,7 +1,7 @@
 
 package AccesoADatos;
 
-
-class Reserva {
+public class Conexion {
+ 
     
 }

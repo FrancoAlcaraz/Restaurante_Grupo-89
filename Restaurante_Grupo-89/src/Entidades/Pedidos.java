@@ -1,5 +1,5 @@
 
-package AccesoADatos;
+package Entidades;
 
 
 public class Pedidos {

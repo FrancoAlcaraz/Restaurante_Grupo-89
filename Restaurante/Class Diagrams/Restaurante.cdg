@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Restaurante">
+  <ClassDiagramComponents>
+    <Class name="Mesas" package="" visibility="public" xPosition="50.0" yPosition="44.0">
+      <Fields>
+        <Field name="IdMesa" type="Object" visibility="private"/>
+        <Field name="Capacidad" type="Object" visibility="private"/>
+        <Field name="Estado" type="Object" visibility="private"/>
+        <Field name="reserva" type="Reserva" visibility="private"/>
+        <Field name="pedidos" type="Pedidos" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Mesero" package="" visibility="public" xPosition="661.0" yPosition="190.0">
+      <Fields>
+        <Field name="IdMesero" type="Object" visibility="private"/>
+        <Field name="mesa" type="Mesas" visibility="private"/>
+        <Field name="reserva" type="Reserva" visibility="private"/>
+        <Field name="Nombre" type="Object" visibility="private"/>
+        <Field name="DNI" type="Object" visibility="private"/>
+        <Field name="Estado" type="Object" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Productos" package="" visibility="public" xPosition="631.0" yPosition="442.0">
+      <Fields>
+        <Field name="IdProducto" type="Object" visibility="private"/>
+        <Field name="Nombre" type="Object" visibility="private"/>
+        <Field name="Cantidad" type="Object" visibility="private"/>
+        <Field name="Precio" type="Object" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Reserva" package="" visibility="public" xPosition="55.0" yPosition="516.0">
+      <Fields>
+        <Field name="IdReserva" type="Object" visibility="private"/>
+        <Field name="mesa" type="Mesas" visibility="private"/>
+        <Field name="DNI" type="Object" visibility="private"/>
+        <Field name="Nombre" type="Object" visibility="private"/>
+        <Field name="Fecha" type="Object" visibility="private"/>
+        <Field name="Hora" type="Object" visibility="private"/>
+        <Field name="Estado" type="Object" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Pedidos" package="" visibility="public" xPosition="328.0" yPosition="541.0">
+      <Fields>
+        <Field name="IdPedidos" type="Object" visibility="private"/>
+        <Field name="producto" type="Productos" visibility="private"/>
+        <Field name="mesero" type="Mesero" visibility="private"/>
+        <Field name="mesa" type="Mesas" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="tiene" source="Mesas" target="Reserva" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="tiene" source="Mesas" target="Pedidos" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="Contiene" source="Pedidos" target="Productos" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

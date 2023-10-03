@@ -1,22 +1,18 @@
-
 package Entidades;
 
-
 public class Mesero {
+
     int IdMesero;
     int dni;
     String nombre;
     boolean Estado;
-    Mesa mesa;
-    Reserva reserva;
 
-    public Mesero(int IdMesero, int dni, String nombre, boolean Estado, Mesa mesa, Reserva reserva) {
+    public Mesero(int IdMesero, int dni, String nombre, boolean Estado) {
         this.IdMesero = IdMesero;
         this.dni = dni;
         this.nombre = nombre;
         this.Estado = Estado;
-        this.mesa = mesa;
-        this.reserva = reserva;
+
     }
 
     public Mesero() {
@@ -54,25 +50,9 @@ public class Mesero {
         this.Estado = Estado;
     }
 
-    public Mesa getMesa() {
-        return mesa;
-    }
-
-    public void setMesa(Mesa mesa) {
-        this.mesa = mesa;
-    }
-
-    public Reserva getReserva() {
-        return reserva;
-    }
-
-    public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
-    }
-
     @Override
     public String toString() {
-        return "Mesero{" + "IdMesero=" + IdMesero + ", dni=" + dni + ", nombre=" + nombre + ", Estado=" + Estado + ", mesa=" + mesa + ", reserva=" + reserva + '}';
+        return "Mesero{" + "IdMesero=" + IdMesero + ", dni=" + dni + ", nombre=" + nombre + ", Estado=" + Estado + '}';
     }
-    
+
 }

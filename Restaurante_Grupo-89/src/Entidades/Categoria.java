@@ -1,7 +1,5 @@
-
 package Entidades;
 
-
 public enum Categoria {
-    COMIDA,BEBIDA_A,BEBIDA_NA;
+    COMIDA, BEBIDA_A, BEBIDA_NA;
 }

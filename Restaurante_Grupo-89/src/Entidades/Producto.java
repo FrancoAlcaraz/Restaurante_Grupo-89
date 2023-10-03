@@ -1,9 +1,7 @@
-
 package Entidades;
 
-
 public class Producto {
-    
+
     private int idProducto;
     private String nombre;
     private int cantidad;
@@ -64,5 +62,5 @@ public class Producto {
     @Override
     public String toString() {
         return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", cantidad=" + cantidad + ", precio=" + precio + ", categoria=" + categoria + '}';
-}
+    }
 }

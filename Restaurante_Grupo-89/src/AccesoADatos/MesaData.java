@@ -18,13 +18,13 @@ public class MesaData {
         con=Conexion.getConexion();
     }
  public void AgregarMesa(Mesa mesa){
- String sql="INSERT INTO `mesa`(`idMesa`, `cantidad`, `estado`, `idReserva`, `idPedido`) VALUES ('?','?','?','?','?')";
+ String sql="INSERT INTO `mesa`(`idMesa`, `cantidad`, `estado`, `idPedido`) VALUES ('?','?','?','?','?')";
   try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, mesa.getIdMesa());
             ps.setInt(2, mesa.getCapacidad());
             ps.setBoolean(3, mesa.isEstado());
-             ps.setInt(5,mesa.getReserva().getIdReserva());
+            
             ps.setInt(5,mesa.getPedido().getIdPedido());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();

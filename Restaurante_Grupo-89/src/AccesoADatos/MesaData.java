@@ -4,6 +4,7 @@ import Entidades.Mesa;
 import Entidades.Pedidos;
 import Entidades.Reserva;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,27 +22,17 @@ public class MesaData {
     public MesaData() {
         con = Conexion.getConexion();
     }
-<<<<<<< HEAD
+
     
-    public void AgregarMesa(Mesa mesa) {
-        String sql = "INSERT INTO `mesa`(`idMesa`, `capacidad`, `estado`, `idReserva`, `idPedido`) VALUES ('?','?','?','?','?')";
-        try {
-=======
+
  public void AgregarMesa(Mesa mesa){
  String sql="INSERT INTO `mesa`(`idMesa`, `cantidad`, `estado`, `idPedido`) VALUES ('?','?','?','?','?')";
   try {
->>>>>>> a9c3bc843ae0f121853de667a2845e8fe6dcc748
+
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, mesa.getIdMesa());
             ps.setInt(2, mesa.getCapacidad());
             ps.setBoolean(3, mesa.isEstado());
-<<<<<<< HEAD
-            ps.setInt(5, mesa.getReserva().getIdReserva());
-            ps.setInt(5, mesa.getPedido().getIdPedido());
-=======
-            
-            ps.setInt(5,mesa.getPedido().getIdPedido());
->>>>>>> a9c3bc843ae0f121853de667a2845e8fe6dcc748
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -83,17 +74,37 @@ public class MesaData {
         try {
                 PreparedStatement ps=con.prepareStatement(sql);
                ps.setInt(1, IdMesa);
+               int res=ps.executeUpdate();
+               if(res>0){
                 System.out.println("Mesa Eliminada");
-                
+               }else{
+                     System.out.println("Error al eliminar");  
+                       }
         } catch (SQLException ex) {
             Logger.getLogger(MesaData.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void ModificarMesa(int IdMesa){
-    //Statement ps=con.createStatement();
-   // ResultSet rs=ps.executeQuery("");
-    
+    public void ModificarMesa(Mesa mesa){
+     String sql = "UPDATE `mesa` SET `idMesa`=?,`cantidad`=?,`estado`=? WHERE idMesa=?";
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, mesa.getIdMesa());
+            ps.setInt(2, mesa.getCapacidad());
+            ps.setBoolean(3,mesa.isEstado());
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Modificado Exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "La mesa no existe");
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa " + ex.getMessage());
     
     }
+}
 }

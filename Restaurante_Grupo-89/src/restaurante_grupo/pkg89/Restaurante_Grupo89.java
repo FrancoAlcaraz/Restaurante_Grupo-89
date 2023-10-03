@@ -5,6 +5,8 @@
  */
 package restaurante_grupo.pkg89;
 
+import AccesoADatos.MesaData;
+
 /**
  *
  * @author Usuario
@@ -15,7 +17,9 @@ public class Restaurante_Grupo89 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+       MesaData mesa=new MesaData();
+       mesa.EliminarMesa(1);
+       
     }
     
 }

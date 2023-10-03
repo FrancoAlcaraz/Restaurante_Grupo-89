@@ -21,16 +21,27 @@ public class MesaData {
     public MesaData() {
         con = Conexion.getConexion();
     }
+<<<<<<< HEAD
     
     public void AgregarMesa(Mesa mesa) {
         String sql = "INSERT INTO `mesa`(`idMesa`, `capacidad`, `estado`, `idReserva`, `idPedido`) VALUES ('?','?','?','?','?')";
         try {
+=======
+ public void AgregarMesa(Mesa mesa){
+ String sql="INSERT INTO `mesa`(`idMesa`, `cantidad`, `estado`, `idPedido`) VALUES ('?','?','?','?','?')";
+  try {
+>>>>>>> a9c3bc843ae0f121853de667a2845e8fe6dcc748
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, mesa.getIdMesa());
             ps.setInt(2, mesa.getCapacidad());
             ps.setBoolean(3, mesa.isEstado());
+<<<<<<< HEAD
             ps.setInt(5, mesa.getReserva().getIdReserva());
             ps.setInt(5, mesa.getPedido().getIdPedido());
+=======
+            
+            ps.setInt(5,mesa.getPedido().getIdPedido());
+>>>>>>> a9c3bc843ae0f121853de667a2845e8fe6dcc748
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {

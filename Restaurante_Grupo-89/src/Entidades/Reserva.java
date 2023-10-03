@@ -1,24 +1,26 @@
-
 package Entidades;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Reserva {
-     int idReserva;
-     int dni;
-     String nombre;
-     LocalDate fecha;
-     LocalTime hora;
-     boolean estado;
 
-    public Reserva(int idReserva, int dni, String nombre, LocalDate fecha, LocalTime hora, boolean estado) {
+    private int idReserva;
+    private int dni;
+    private String nombre;
+    private LocalDate fecha;
+    private LocalTime hora;
+    private boolean estado;
+    private Mesa mesa;
+
+    public Reserva(int idReserva, int dni, String nombre, LocalDate fecha, LocalTime hora, boolean estado, Mesa mesa) {
         this.idReserva = idReserva;
         this.dni = dni;
         this.nombre = nombre;
         this.fecha = fecha;
         this.hora = hora;
         this.estado = estado;
+        this.mesa = mesa;
     }
 
     public Reserva() {
@@ -71,5 +73,18 @@ public class Reserva {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    
+
+    public Mesa getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(Mesa mesa) {
+        this.mesa = mesa;
+    }
+
+    @Override
+    public String toString() {
+        return "Reserva{" + "idReserva=" + idReserva + ", dni=" + dni + ", nombre=" + nombre + ", fecha=" + fecha + ", hora=" + hora + ", estado=" + estado + ", mesa=" + mesa + '}';
+    }
+
 }

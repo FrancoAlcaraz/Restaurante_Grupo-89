@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-10-2023 a las 17:43:25
+-- Tiempo de generación: 03-10-2023 a las 17:32:48
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -30,9 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `mesa` (
   `idMesa` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `estado` tinyint(1) NOT NULL,
-  `idReserva` int(11) NOT NULL,
-  `idPedido` int(11) NOT NULL
+  `estado` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -42,12 +40,10 @@ CREATE TABLE `mesa` (
 --
 
 CREATE TABLE `mesero` (
-  `idMesero` int(1) NOT NULL,
+  `idMesero` int(11) NOT NULL,
   `dni` int(60) NOT NULL,
   `nombre` varchar(60) NOT NULL,
-  `estado` tinyint(1) NOT NULL,
-  `idMesa` int(11) NOT NULL,
-  `idReserva` int(11) NOT NULL
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -74,7 +70,7 @@ CREATE TABLE `producto` (
   `nombre` varchar(60) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `precio` double NOT NULL,
-  `categoria` int(11) NOT NULL
+  `categoria` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -101,17 +97,13 @@ CREATE TABLE `reserva` (
 -- Indices de la tabla `mesa`
 --
 ALTER TABLE `mesa`
-  ADD PRIMARY KEY (`idMesa`),
-  ADD KEY `idReserva` (`idReserva`,`idPedido`),
-  ADD KEY `idPedido` (`idPedido`);
+  ADD PRIMARY KEY (`idMesa`);
 
 --
 -- Indices de la tabla `mesero`
 --
 ALTER TABLE `mesero`
-  ADD PRIMARY KEY (`idMesero`),
-  ADD KEY `idReserva` (`idReserva`),
-  ADD KEY `idMesa` (`idMesa`);
+  ADD PRIMARY KEY (`idMesero`);
 
 --
 -- Indices de la tabla `pedido`
@@ -150,7 +142,7 @@ ALTER TABLE `mesa`
 -- AUTO_INCREMENT de la tabla `mesero`
 --
 ALTER TABLE `mesero`
-  MODIFY `idMesero` int(1) NOT NULL AUTO_INCREMENT;
+  MODIFY `idMesero` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
@@ -173,20 +165,6 @@ ALTER TABLE `reserva`
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `mesa`
---
-ALTER TABLE `mesa`
-  ADD CONSTRAINT `mesa_ibfk_1` FOREIGN KEY (`idPedido`) REFERENCES `pedido` (`idPedido`),
-  ADD CONSTRAINT `mesa_ibfk_2` FOREIGN KEY (`idReserva`) REFERENCES `reserva` (`idReserva`);
-
---
--- Filtros para la tabla `mesero`
---
-ALTER TABLE `mesero`
-  ADD CONSTRAINT `mesero_ibfk_1` FOREIGN KEY (`idMesa`) REFERENCES `mesa` (`idMesa`),
-  ADD CONSTRAINT `mesero_ibfk_2` FOREIGN KEY (`idReserva`) REFERENCES `reserva` (`idReserva`);
 
 --
 -- Filtros para la tabla `pedido`

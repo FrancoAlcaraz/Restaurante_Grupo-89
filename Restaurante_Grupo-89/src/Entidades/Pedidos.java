@@ -1,8 +1,7 @@
-
 package Entidades;
 
-
 public class Pedidos {
+
     int IdPedido;
     Producto producto;
     Mesero mesero;
@@ -54,5 +53,5 @@ public class Pedidos {
     public String toString() {
         return "Pedidos{" + "IdPedido=" + IdPedido + ", producto=" + producto + ", mesero=" + mesero + ", mesa=" + mesa + '}';
     }
-    
+
 }

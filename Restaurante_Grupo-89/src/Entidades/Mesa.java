@@ -2,11 +2,11 @@ package Entidades;
 
 public class Mesa {
 
-    int IdMesa;
-    int Capacidad;
-    boolean Estado;
-    Reserva reserva;
-    Pedidos pedido;
+   private int IdMesa;
+   private int Capacidad;
+   private boolean Estado;
+   private Reserva reserva;
+   private Pedidos pedido;
 
     public Mesa(int IdMesa, int Capacidad, boolean Estado, Reserva reserva, Pedidos pedido) {
         this.IdMesa = IdMesa;

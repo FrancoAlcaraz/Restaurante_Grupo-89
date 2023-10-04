@@ -2,40 +2,53 @@
 
 <ClassDiagram name="Restaurante">
   <ClassDiagramComponents>
-    <Class name="Mesas" package="" visibility="public" xPosition="50.0" yPosition="44.0">
+    <Class name="Mesas" package="" visibility="public" xPosition="76.0" yPosition="90.0">
       <Fields>
         <Field name="IdMesa" type="Object" visibility="private"/>
         <Field name="Capacidad" type="Object" visibility="private"/>
         <Field name="Estado" type="Object" visibility="private"/>
-        <Field name="reserva" type="Reserva" visibility="private"/>
-        <Field name="pedidos" type="Pedidos" visibility="private"/>
       </Fields>
       <Constructors/>
-      <Methods/>
+      <Methods>
+        <Method name="AgregarMesa" returnType="void" visibility="public"/>
+        <Method name="ListarMesa" returnType="void" visibility="public"/>
+        <Method name="ModificarMesa" returnType="void" visibility="public"/>
+        <Method name="EliminarMesa" returnType="void" visibility="public"/>
+      </Methods>
     </Class>
-    <Class name="Mesero" package="" visibility="public" xPosition="660.0" yPosition="35.0">
+    <Class name="Mesero" package="" visibility="public" xPosition="366.0" yPosition="306.0">
       <Fields>
         <Field name="IdMesero" type="Object" visibility="private"/>
-        <Field name="mesa" type="Mesas" visibility="private"/>
-        <Field name="reserva" type="Reserva" visibility="private"/>
         <Field name="Nombre" type="Object" visibility="private"/>
         <Field name="DNI" type="Object" visibility="private"/>
         <Field name="Estado" type="Object" visibility="private"/>
       </Fields>
       <Constructors/>
-      <Methods/>
+      <Methods>
+        <Method name="AgregarMesero" returnType="void" visibility="public"/>
+        <Method name="AnularPedido" returnType="void" visibility="public"/>
+        <Method name="ObtenerMesero" returnType="void" visibility="public"/>
+        <Method name="ModificarMesero" returnType="void" visibility="public"/>
+        <Method name="EliminarMesero" returnType="void" visibility="public"/>
+      </Methods>
     </Class>
-    <Class name="Productos" package="" visibility="public" xPosition="478.0" yPosition="35.0">
+    <Class name="Productos" package="" visibility="public" xPosition="629.0" yPosition="447.0">
       <Fields>
         <Field name="IdProducto" type="Object" visibility="private"/>
         <Field name="Nombre" type="Object" visibility="private"/>
         <Field name="Cantidad" type="Object" visibility="private"/>
         <Field name="Precio" type="Object" visibility="private"/>
+        <Field name="Categoria" type="Object" visibility="private"/>
       </Fields>
       <Constructors/>
-      <Methods/>
+      <Methods>
+        <Method name="AgregarProducto" returnType="void" visibility="public"/>
+        <Method name="ListarProductos" returnType="void" visibility="public"/>
+        <Method name="QuitarProductos" returnType="void" visibility="public"/>
+        <Method name="ListarProductosXPrecio" returnType="void" visibility="public"/>
+      </Methods>
     </Class>
-    <Class name="Reserva" package="" visibility="public" xPosition="50.0" yPosition="300.0">
+    <Class name="Reserva" package="" visibility="public" xPosition="76.0" yPosition="458.0">
       <Fields>
         <Field name="IdReserva" type="Object" visibility="private"/>
         <Field name="mesa" type="Mesas" visibility="private"/>
@@ -46,22 +59,33 @@
         <Field name="Estado" type="Object" visibility="private"/>
       </Fields>
       <Constructors/>
-      <Methods/>
+      <Methods>
+        <Method name="AgregarReserva" returnType="void" visibility="public"/>
+        <Method name="ObtenerReservaXNombre" returnType="void" visibility="public"/>
+        <Method name="ObtenerReservaXDNI" returnType="void" visibility="public"/>
+        <Method name="ModificarReserva" returnType="void" visibility="public"/>
+        <Method name="EliminarReservar" returnType="void" visibility="public"/>
+      </Methods>
     </Class>
-    <Class name="Pedidos" package="" visibility="public" xPosition="278.0" yPosition="44.0">
+    <Class name="Pedidos" package="" visibility="public" xPosition="625.0" yPosition="90.0">
       <Fields>
-        <Field name="IdPedidos" type="Object" visibility="private"/>
+        <Field name="IdPedido" type="Object" visibility="private"/>
         <Field name="producto" type="Productos" visibility="private"/>
         <Field name="mesero" type="Mesero" visibility="private"/>
         <Field name="mesa" type="Mesas" visibility="private"/>
       </Fields>
       <Constructors/>
-      <Methods/>
+      <Methods>
+        <Method name="CalcularSubTotal" returnType="void" visibility="public"/>
+        <Method name="AgregarPedido" returnType="void" visibility="public"/>
+        <Method name="QuitarProducto" returnType="void" visibility="public"/>
+      </Methods>
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
+    <HasRelation name="tiene" source="Mesas" target="Reserva" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="tiene" source="Mesas" target="Pedidos" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="Contiene" source="Pedidos" target="Productos" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="tiene" source="Mesas" target="Reserva" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="Atiende" source="Mesero" target="Pedidos" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="Contiene" source="Pedidos" target="Productos" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
   </ClassDiagramRelations>
 </ClassDiagram>

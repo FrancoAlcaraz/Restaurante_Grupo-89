@@ -86,18 +86,17 @@ public class MesaData {
     }
     
     public void ModificarMesa(Mesa mesa){
-     String sql = "UPDATE `mesa` SET `idMesa`=?,`cantidad`=?,`estado`=? WHERE idMesa=?";
+     String sql = "UPDATE `mesa` SET `cantidad`=?,`estado`=? WHERE idMesa=?";
         PreparedStatement ps = null;
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, mesa.getIdMesa());
-            ps.setInt(2, mesa.getCapacidad());
-            ps.setBoolean(3,mesa.isEstado());
+            ps.setInt(1, mesa.getCapacidad());
+            ps.setBoolean(2,mesa.isEstado());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Modificado Exitosamente.");
+                JOptionPane.showMessageDialog(null, "Mesa Modificada Exitosamente.");
             } else {
                 JOptionPane.showMessageDialog(null, "La mesa no existe");
             }

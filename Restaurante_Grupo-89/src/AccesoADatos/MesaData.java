@@ -1,16 +1,11 @@
 package AccesoADatos;
 
 import Entidades.Mesa;
-import Entidades.Pedidos;
-import Entidades.Reserva;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -30,7 +25,7 @@ public class MesaData {
   try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, mesa.getIdMesa());
-            ps.setInt(2, mesa.getCapacidad());
+            ps.setInt(2, mesa.getCantidad());
             ps.setBoolean(3, mesa.isEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -89,7 +84,7 @@ public class MesaData {
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, mesa.getCapacidad());
+            ps.setInt(1, mesa.getCantidad());
             ps.setBoolean(2,mesa.isEstado());
             int exito = ps.executeUpdate();
 

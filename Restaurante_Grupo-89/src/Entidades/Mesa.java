@@ -3,12 +3,12 @@ package Entidades;
 public class Mesa {
 
     private int IdMesa;
-    private int Capacidad;
+    private int Cantidad;
     private boolean Estado;
 
-    public Mesa(int IdMesa, int Capacidad, boolean Estado) {
+    public Mesa(int IdMesa, int Cantidad, boolean Estado) {
         this.IdMesa = IdMesa;
-        this.Capacidad = Capacidad;
+        this.Cantidad = Cantidad;
         this.Estado = Estado;
 
     }
@@ -24,12 +24,12 @@ public class Mesa {
         this.IdMesa = IdMesa;
     }
 
-    public int getCapacidad() {
-        return Capacidad;
+    public int getCantidad() {
+        return Cantidad;
     }
 
     public void setCapacidad(int Capacidad) {
-        this.Capacidad = Capacidad;
+        this.Cantidad = Capacidad;
     }
 
     public boolean isEstado() {
@@ -42,7 +42,7 @@ public class Mesa {
 
     @Override
     public String toString() {
-        return "Mesa{" + "IdMesa=" + IdMesa + ", Capacidad=" + Capacidad + ", Estado=" + Estado + '}';
+        return "Mesa{" + "IdMesa=" + IdMesa + ", Capacidad=" + Cantidad + ", Estado=" + Estado + '}';
     }
 
 }

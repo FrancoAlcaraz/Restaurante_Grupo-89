@@ -44,27 +44,27 @@ public class ProductoData {
 
     }
 
-    public List<Producto> obtenerProductos() {
-        ArrayList<Producto> prod = new ArrayList<>();
+    public Producto obtenerProductos(int idProducto) {
+      
         String sql = "SELECT * FROM 'producto' WHERE idProducto=?";
-
+        Producto producto=null; 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Producto producto = new Producto();
-                producto.setIdProducto(rs.getInt("idProducto"));
+             producto = new Producto();
+                producto.setIdProducto(idProducto);
                 producto.setNombre(rs.getString("nombre"));
                 producto.setPrecio(rs.getDouble("precio"));
                 producto.setCategoria(rs.getString("categoria"));
-                prod.add(producto);
+              
 
             }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al listar productos: " + ex);
         }
-        return prod;
+        return producto;
     }
 
     public void modificarProducto(String nombre, int cantidad, double precio, String categoria, int idProducto) {

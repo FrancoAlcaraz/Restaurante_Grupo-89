@@ -2,7 +2,7 @@
 
 <ClassDiagram name="Restaurante">
   <ClassDiagramComponents>
-    <Class name="Mesas" package="" visibility="public" xPosition="76.0" yPosition="90.0">
+    <Class name="Mesas" package="" visibility="public" xPosition="101.0" yPosition="153.0">
       <Fields>
         <Field name="IdMesa" type="Object" visibility="private"/>
         <Field name="Capacidad" type="Object" visibility="private"/>
@@ -16,7 +16,7 @@
         <Method name="EliminarMesa" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Mesero" package="" visibility="public" xPosition="366.0" yPosition="306.0">
+    <Class name="Mesero" package="" visibility="public" xPosition="703.0" yPosition="134.0">
       <Fields>
         <Field name="IdMesero" type="Object" visibility="private"/>
         <Field name="Nombre" type="Object" visibility="private"/>
@@ -32,7 +32,7 @@
         <Method name="EliminarMesero" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Productos" package="" visibility="public" xPosition="629.0" yPosition="447.0">
+    <Class name="Productos" package="" visibility="public" xPosition="386.0" yPosition="496.0">
       <Fields>
         <Field name="IdProducto" type="Object" visibility="private"/>
         <Field name="Nombre" type="Object" visibility="private"/>
@@ -61,13 +61,12 @@
       <Constructors/>
       <Methods>
         <Method name="AgregarReserva" returnType="void" visibility="public"/>
-        <Method name="ObtenerReservaXNombre" returnType="void" visibility="public"/>
         <Method name="ObtenerReservaXDNI" returnType="void" visibility="public"/>
         <Method name="ModificarReserva" returnType="void" visibility="public"/>
         <Method name="EliminarReservar" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Pedidos" package="" visibility="public" xPosition="625.0" yPosition="90.0">
+    <Class name="Pedidos" package="" visibility="public" xPosition="403.0" yPosition="153.0">
       <Fields>
         <Field name="IdPedido" type="Object" visibility="private"/>
         <Field name="producto" type="Productos" visibility="private"/>
@@ -83,9 +82,9 @@
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="tiene" source="Mesas" target="Reserva" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="tiene" source="Mesas" target="Pedidos" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="Atiende" source="Mesero" target="Pedidos" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="tiene" source="Mesas" target="Reserva" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="Contiene" source="Pedidos" target="Productos" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
   </ClassDiagramRelations>
 </ClassDiagram>

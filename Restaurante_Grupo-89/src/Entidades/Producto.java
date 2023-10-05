@@ -6,14 +6,17 @@ public class Producto {
     private String nombre;
     private int cantidad;
     private double precio;
-    private Categoria categoria;
+    private String categoria;
 
-    public Producto( String nombre, int cantidad, double precio, Categoria categoria) {
+    public Producto(int idProducto, String nombre, int cantidad, double precio, String categoria) {
+        this.idProducto = idProducto;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.precio = precio;
         this.categoria = categoria;
     }
+
+    
 
     public Producto() {
     }
@@ -50,11 +53,11 @@ public class Producto {
         this.precio = precio;
     }
 
-    public Categoria getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
@@ -62,4 +65,6 @@ public class Producto {
     public String toString() {
         return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", cantidad=" + cantidad + ", precio=" + precio + ", categoria=" + categoria + '}';
     }
+
+    
 }

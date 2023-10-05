@@ -1,6 +1,5 @@
 package AccesoADatos;
 
-import Entidades.Categoria;
 import Entidades.Producto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,7 +28,7 @@ public class ProductoData {
             ps.setString(1, producto.getNombre());
             ps.setInt(2, producto.getCantidad());
             ps.setDouble(3, producto.getIdProducto());
-            ps.setObject(4, producto.getCategoria());
+           ps.setString(4, producto.getCategoria());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -54,10 +53,10 @@ public class ProductoData {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Producto producto = new Producto();
-                producto.getIdProducto();
-                producto.getNombre();
-                producto.getPrecio();
-                producto.getCategoria();
+                producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setPrecio(rs.getDouble("precio"));
+                producto.setCategoria(rs.getString("categoria"));
                 prod.add(producto);
 
             }
@@ -68,7 +67,7 @@ public class ProductoData {
         return prod;
     }
 
-    public void modificarProducto(String nombre, int cantidad, double precio, Categoria categoria, int idProducto) {
+    public void modificarProducto(String nombre, int cantidad, double precio, String categoria, int idProducto) {
         String sql = "UPTADE producto SET nombre=?,cantidad=?,precio=?,categoria=?"
                 + "WHERE idProducto=?";
         try {
@@ -76,8 +75,8 @@ public class ProductoData {
             ps.setString(1, nombre);
             ps.setInt(2, cantidad);
             ps.setDouble(3, precio);
-            ps.setObject(4, categoria);
-            ps.setInt(1, idProducto);
+            ps.setString(4, categoria);
+            ps.setInt(6, idProducto);
 
             int exito = ps.executeUpdate();
             if (exito == 1) {
@@ -106,5 +105,27 @@ public class ProductoData {
 
         }
 
+    }
+     public List<Producto> obtenerProductosxPrecio() {
+        ArrayList<Producto> prod = new ArrayList<>();
+        String sql = "SELECT * FROM 'producto' WHERE precio=?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Producto producto = new Producto();
+                producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setPrecio(rs.getDouble("precio"));
+                producto.setCategoria(rs.getString("categoria"));
+                prod.add(producto);
+
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al listar productos: " + ex);
+        }
+        return prod;
     }
 }

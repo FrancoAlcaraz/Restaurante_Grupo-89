@@ -19,7 +19,9 @@ import javax.swing.JOptionPane;
 
 public class PedidosData {
     private Connection con=null;
-
+MesaData md=new MesaData();
+MeseroData meserodata=new MeseroData();
+ProductoData data=new ProductoData();
     public PedidosData() {
         con=Conexion.getConexion();
     }
@@ -42,11 +44,9 @@ public class PedidosData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos ");
         }
     }
-    
     public void ModificarPedido(Pedidos pedido){
      String sql = "UPDATE `pedido` SET `idPedido`=?,`idProducto`=?,`idMesero`=?, `idMesa`=? WHERE idPedido=?";
         PreparedStatement ps = null;
-
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, pedido.getIdPedido());
@@ -54,7 +54,6 @@ public class PedidosData {
             ps.setInt(3, pedido.getMesero().getIdMesero());
             ps.setInt(4,pedido.getMesa().getIdMesa());
             int exito = ps.executeUpdate();
-
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Modificado Exitosamente.");
             } else {
@@ -77,7 +76,7 @@ public class PedidosData {
                     System.out.println("Error al eliminar");  
                 }
         } catch (SQLException ex) {
-            Logger.getLogger(PedidosData.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("error al ingresar la tabla pedido");
         }
     }
     
@@ -88,14 +87,10 @@ public class PedidosData {
             ResultSet rs = ps.executeQuery("SELECT * FROM `pedido` ");
             while (rs.next()) {
                 Pedidos pedido = new Pedidos();
-                Producto producto = new Producto();
-                Mesero mesero = new Mesero();
-                Mesa mesa = new Mesa();
-                
-                pedido.setIdPedido(rs.getInt("IDMesa"));
-                producto.setIdProducto(rs.getInt("IDProducto"));
-                mesero.setIdMesero(rs.getInt("IDPedido"));
-                mesa.setIdMesa(rs.getInt("IDMesa"));
+                Mesero mesero = meserodata.ObtenerMesero(rs.getInt("idMesero"));
+                Mesa mesa = md.ObtenerMesa(rs.getInt("idMesa"));
+                Producto prod=data.obtenerProductos(rs.getInt("idProducto"));
+                pedido.setIdPedido(rs.getInt("IDPedido"));
                 pedidos.add(pedido);
             }
             ps.close();

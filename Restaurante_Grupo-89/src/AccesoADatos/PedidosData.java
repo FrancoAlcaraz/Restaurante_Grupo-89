@@ -43,7 +43,7 @@ public class PedidosData {
         }
     }
     
-    public void ModificarPediso(Pedidos pedido){
+    public void ModificarPedido(Pedidos pedido){
      String sql = "UPDATE `pedido` SET `idPedido`=?,`idProducto`=?,`idMesero`=?, `idMesa`=? WHERE idPedido=?";
         PreparedStatement ps = null;
 
@@ -65,7 +65,7 @@ public class PedidosData {
         }
     }
     
-    public void EliminarMesa(int IdPedido){
+    public void EliminarPedido(int IdPedido){
       String sql="DELETE FROM `pedido` WHERE idPedido=?";
         try {
                 PreparedStatement ps=con.prepareStatement(sql);

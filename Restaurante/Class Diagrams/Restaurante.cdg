@@ -26,7 +26,6 @@
       <Constructors/>
       <Methods>
         <Method name="AgregarMesero" returnType="void" visibility="public"/>
-        <Method name="AnularPedido" returnType="void" visibility="public"/>
         <Method name="ObtenerMesero" returnType="void" visibility="public"/>
         <Method name="ModificarMesero" returnType="void" visibility="public"/>
         <Method name="EliminarMesero" returnType="void" visibility="public"/>
@@ -78,14 +77,15 @@
       <Methods>
         <Method name="CalcularSubTotal" returnType="void" visibility="public"/>
         <Method name="AgregarPedido" returnType="void" visibility="public"/>
-        <Method name="QuitarProducto" returnType="void" visibility="public"/>
+        <Method name="EliminarPedido" returnType="void" visibility="public"/>
+        <Method name="ModificarPedido" returnType="void" visibility="public"/>
       </Methods>
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="tiene" source="Mesas" target="Reserva" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="tiene" source="Mesas" target="Pedidos" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="Atiende" source="Mesero" target="Pedidos" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="tiene" source="Mesas" target="Pedidos" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="Contiene" source="Pedidos" target="Productos" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="tiene" source="Mesas" target="Reserva" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
   </ClassDiagramRelations>
 </ClassDiagram>

@@ -23,12 +23,11 @@ public class MesaData {
         con = Conexion.getConexion();
     }
 
-    
-
+    PedidosData PD=new PedidosData();
+    ReservaData RD=new ReservaData();
  public void AgregarMesa(Mesa mesa){
  String sql="INSERT INTO `mesa`(`idMesa`, `cantidad`, `estado`, `idPedido`) VALUES ('?','?','?','?','?')";
   try {
-
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, mesa.getIdMesa());
             ps.setInt(2, mesa.getCapacidad());
@@ -44,29 +43,28 @@ public class MesaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos ");
         }
     }
-    public List<Mesa> ListarMesa() {
-        ArrayList<Mesa> mesas = new ArrayList<>();
+ 
+    public Mesa ObtenerMesa(int idmesa) {
+        Mesa mesa=null;
         try {
             Statement ps = con.createStatement();
             ResultSet rs = ps.executeQuery("SELECT * FROM mesa WHERE Estado = 1 ");
-            while (rs.next()) {
-                Pedidos pedido1 = new Pedidos();
-                Mesa mesa = new Mesa();
-                Reserva reserva1 = new Reserva();
-                mesa.setIdMesa(rs.getInt("IDMesa"));
+         
+            if (rs.next()) {
+                mesa = new Mesa();
+                mesa.setIdMesa(idmesa);
                 mesa.setCapacidad(rs.getInt("Capacidad"));
-                mesa.setEstado(rs.getBoolean("Estado"));
-                pedido1.setIdPedido(rs.getInt("IDPedido"));
-                reserva1.setIdReserva(rs.getInt("IDReserva"));
-                mesas.add(mesa);
-            }
+                mesa.setEstado(true);
+            }else{
+                System.out.println("La Mesa no existe");
             ps.close();
+            }
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Mesa " + ex.getMessage());
         }
-        return mesas;
-        
+       
+        return mesa;
     }
     
     public void EliminarMesa(int IdMesa){

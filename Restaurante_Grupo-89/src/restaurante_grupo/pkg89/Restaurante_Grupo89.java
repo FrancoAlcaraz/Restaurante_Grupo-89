@@ -5,20 +5,10 @@
  */
 package restaurante_grupo.pkg89;
 
-import AccesoADatos.MesaData;
-
-/**
- *
- * @author Usuario
- */
 public class Restaurante_Grupo89 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-       MesaData mesa=new MesaData();
-       mesa.EliminarMesa(1);
+
        
     }
     

@@ -1,10 +1,7 @@
 
 package AccesoADatos;
 
-import Entidades.Mesa;
 import Entidades.Mesero;
-import Entidades.Pedidos;
-import Entidades.Reserva;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,25 +41,24 @@ public class MeseroData {
     }
  
  
-    public List<Mesero> ObtenerMesero() {
-        ArrayList<Mesero> meseros = new ArrayList<>();
+    public Mesero ObtenerMesero(int idmesero) {
+        Mesero mesero=null;
         try {
             Statement ps = con.createStatement();
             ResultSet rs = ps.executeQuery("SELECT `idMesero`, `dni`, `nombre`, `estado` FROM `mesero` WHERE `estado`=1");
             while (rs.next()) {
-                Mesero mesero = new Mesero();
-                mesero.setIdMesero(rs.getInt("idMesero"));
+                mesero = new Mesero();
+                mesero.setIdMesero(idmesero);
                 mesero.setDni(rs.getInt("dni"));
                 mesero.setNombre(rs.getString("nombre"));
                 mesero.setEstado(rs.getBoolean("estado"));
-                meseros.add(mesero);
             }
             ps.close();
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Mesero " + ex.getMessage());
         }
-        return meseros;    
+        return mesero;    
     }
     
     public void ModificarMesero(Mesero mesero){

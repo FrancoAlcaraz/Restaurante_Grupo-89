@@ -1,14 +1,11 @@
 package AccesoADatos;
 
-import Entidades.Categoria;
 import Entidades.Producto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ProductoData {
@@ -19,16 +16,14 @@ public class ProductoData {
         con = Conexion.getConexion();
 
     }
-
     public void agregarProducto(Producto producto) {
         String sql = "INSERT INTO 'producto'('nombre','cantidad','precio','categoria')"
                 + " VALUES (?,?,?,?)";
-
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, producto.getNombre());
             ps.setInt(2, producto.getCantidad());
-            ps.setDouble(3, producto.getIdProducto());
+            ps.setDouble(3, producto.getPrecio());
             ps.setObject(4, producto.getCategoria());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -37,38 +32,34 @@ public class ProductoData {
                 JOptionPane.showMessageDialog(null, "Producto ingresado");
             }
             ps.close();
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al ingreso de la base de datos producto:" + ex);
-
         }
-
     }
 
-    public List<Producto> obtenerProductos() {
-        ArrayList<Producto> prod = new ArrayList<>();
+    public Producto obtenerProductos(int idProducto) {
         String sql = "SELECT * FROM 'producto' WHERE idProducto=?";
-
+        Producto producto=null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Producto producto = new Producto();
-                producto.getIdProducto();
-                producto.getNombre();
-                producto.getPrecio();
-                producto.getCategoria();
-                prod.add(producto);
-
+                producto = new Producto();
+                producto.setIdProducto(idProducto);
+                producto.setNombre(rs.getString("nombre"));
+                producto.setCantidad(rs.getInt("cantidad"));
+                producto.setPrecio(rs.getDouble("precio"));
+                producto.setCategoria(rs.getString("categoria"));
+                
             }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al listar productos: " + ex);
         }
-        return prod;
+        return producto;
     }
 
-    public void modificarProducto(String nombre, int cantidad, double precio, Categoria categoria, int idProducto) {
+    public void modificarProducto(String nombre, int cantidad, double precio, String categoria, int idProducto) {
         String sql = "UPTADE producto SET nombre=?,cantidad=?,precio=?,categoria=?"
                 + "WHERE idProducto=?";
         try {
@@ -77,11 +68,9 @@ public class ProductoData {
             ps.setInt(2, cantidad);
             ps.setDouble(3, precio);
             ps.setObject(4, categoria);
-            ps.setInt(1, idProducto);
-
             int exito = ps.executeUpdate();
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Producto Modificado");
+            JOptionPane.showMessageDialog(null, "Producto Modificado");
             }
             ps.close();
         } catch (SQLException ex) {

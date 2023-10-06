@@ -5,6 +5,9 @@
  */
 package Vistas;
 
+import AccesoADatos.MesaData;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Bel
@@ -153,10 +156,17 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-   int numero=Integer.parseInt(jNumero.getText());
-   int capacidad=Integer.parseInt(jcapacidad.getText());
-        
-        
+     if (jNumero.getText().isEmpty() || jcapacidad.getText().isEmpty()|| !rbnLibre.isSelected()||!rbnOcupada.isSelected() ) {
+                JOptionPane.showMessageDialog(null, "No deje campos vacíos");
+                return;
+            }
+        int numero=Integer.parseInt(jNumero.getText());
+        int capacidad=Integer.parseInt(jcapacidad.getText());
+        boolean libre=rbnLibre.isSelected();
+        boolean ocupado=rbnOcupada.isSelected();
+        MesaData md=new MesaData();
+       boolean estadoMesa=true;
+       
     }//GEN-LAST:event_btnAgregarActionPerformed
 
 

@@ -29,7 +29,7 @@ public class MesaData {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, mesa.getIdMesa());
             ps.setInt(2, mesa.getNumero());
-            ps.setInt(3, mesa.getCantidad());
+            ps.setInt(3, mesa.getCapacidad());
             ps.setBoolean(4, mesa.isEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -113,7 +113,7 @@ public class MesaData {
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, mesa.getNumero());
-            ps.setInt(2, mesa.getCantidad());
+            ps.setInt(2, mesa.getCapacidad());
             ps.setBoolean(3, mesa.isEstado());
             int exito = ps.executeUpdate();
 

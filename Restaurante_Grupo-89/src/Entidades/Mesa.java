@@ -4,13 +4,13 @@ public class Mesa {
 
     private int IdMesa;
     private int numero;
-    private int Cantidad;
+    private int Capacidad;
     private boolean Estado;
 
-    public Mesa(int IdMesa,int numero, int Cantidad, boolean Estado) {
+    public Mesa(int IdMesa,int numero, int Capacidad, boolean Estado) {
         this.IdMesa = IdMesa;
         this.numero = numero;
-        this.Cantidad = Cantidad;
+        this.Capacidad = Capacidad;
         this.Estado = Estado;
 
     }
@@ -35,12 +35,12 @@ public class Mesa {
     }
 
     
-    public int getCantidad() {
-        return Cantidad;
+    public int getCapacidad() {
+        return Capacidad;
     }
 
     public void setCapacidad(int Capacidad) {
-        this.Cantidad = Capacidad;
+        this.Capacidad = Capacidad;
     }
 
     public boolean isEstado() {
@@ -53,7 +53,7 @@ public class Mesa {
 
     @Override
     public String toString() {
-        return "Mesa{" + "IdMesa=" + IdMesa + ", numero=" + numero + ", Cantidad=" + Cantidad + ", Estado=" + Estado + '}';
+        return "Mesa{" + "IdMesa=" + IdMesa + ", numero=" + numero + ", Cantidad=" + Capacidad + ", Estado=" + Estado + '}';
     }
 
     

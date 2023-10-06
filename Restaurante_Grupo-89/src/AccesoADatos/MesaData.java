@@ -21,12 +21,13 @@ public class MesaData {
     PedidosData PD=new PedidosData();
     ReservaData RD=new ReservaData();
  public void AgregarMesa(Mesa mesa){
- String sql="INSERT INTO `mesa`(`idMesa`, `cantidad`, `estado`, `idPedido`) VALUES ('?','?','?','?','?')";
+ String sql="INSERT INTO `mesa`(`idMesa`,`numero`, `cantidad`, `estado`) VALUES ('?','?','?','?')";
   try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, mesa.getIdMesa());
-            ps.setInt(2, mesa.getCantidad());
-            ps.setBoolean(3, mesa.isEstado());
+            ps.setInt(2, mesa.getNumero());
+            ps.setInt(3, mesa.getCantidad());
+            ps.setBoolean(4, mesa.isEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -48,6 +49,7 @@ public class MesaData {
             if (rs.next()) {
                 mesa = new Mesa();
                 mesa.setIdMesa(idmesa);
+                mesa.setNumero(rs.getInt("numero"));
                 mesa.setCapacidad(rs.getInt("Capacidad"));
                 mesa.setEstado(true);
             }else{
@@ -79,13 +81,14 @@ public class MesaData {
     }
     
     public void ModificarMesa(Mesa mesa){
-     String sql = "UPDATE `mesa` SET `cantidad`=?,`estado`=? WHERE idMesa=?";
+     String sql = "UPDATE `mesa` SET `numero`=?, `cantidad`=?,`estado`=? WHERE idMesa=?";
         PreparedStatement ps = null;
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, mesa.getCantidad());
-            ps.setBoolean(2,mesa.isEstado());
+            ps.setInt(1,mesa.getNumero());
+            ps.setInt(2, mesa.getCantidad());
+            ps.setBoolean(3,mesa.isEstado());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {

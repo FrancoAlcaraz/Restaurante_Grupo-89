@@ -88,7 +88,7 @@ public class PedidosData {
             while (rs.next()) {
                 Pedidos pedido = new Pedidos();
                 Mesero mesero = meserodata.ObtenerMesero(rs.getInt("idMesero"));
-                Mesa mesa = md.ObtenerMesa(rs.getInt("idMesa"));
+                Mesa mesa = md.ObtenerMesaxID(rs.getInt("idMesa"));
                 Producto prod = data.obtenerProductosxID(rs.getInt("idProducto"));
                 pedido.setIdPedido(rs.getInt("IDPedido"));
                 pedidos.add(pedido);

@@ -15,6 +15,13 @@ public class Mesa {
 
     }
 
+    public Mesa(int numero, int Capacidad, boolean Estado) {
+        this.numero = numero;
+        this.Capacidad = Capacidad;
+        this.Estado = Estado;
+    }
+
+    
     public Mesa() {
     }
 

@@ -1,22 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vistas;
 
 import AccesoADatos.MesaData;
+import Entidades.Mesa;
+import java.util.List;
 import javax.swing.JOptionPane;
-
-/**
- *
- * @author Bel
- */
 public class AgregarMesa extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form AgregarMesa
-     */
     public AgregarMesa() {
         initComponents();
     }
@@ -62,6 +52,11 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
         jNumero.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -71,6 +66,11 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
         });
 
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -156,18 +156,45 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-     if (jNumero.getText().isEmpty() || jcapacidad.getText().isEmpty()|| !rbnLibre.isSelected()||!rbnOcupada.isSelected() ) {
+        try{
+        if (jNumero.getText().isEmpty() || jcapacidad.getText().isEmpty()|| !rbnLibre.isSelected()&&!rbnOcupada.isSelected() ) {
                 JOptionPane.showMessageDialog(null, "No deje campos vacíos");
                 return;
             }
+        boolean estadoMesa=false;
         int numero=Integer.parseInt(jNumero.getText());
         int capacidad=Integer.parseInt(jcapacidad.getText());
-        boolean libre=rbnLibre.isSelected();
-        boolean ocupado=rbnOcupada.isSelected();
+        
         MesaData md=new MesaData();
-       boolean estadoMesa=true;
-       
+         List<Mesa> m=md.ObtenerMesas();
+         if(rbnLibre.isSelected()){
+            estadoMesa=true;
+         }else if(rbnOcupada.isSelected()){
+            estadoMesa=false;
+         }
+        for (Mesa mesas : m) {
+            if(numero==mesas.getNumero() && mesas.isEstado()==true ){
+            estadoMesa=true;
+            break;
+            }
+           
+        }
+       Mesa mesa=new Mesa(numero, capacidad, estadoMesa);
+        md.AgregarMesa(mesa);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error: El número de documento no es válido.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage());
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+LimpiarVentadas();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -185,4 +212,9 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rbnLibre;
     private javax.swing.JRadioButton rbnOcupada;
     // End of variables declaration//GEN-END:variables
+ public void LimpiarVentadas() {
+        jNumero.setText("");
+        jcapacidad.setText("");
+       GroupEstado1.clearSelection();
+    }
 }

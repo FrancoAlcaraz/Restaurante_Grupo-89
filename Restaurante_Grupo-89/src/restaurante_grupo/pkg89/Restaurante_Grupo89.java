@@ -16,8 +16,8 @@ public class Restaurante_Grupo89 {
         Producto prod = new Producto("Sopa", 5, 10.50, "Comida");
         ProductoData pr = new ProductoData();
         System.out.println(prod);
-        //pr.agregarProducto(prod);
-        //pr.modificarProducto("Pollo", 8, 100.30, "Comida", 1);
+       // pr.agregarProducto(prod);
+        pr.modificarProducto("Pollo", 8, 100.30, "Comida", 1);
         //System.out.println(pr.obtenerProductos(1));
         // List<Producto> listaDeArreglos = pr.obtenerProductosxPrecio(10.50);
         // for (Producto produ : listaDeArreglos) {

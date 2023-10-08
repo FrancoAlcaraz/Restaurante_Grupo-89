@@ -182,7 +182,7 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
        Mesa mesa=new Mesa(numero, capacidad, estadoMesa);
         md.AgregarMesa(mesa);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error: El número de documento no es válido.");
+            JOptionPane.showMessageDialog(null, "Error: El número no es válido.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage());
         }

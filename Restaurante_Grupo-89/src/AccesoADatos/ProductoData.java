@@ -1,5 +1,6 @@
 package AccesoADatos;
 
+import Entidades.Categoria;
 import Entidades.Producto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +19,7 @@ public class ProductoData {
         con = Conexion.getConexion();
 
     }
-
+CategoriaData ct=new CategoriaData();
     public void agregarProducto(Producto producto) {
         String sql = "INSERT INTO producto (nombre, cantidad, precio, categoria) "
                 + "VALUES (?,?,?,?)";
@@ -28,7 +29,7 @@ public class ProductoData {
             ps.setString(1, producto.getNombre());
             ps.setInt(2, producto.getCantidad());
             ps.setDouble(3, producto.getPrecio());
-            ps.setString(4, producto.getCategoria());
+            ps.setObject(4, producto.getCategoria().getCategoria());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -52,12 +53,14 @@ public class ProductoData {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+           
                 Producto producto = new Producto();
                 producto.setIdProducto(rs.getInt("idProducto"));
                 producto.setNombre(rs.getString("nombre"));
                 producto.setCantidad(rs.getInt("cantidad"));
                 producto.setPrecio(rs.getDouble("precio"));
-                producto.setCategoria(rs.getString("categoria"));
+                Categoria cat= ct.ObtenerCategoria(rs.getInt(""));
+                producto.setCategoria(cat);
                 prod.add(producto);
 
             }
@@ -68,7 +71,36 @@ public class ProductoData {
         return prod;
 
     }
+    
+    public List<Producto> obtenerProductosXCategoria(String nom) {
+        ArrayList<Producto> producto = new ArrayList<>();
+        String sql = "SELECT * FROM `producto`,`categoria` WHERE categoria.nombre=?";
 
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, nom);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto produ = new Producto();
+               produ.setIdProducto(rs.getInt("idProducto"));
+               produ.setNombre(rs.getString("nombre"));
+               produ.setCantidad(rs.getInt("cantidad"));
+               produ.setPrecio(rs.getInt("precio"));
+               Categoria cat=ct.ObtenerCategoria(rs.getInt("idCategoria"));
+               produ.setCategoria(cat);
+                producto.add(produ);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al buscar por producto" + ex.getMessage());
+        }
+
+        return producto;
+
+    }
+
+    
     public Producto obtenerProductosxID(int idProducto) {
 
         String sql = "SELECT * FROM producto WHERE idProducto=?";
@@ -83,7 +115,8 @@ public class ProductoData {
                 producto.setNombre(rs.getString("nombre"));
                 producto.setCantidad(rs.getInt("cantidad"));
                 producto.setPrecio(rs.getDouble("precio"));
-                producto.setCategoria(rs.getString("categoria"));
+                  Categoria cat=ct.ObtenerCategoria(rs.getInt("idCategoria"));
+                producto.setCategoria(cat);
 
             }
             ps.close();
@@ -107,7 +140,8 @@ public class ProductoData {
                 producto.setIdProducto(rs.getInt("idProducto"));
                 producto.setNombre(rs.getString("nombre"));
                 producto.setPrecio(rs.getDouble("precio"));
-                producto.setCategoria(rs.getString("categoria"));
+                  Categoria cat=ct.ObtenerCategoria(rs.getInt("idCategoria"));
+                producto.setCategoria(cat);
                 prod.add(producto);
 
             }

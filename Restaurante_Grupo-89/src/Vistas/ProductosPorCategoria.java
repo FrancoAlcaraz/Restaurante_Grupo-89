@@ -11,25 +11,23 @@ import Entidades.Categoria;
 import Entidades.Producto;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableColumn;
+
 
 public class ProductosPorCategoria extends javax.swing.JInternalFrame {
 
     ProductoData pd = new ProductoData();
     DefaultTableModel modelo = new DefaultTableModel();
-    DefaultComboBoxModel<Categoria> jBox = new DefaultComboBoxModel<>();
+    JComboBox c = new JComboBox();
 
     public ProductosPorCategoria() {
         initComponents();
         CargarCombos();
         CabeceraLista();
-   
+        boxTable();
     }
 
     /**
@@ -173,7 +171,6 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
         if (pr != null) {
             modelo.setRowCount(0);
             int cat = pr.getIdcategoria();
-            System.out.println(cat);
             List<Producto> lis = pd.obtenerProductosXCategoria(cat);
             for (Producto producto : lis) {
                 int idP = producto.getIdProducto();
@@ -182,38 +179,38 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
                 double precio = producto.getPrecio();
                 String cate = pr.getCategoria();
                 modelo.addRow(new Object[]{idP, nombre, cantidad, precio, cate});
-
             }
+
         }
 
     }//GEN-LAST:event_jcategoriaActionPerformed
 
     private void btnmodificarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarListaActionPerformed
-        int fila = jlistaCategoria.getSelectedRow();
+       int fila = jlistaCategoria.getSelectedRow();
         Categoria cat = (Categoria) jcategoria.getSelectedItem();
         List<Producto> p = new ArrayList<>(pd.obtenerProductos());
         if (cat != null && fila != -1) {
-            int id = cat.getIdcategoria();
+            int idcategoria = cat.getIdcategoria();
             String nombre = (String) jlistaCategoria.getValueAt(fila, 1);
-        int idcategoria=0;
+        int idproducto=-1;
             for (Producto producto : p) {
                 if (producto.getNombre().equals(nombre)) {
-                    id = producto.getIdProducto();
-                    break;
+                    idproducto = producto.getIdProducto();
+                  
                 }
-                if (id != -1) {
+                if (idproducto != -1) {
                     
                     String nuevoNombre=jlistaCategoria.getValueAt(fila, 1).toString();
                     int nuevaCantidad=Integer.parseInt(jlistaCategoria.getValueAt(fila, 2).toString());
                     double nuevoPrecio=Double.parseDouble(jlistaCategoria.getValueAt(fila, 3).toString());
-                    String nuevaCategoria=jlistaCategoria.getValueAt(fila, 4).toString();
+                    String nuevaCategoria=c.getSelectedItem().toString();
                     if(nuevaCategoria.equalsIgnoreCase("BEBIDA NA")){
                      idcategoria=4;
                     }else if(nuevaCategoria.equalsIgnoreCase("COMIDA")){
                      idcategoria=5;
                     }else if(nuevaCategoria.equalsIgnoreCase("BEBIDA")){
                      idcategoria=6; }
-                    pd.modificarProducto(nuevoNombre,nuevaCantidad, nuevoPrecio, idcategoria,id);
+                    pd.modificarProducto(nuevoNombre,nuevaCantidad, nuevoPrecio, idcategoria,idproducto);
                 }
             }
 
@@ -223,22 +220,22 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnmodificarListaActionPerformed
 
     private void btnEliminarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProdActionPerformed
-        int filaseleccionada=jlistaCategoria.getSelectedRow();
-       List<Producto> pr=new ArrayList<>(pd.obtenerProductos());
-        if(filaseleccionada!=-1){
-            int idproducto=-1;
-            for(Producto producto:pr){
-             idproducto=producto.getIdProducto();
-            break;
+        int filaseleccionada = jlistaCategoria.getSelectedRow();
+        List<Producto> pr = new ArrayList<>(pd.obtenerProductos());
+        if (filaseleccionada != -1) {
+            int idproducto = -1;
+            for (Producto producto : pr) {
+                idproducto = producto.getIdProducto();
+               
             }
-            if (idproducto!=-1){
-            pd.eliminarProducto(idproducto);
+            if (idproducto != -1) {
+                pd.eliminarProducto(idproducto);
+
             }
-            
+
         }
-            
-        
-        
+
+
     }//GEN-LAST:event_btnEliminarProdActionPerformed
 
 
@@ -273,5 +270,12 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
         modelo.addColumn("Categoria");
         jlistaCategoria.setModel(modelo);
     }
+    private void boxTable() {
 
+        String dato[] = {"COMIDA", "BEBIDA", "BEBIDA NA"};
+        for (String dato1 : dato) {
+            c.addItem(dato1);
+        }
+        jlistaCategoria.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(c));
+    }
 }

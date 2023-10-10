@@ -59,7 +59,7 @@ CategoriaData ct=new CategoriaData();
                 producto.setNombre(rs.getString("nombre"));
                 producto.setCantidad(rs.getInt("cantidad"));
                 producto.setPrecio(rs.getDouble("precio"));
-                Categoria cat= ct.ObtenerCategoria(rs.getInt(""));
+                Categoria cat= ct.ObtenerCategoria(rs.getInt("idCategoria"));
                 producto.setCategoria(cat);
                 prod.add(producto);
 
@@ -72,13 +72,13 @@ CategoriaData ct=new CategoriaData();
 
     }
     
-    public List<Producto> obtenerProductosXCategoria(String nom) {
+    public List<Producto> obtenerProductosXCategoria(int id) {
         ArrayList<Producto> producto = new ArrayList<>();
-        String sql = "SELECT * FROM `producto`,`categoria` WHERE categoria.nombre=?";
+        String sql = "SELECT `idProducto`, `nombre`, `cantidad`, `precio`, `idCategoria` FROM `producto` WHERE idCategoria=? ";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, nom);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Producto produ = new Producto();
@@ -152,15 +152,14 @@ CategoriaData ct=new CategoriaData();
         return prod;
     }
 
-    public void modificarProducto(String nombre, int cantidad, double precio, String categoria, int idProducto) {
-        String sql = "UPDATE producto SET nombre=?,cantidad=?,precio=?,categoria=?"
-                + "WHERE idProducto=?";
+    public void modificarProducto( String nombre, int cantidad,double precio  , int categoria,int idProducto) {
+        String sql = "UPDATE `producto` SET `nombre`=?,`cantidad`=?,`precio`=?,`idCategoria`=? WHERE idProducto=?; ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, nombre);
             ps.setInt(2, cantidad);
             ps.setDouble(3, precio);
-            ps.setString(4, categoria);
+            ps.setInt(4, categoria);
             ps.setInt(5, idProducto);
 
             int exito = ps.executeUpdate();
@@ -169,7 +168,7 @@ CategoriaData ct=new CategoriaData();
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al modificar el producto " + ex);
+            JOptionPane.showMessageDialog(null, "Error al modificar el producto " );
         }
 
     }

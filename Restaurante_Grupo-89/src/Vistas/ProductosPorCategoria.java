@@ -9,18 +9,27 @@ import AccesoADatos.CategoriaData;
 import AccesoADatos.ProductoData;
 import Entidades.Categoria;
 import Entidades.Producto;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableColumn;
 
 public class ProductosPorCategoria extends javax.swing.JInternalFrame {
+
     ProductoData pd = new ProductoData();
     DefaultTableModel modelo = new DefaultTableModel();
-    DefaultComboBoxModel<Categoria> jBox= new DefaultComboBoxModel<>();
+    DefaultComboBoxModel<Categoria> jBox = new DefaultComboBoxModel<>();
+
     public ProductosPorCategoria() {
         initComponents();
         CargarCombos();
         CabeceraLista();
+   
     }
 
     /**
@@ -80,8 +89,18 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
         jLabel2.setText("Categoria:");
 
         btnmodificarLista.setText("Modificar");
+        btnmodificarLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmodificarListaActionPerformed(evt);
+            }
+        });
 
         btnEliminarProd.setText("Eliminar");
+        btnEliminarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarProdActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Salir");
 
@@ -150,29 +169,77 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcategoriaActionPerformed
-        Categoria pr=(Categoria) jcategoria.getSelectedItem();
+        Categoria pr = (Categoria) jcategoria.getSelectedItem();
         if (pr != null) {
             modelo.setRowCount(0);
-            String cat = pr.getCategoria(); 
+            int cat = pr.getIdcategoria();
             System.out.println(cat);
             List<Producto> lis = pd.obtenerProductosXCategoria(cat);
             for (Producto producto : lis) {
-             
-                   if(cat==producto.getCategoria().getCategoria()){
                 int idP = producto.getIdProducto();
                 String nombre = producto.getNombre();
                 int cantidad = producto.getCantidad();
                 double precio = producto.getPrecio();
-                      String cate = pr.getCategoria();
+                String cate = pr.getCategoria();
                 modelo.addRow(new Object[]{idP, nombre, cantidad, precio, cate});
-                }
-                
-                
 
             }
         }
 
     }//GEN-LAST:event_jcategoriaActionPerformed
+
+    private void btnmodificarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarListaActionPerformed
+        int fila = jlistaCategoria.getSelectedRow();
+        Categoria cat = (Categoria) jcategoria.getSelectedItem();
+        List<Producto> p = new ArrayList<>(pd.obtenerProductos());
+        if (cat != null && fila != -1) {
+            int id = cat.getIdcategoria();
+            String nombre = (String) jlistaCategoria.getValueAt(fila, 1);
+        int idcategoria=0;
+            for (Producto producto : p) {
+                if (producto.getNombre().equals(nombre)) {
+                    id = producto.getIdProducto();
+                    break;
+                }
+                if (id != -1) {
+                    
+                    String nuevoNombre=jlistaCategoria.getValueAt(fila, 1).toString();
+                    int nuevaCantidad=Integer.parseInt(jlistaCategoria.getValueAt(fila, 2).toString());
+                    double nuevoPrecio=Double.parseDouble(jlistaCategoria.getValueAt(fila, 3).toString());
+                    String nuevaCategoria=jlistaCategoria.getValueAt(fila, 4).toString();
+                    if(nuevaCategoria.equalsIgnoreCase("BEBIDA NA")){
+                     idcategoria=4;
+                    }else if(nuevaCategoria.equalsIgnoreCase("COMIDA")){
+                     idcategoria=5;
+                    }else if(nuevaCategoria.equalsIgnoreCase("BEBIDA")){
+                     idcategoria=6; }
+                    pd.modificarProducto(nuevoNombre,nuevaCantidad, nuevoPrecio, idcategoria,id);
+                }
+            }
+
+        }
+
+
+    }//GEN-LAST:event_btnmodificarListaActionPerformed
+
+    private void btnEliminarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProdActionPerformed
+        int filaseleccionada=jlistaCategoria.getSelectedRow();
+       List<Producto> pr=new ArrayList<>(pd.obtenerProductos());
+        if(filaseleccionada!=-1){
+            int idproducto=-1;
+            for(Producto producto:pr){
+             idproducto=producto.getIdProducto();
+            break;
+            }
+            if (idproducto!=-1){
+            pd.eliminarProducto(idproducto);
+            }
+            
+        }
+            
+        
+        
+    }//GEN-LAST:event_btnEliminarProdActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -193,7 +260,7 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
         for (Categoria ala : lista) {
             if (ala != null) {
                 jcategoria.addItem(ala);
-             
+
             }
         }
     }
@@ -206,4 +273,5 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
         modelo.addColumn("Categoria");
         jlistaCategoria.setModel(modelo);
     }
+
 }

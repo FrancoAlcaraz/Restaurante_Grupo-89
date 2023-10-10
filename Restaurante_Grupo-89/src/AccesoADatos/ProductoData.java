@@ -153,7 +153,7 @@ CategoriaData ct=new CategoriaData();
     }
 
     public void modificarProducto( String nombre, int cantidad,double precio  , int categoria,int idProducto) {
-        String sql = "UPDATE `producto` SET `nombre`=?,`cantidad`=?,`precio`=?,`idCategoria`=? WHERE idProducto=?; ";
+        String sql = "UPDATE `producto` SET `nombre`=?,`cantidad`=?,`precio`=?,`idCategoria`=? WHERE idProducto=? ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, nombre);

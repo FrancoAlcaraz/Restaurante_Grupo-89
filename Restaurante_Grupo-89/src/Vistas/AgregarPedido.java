@@ -6,9 +6,12 @@
 package Vistas;
 
 import AccesoADatos.MesaData;
+import AccesoADatos.ProductoData;
 import Entidades.Mesa;
+import Entidades.Producto;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,12 +19,13 @@ import javax.swing.table.DefaultTableModel;
  * @author Bel
  */
 public class AgregarPedido extends javax.swing.JInternalFrame {
-    
- private DefaultTableModel modelo = new DefaultTableModel() {
+
+    private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
             return false;
         }
     };
+
     /**
      * Creates new form AgregarPedido
      */
@@ -29,6 +33,10 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
         initComponents();
         armarCabecera();
         CargarComboMesa();
+        CargarComboProducto();
+        CargarComboHora();
+        CargarComboCantidad();
+
     }
 
     /**
@@ -53,11 +61,11 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
         jbAgregarProducto = new javax.swing.JButton();
         jcMesa = new javax.swing.JComboBox<>();
         jcProducto = new javax.swing.JComboBox<>();
-        jcCantidad = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jbEliminarProducto = new javax.swing.JButton();
         jtPrecioTotal = new javax.swing.JTextField();
         jcHora = new javax.swing.JComboBox<>();
+        jcCantidad = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Haz Tu Pedido");
@@ -96,20 +104,17 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
         jbRealizarPedido.setText("Realizar Pedido");
 
         jbAgregarProducto.setText("Agregar Producto");
-
-        jcMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jcProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jcCantidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jbAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAgregarProductoActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Precio total:");
 
         jbEliminarProducto.setText("Eliminar Producto");
 
         jtPrecioTotal.setEditable(false);
-
-        jcHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -190,7 +195,7 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAgregarProducto)
                     .addComponent(jbEliminarProducto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSalir)
                     .addComponent(jbRealizarPedido)
@@ -213,6 +218,35 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarProductoActionPerformed
+        try {
+
+            Mesa mesa = (Mesa) jcMesa.getSelectedItem();
+            Producto pro = (Producto) jcProducto.getSelectedItem();
+            String hora = (String) jcHora.getSelectedItem();
+            int cantidad = Integer.parseInt(jcCantidad.getSelectedItem().toString());
+
+            if (cantidad >= 1) {
+                if (mesa != null && pro != null && hora != null) {
+                    int numMesa = mesa.getNumero();
+                    String nombreProducto = pro.getNombre();
+
+                    modelo.addRow(new Object[]{numMesa, nombreProducto, hora, cantidad});
+
+                    jTabla.setModel(modelo);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Seleccione todos los campos");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione la cantidad de productos que desea agregar");
+            }
+
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "Ingrese correctamente los datos");
+        }
+
+    }//GEN-LAST:event_jbAgregarProductoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -228,14 +262,14 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbEliminarProducto;
     private javax.swing.JButton jbRealizarPedido;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<String> jcCantidad;
+    private javax.swing.JComboBox<Integer> jcCantidad;
     private javax.swing.JComboBox<String> jcHora;
-    private javax.swing.JComboBox<String> jcMesa;
-    private javax.swing.JComboBox<String> jcProducto;
+    private javax.swing.JComboBox<Mesa> jcMesa;
+    private javax.swing.JComboBox<Producto> jcProducto;
     private javax.swing.JTextField jtPrecioTotal;
     // End of variables declaration//GEN-END:variables
 
- private void armarCabecera() {
+    private void armarCabecera() {
         modelo.addColumn("Producto");
         modelo.addColumn("Cantidad");
         modelo.addColumn("Precio Unidad");
@@ -247,11 +281,52 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
         jcMesa.removeAllItems();
         Mesa mesa = new Mesa();
         MesaData md = new MesaData();
-        ArrayList lista = new ArrayList();
+        ArrayList<Mesa> lista = new ArrayList();
         List<Mesa> mes = md.ObtenerMesas();
         for (Mesa mesas : mes) {
-            jcMesa.addItem(mesas+"");
+            jcMesa.addItem(mesas);
         }
+    }
+
+    public void CargarComboProducto() {
+        jcProducto.removeAllItems();
+        Producto prod = new Producto();
+        ProductoData pd = new ProductoData();
+        ArrayList lista = new ArrayList();
+        List<Producto> pro = pd.obtenerProductos();
+        for (Producto prou : pro) {
+            jcProducto.addItem(prou);
+        }
+    }
+
+    public void CargarComboHora() {
+        jcHora.removeAllItems();
+        List<String> horas = new ArrayList<>();
+        int horaInicial = 10;
+        int horaFinal = 22;
+
+        for (int hora = horaInicial; hora <= horaFinal; hora++) {
+            String horaFormateada = String.format("%02d:00", hora);
+            horas.add(horaFormateada);
+        }
+
+        for (String hor : horas) {
+            jcHora.addItem(hor);
+        }
+    }
+
+    public void CargarComboCantidad() {
+
+        jcCantidad.removeAllItems();
+
+        Producto pro = (Producto) jcProducto.getSelectedItem();
+        if (pro != null) {
+            int producto = pro.getCantidad();
+            for (int i = 0; i <= producto; i++) {
+                jcCantidad.addItem(i);
+            }
+        }
+
     }
 
     private void borrarFilas() {

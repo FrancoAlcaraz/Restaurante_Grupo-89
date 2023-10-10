@@ -15,6 +15,12 @@ public class Mesero {
 
     }
 
+    public Mesero(int dni, String nombre, boolean Estado) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.Estado = Estado;
+    }
+
     public Mesero() {
     }
 

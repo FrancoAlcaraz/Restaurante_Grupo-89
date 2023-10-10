@@ -25,6 +25,7 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
             return false;
         }
     };
+    double pre = 0.0;
 
     /**
      * Creates new form AgregarPedido
@@ -113,8 +114,14 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
         jLabel6.setText("Precio total:");
 
         jbEliminarProducto.setText("Eliminar Producto");
+        jbEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarProductoActionPerformed(evt);
+            }
+        });
 
         jtPrecioTotal.setEditable(false);
+        jtPrecioTotal.setText("0.0");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -228,12 +235,21 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
 
             if (cantidad >= 1) {
                 if (mesa != null && pro != null && hora != null) {
-                    int numMesa = mesa.getNumero();
                     String nombreProducto = pro.getNombre();
-
-                    modelo.addRow(new Object[]{numMesa, nombreProducto, hora, cantidad});
-
+                    double precio = pro.getPrecio();
+                    double precioTotal = precio * (cantidad);
+                    jcMesa.setEnabled(false);
+                    jcHora.setEnabled(false);
+                    modelo.addRow(new Object[]{nombreProducto, cantidad, precio, precioTotal});
                     jTabla.setModel(modelo);
+                    int cantidadDisponible = pro.getCantidad();
+                    cantidadDisponible = cantidadDisponible - cantidad;
+                    jcCantidad.removeAllItems();
+                    for (int i = 0; i <= cantidadDisponible; i++) {
+                        jcCantidad.addItem(i);
+                    }
+                    pre = pre + precioTotal;
+                    jtPrecioTotal.setText(String.valueOf(pre));
                 } else {
                     JOptionPane.showMessageDialog(null, "Seleccione todos los campos");
                 }
@@ -246,6 +262,29 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_jbAgregarProductoActionPerformed
+
+    private void jbEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarProductoActionPerformed
+        int filaS = jTabla.getSelectedRow();
+        if (filaS == -1) {
+            JOptionPane.showMessageDialog(null, "Selecciona una fila primero.");
+            return;
+        } else {
+
+            try {
+                double pre = Double.parseDouble(jtPrecioTotal.getText());
+                double precioTotal = Double.parseDouble(modelo.getValueAt(filaS, 3).toString());
+                pre -= precioTotal;
+                jtPrecioTotal.setText(String.valueOf(pre));
+                modelo.removeRow(filaS);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "El campo de precio total no contiene un número válido.");
+            }
+        }
+        if ((modelo.getRowCount() == 0)) {
+            jcMesa.setEnabled(true);
+            jcHora.setEnabled(true);
+        }
+    }//GEN-LAST:event_jbEliminarProductoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

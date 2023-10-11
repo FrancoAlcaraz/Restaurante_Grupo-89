@@ -1,14 +1,22 @@
 package Entidades;
 
+import java.util.List;
+
 public class Pedidos {
 
     int IdPedido;
-    Producto producto;
+    List<Producto> producto;
     Mesero mesero;
     Mesa mesa;
 
-    public Pedidos(int IdPedido, Producto producto, Mesero mesero, Mesa mesa) {
+    public Pedidos(int IdPedido, List<Producto> producto, Mesero mesero, Mesa mesa) {
         this.IdPedido = IdPedido;
+        this.producto = producto;
+        this.mesero = mesero;
+        this.mesa = mesa;
+    }
+
+    public Pedidos(List<Producto> producto, Mesero mesero, Mesa mesa) {
         this.producto = producto;
         this.mesero = mesero;
         this.mesa = mesa;
@@ -25,11 +33,11 @@ public class Pedidos {
         this.IdPedido = IdPedido;
     }
 
-    public Producto getProducto() {
+    public List<Producto> getProducto() {
         return producto;
     }
 
-    public void setProducto(Producto producto) {
+    public void setProducto(List<Producto> producto) {
         this.producto = producto;
     }
 
@@ -54,4 +62,5 @@ public class Pedidos {
         return "Pedidos{" + "IdPedido=" + IdPedido + ", producto=" + producto + ", mesero=" + mesero + ", mesa=" + mesa + '}';
     }
 
+    
 }

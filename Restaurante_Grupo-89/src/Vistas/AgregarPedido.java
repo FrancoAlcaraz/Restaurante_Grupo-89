@@ -6,8 +6,12 @@
 package Vistas;
 
 import AccesoADatos.MesaData;
+import AccesoADatos.MeseroData;
+import AccesoADatos.PedidosData;
 import AccesoADatos.ProductoData;
 import Entidades.Mesa;
+import Entidades.Mesero;
+import Entidades.Pedidos;
 import Entidades.Producto;
 import java.util.ArrayList;
 import java.util.List;
@@ -103,6 +107,11 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
         jbSalir.setText("Salir");
 
         jbRealizarPedido.setText("Realizar Pedido");
+        jbRealizarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbRealizarPedidoActionPerformed(evt);
+            }
+        });
 
         jbAgregarProducto.setText("Agregar Producto");
         jbAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -285,6 +294,40 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
             jcHora.setEnabled(true);
         }
     }//GEN-LAST:event_jbEliminarProductoActionPerformed
+
+    private void jbRealizarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRealizarPedidoActionPerformed
+        if (modelo.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Ingrese productos para su pedido");
+            return;
+        } else {
+            PedidosData pd = new PedidosData();
+            Producto pro = new Producto();
+           ProductoData prd = new ProductoData();
+            MesaData md = new MesaData();
+            MeseroData med = new MeseroData();
+            int mesaa;
+            try {
+                mesaa = Integer.parseInt(jcMesa.getSelectedItem().toString());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Ingrese un número de mesa válido.");
+                return;
+            }
+            List<Producto> lp = new ArrayList<>();
+            // Obtener un mesero (puedes implementar la lógica para seleccionar uno aleatorio)
+            Mesero mese = med.ObtenerMesero(3);
+            Mesa mes = md.ObtenerMesaxID(mesaa);
+
+            Pedidos ped = new Pedidos();
+            ped.setMesa(mes);
+            ped.setMesero(mese);
+            ped.setProducto(lp);
+            
+            pd.AgregarPedido(ped);
+
+            JOptionPane.showMessageDialog(null, "Pedido realizado con éxito.");
+        }
+
+    }//GEN-LAST:event_jbRealizarPedidoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

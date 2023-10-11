@@ -29,10 +29,12 @@ public class PedidosData {
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, pedido.getIdPedido());
-            ps.setInt(2, pedido.getProducto().getIdProducto());
             ps.setInt(3, pedido.getMesero().getIdMesero());
             ps.setInt(4, pedido.getMesa().getIdMesa());
-            ps.executeUpdate();
+            for (Producto producto : pedido.getProducto()) {
+                ps.setInt(2, producto.getIdProducto());
+                ps.executeUpdate();
+            }
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 pedido.setIdPedido(rs.getInt(1));
@@ -45,19 +47,31 @@ public class PedidosData {
     }
 
     public void ModificarPedido(Pedidos pedido) {
-        String sql = "UPDATE `pedido` SET `idPedido`=?,`idProducto`=?,`idMesero`=?, `idMesa`=? WHERE idPedido=?";
+        String sqlE = "DELETE FROM `pedido` WHERE idPedido = ?";
+        String sqlI = "INSERT INTO `pedido`(`idPedido`,`idProducto`,`idMesero`, `idMesa`) VALUES (?,?,?,?)";
+
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, pedido.getIdPedido());
-            ps.setInt(2, pedido.getProducto().getIdProducto());
-            ps.setInt(3, pedido.getMesero().getIdMesero());
-            ps.setInt(4, pedido.getMesa().getIdMesa());
-            int exito = ps.executeUpdate();
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Modificado Exitosamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "El pedido no existe");
+            // Eliminar todos los productos asociados al pedido
+            PreparedStatement psE = con.prepareStatement(sqlE);
+            psE.setInt(1, pedido.getIdPedido());
+            psE.executeUpdate();
+            psE.close();
+
+            // Insertar los nuevos productos al pedido
+            PreparedStatement psI = con.prepareStatement(sqlI);
+
+            for (Producto producto : pedido.getProducto()) {
+                psI.setInt(1, pedido.getIdPedido());
+                psI.setInt(2, producto.getIdProducto());
+                psI.setInt(3, pedido.getMesero().getIdMesero());
+                psI.setInt(4, pedido.getMesa().getIdMesa());
+                int exito = psI.executeUpdate();
+                if (exito == 1) {
+                    JOptionPane.showMessageDialog(null, "Modificado Exitosamente.");
+                } else {
+                    JOptionPane.showMessageDialog(null, "El pedido no existe");
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido " + ex.getMessage());

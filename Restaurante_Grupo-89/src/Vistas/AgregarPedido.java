@@ -297,35 +297,54 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
 
     private void jbRealizarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRealizarPedidoActionPerformed
         if (modelo.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Ingrese productos para su pedido");
+        JOptionPane.showMessageDialog(null, "Ingrese productos para su pedido");
+        return;
+    } else {
+        PedidosData pd = new PedidosData();
+        ProductoData prd = new ProductoData();
+        MesaData md = new MesaData();
+        MeseroData med = new MeseroData();
+        
+        int mesaa;
+        try {
+            mesaa = Integer.parseInt(jcMesa.getSelectedItem().toString());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Ingrese un número de mesa válido.");
             return;
-        } else {
-            PedidosData pd = new PedidosData();
-            Producto pro = new Producto();
-           ProductoData prd = new ProductoData();
-            MesaData md = new MesaData();
-            MeseroData med = new MeseroData();
-            int mesaa;
-            try {
-                mesaa = Integer.parseInt(jcMesa.getSelectedItem().toString());
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Ingrese un número de mesa válido.");
+        }
+        
+        List<Producto> lp = new ArrayList<>();
+        Mesero mese = med.ObtenerMesero(3);
+        Mesa mes = md.ObtenerMesaxID(mesaa);
+        
+        Pedidos ped = new Pedidos();
+        ped.setMesa(mes);
+        ped.setMesero(mese);
+        ped.setProducto(lp);
+        ped.setEstado(true);
+        
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            String nombreProducto = (String) modelo.getValueAt(i, 0); // Obtener el nombre del producto
+            int cantidad = (int) modelo.getValueAt(i, 1); // Asume que la cantidad está en la columna 1
+            
+            // Obtener el producto por nombre
+            Producto producto = (Producto) prd.obtenerProductosxNombre(nombreProducto);
+            
+            if (producto != null) {
+                // Agregar el producto la cantidad de veces especificada
+                for (int j = 0; j < cantidad; j++) {
+                    lp.add(producto);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Error: Producto no encontrado");
                 return;
             }
-            List<Producto> lp = new ArrayList<>();
-            // Obtener un mesero (puedes implementar la lógica para seleccionar uno aleatorio)
-            Mesero mese = med.ObtenerMesero(3);
-            Mesa mes = md.ObtenerMesaxID(mesaa);
-
-            Pedidos ped = new Pedidos();
-            ped.setMesa(mes);
-            ped.setMesero(mese);
-            ped.setProducto(lp);
-            
-            pd.AgregarPedido(ped);
-
-            JOptionPane.showMessageDialog(null, "Pedido realizado con éxito.");
         }
+        
+        ped.setProducto(lp);
+        pd.AgregarPedido(ped);
+        JOptionPane.showMessageDialog(null, "Pedido realizado con éxito.");
+    }
 
     }//GEN-LAST:event_jbRealizarPedidoActionPerformed
 

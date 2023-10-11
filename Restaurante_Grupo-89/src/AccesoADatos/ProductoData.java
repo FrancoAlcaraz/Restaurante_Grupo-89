@@ -21,7 +21,7 @@ public class ProductoData {
     }
 CategoriaData ct=new CategoriaData();
     public void agregarProducto(Producto producto) {
-        String sql = "INSERT INTO producto (nombre, cantidad, precio, categoria) "
+        String sql = "INSERT INTO `producto`( `nombre`, `cantidad`, `precio`, `idCategoria` ) "
                 + "VALUES (?,?,?,?)";
 
         try {
@@ -29,7 +29,7 @@ CategoriaData ct=new CategoriaData();
             ps.setString(1, producto.getNombre());
             ps.setInt(2, producto.getCantidad());
             ps.setDouble(3, producto.getPrecio());
-            ps.setObject(4, producto.getCategoria().getCategoria());
+            ps.setObject(4, producto.getCategoria().getIdcategoria());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {

@@ -45,8 +45,9 @@ public class Categoria {
 
     @Override
     public String toString() {
-        return  categoria ;
+        return categoria ;
     }
-    
+
+   
     
 }

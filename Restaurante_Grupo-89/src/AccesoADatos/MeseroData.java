@@ -21,13 +21,13 @@ public class MeseroData {
     }
     
  public void AgregarMesero(Mesero mesero){
- String sql="INSERT INTO `mesero`(`idMesero`, `dni`, `nombre`, `estado`) VALUES ('?','?','?','?')";
+ String sql="INSERT INTO `mesero`(`dni`, `nombre`, `estado`) VALUES (?,?,?)";
   try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, mesero.getIdMesero());
-            ps.setInt(2, mesero.getDni());
-            ps.setString(3, mesero.getNombre());
-            ps.setBoolean(4, mesero.isEstado());
+           
+            ps.setInt(1, mesero.getDni());
+            ps.setString(2, mesero.getNombre());
+            ps.setBoolean(3, mesero.isEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -61,14 +61,15 @@ public class MeseroData {
         return mesero;    
     }
     
-    public void ModificarMesero(Mesero mesero){
-     String sql = "UPDATE `mesero` SET `dni`='?',`nombre`='?',`estado`='?' WHERE `idMesero`=?";
-        PreparedStatement ps = null;
+    public void ModificarMesero(int dni,String nombre,boolean estado,int idmesero){
+     String sql = "UPDATE `mesero` SET `dni`=?,`nombre`=? ,`estado`=? WHERE `idMesero`=? ";
+        
         try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, mesero.getDni());
-            ps.setString(2, mesero.getNombre());
-            ps.setBoolean(3,mesero.isEstado());
+        PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,dni);
+            ps.setString(2, nombre);
+            ps.setBoolean(3,estado);
+            ps.setInt(4,idmesero);
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
@@ -88,9 +89,9 @@ public class MeseroData {
                ps.setInt(1, IdMesero);
                int res=ps.executeUpdate();
                if(res>0){
-                System.out.println("Mesero Eliminado");
+               JOptionPane.showMessageDialog(null,"Mesero Eliminado");
                }else{
-                     System.out.println("Error al eliminar al mesero");  
+                     JOptionPane.showMessageDialog(null,"Error al eliminar al mesero");  
                        }
         } catch (SQLException ex) {
             Logger.getLogger(MesaData.class.getName()).log(Level.SEVERE, null, ex);

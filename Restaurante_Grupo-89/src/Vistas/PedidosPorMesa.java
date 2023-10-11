@@ -5,17 +5,22 @@
  */
 package Vistas;
 
+import AccesoADatos.MesaData;
+import Entidades.Mesa;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Bel
  */
 public class PedidosPorMesa extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form PedidosPorMesa
-     */
+    DefaultTableModel modelo=new DefaultTableModel();
     public PedidosPorMesa() {
         initComponents();
+        CargarCombo();
+        cabecera();
     }
 
     /**
@@ -27,16 +32,18 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        rbnGrouppedidos = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jMesa = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        jTablePorMesa = new javax.swing.JTable();
+        rbnRealizadas = new javax.swing.JRadioButton();
+        rbnPendientes = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Pedidos por mesa");
@@ -44,9 +51,13 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Mesa");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMesaActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTablePorMesa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -65,15 +76,24 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTablePorMesa);
 
-        jRadioButton1.setText("Pedidos Realizados");
+        rbnGrouppedidos.add(rbnRealizadas);
+        rbnRealizadas.setText("Pedidos Realizados");
 
-        jRadioButton2.setText("Pedidos Pendientes");
+        rbnGrouppedidos.add(rbnPendientes);
+        rbnPendientes.setText("Pedidos Pendientes");
 
         jButton1.setText("Salir");
 
-        jButton2.setText("Refresh");
+        jButton2.setText("actualizar");
+
+        jButton3.setText("Modificar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -83,6 +103,8 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
+                        .addComponent(jButton3)
+                        .addGap(104, 104, 104)
                         .addComponent(jButton2)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1))
@@ -91,9 +113,9 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
                             .addGap(93, 93, 93)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jRadioButton1)
+                                    .addComponent(rbnRealizadas)
                                     .addGap(65, 65, 65)
-                                    .addComponent(jRadioButton2))
+                                    .addComponent(rbnPendientes))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGap(40, 40, 40)
                                     .addComponent(jLabel1))))
@@ -105,7 +127,7 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(110, 110, 110))
         );
         jPanel1Layout.setVerticalGroup(
@@ -115,18 +137,19 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(rbnRealizadas)
+                    .addComponent(rbnPendientes))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addGap(16, 16, 16))
         );
 
@@ -148,17 +171,42 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMesaActionPerformed
+
+
+    }//GEN-LAST:event_jMesaActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JComboBox<Mesa> jMesa;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTablePorMesa;
+    private javax.swing.ButtonGroup rbnGrouppedidos;
+    private javax.swing.JRadioButton rbnPendientes;
+    private javax.swing.JRadioButton rbnRealizadas;
     // End of variables declaration//GEN-END:variables
+private void CargarCombo() {
+        MesaData md = new MesaData();
+        List<Mesa> lista = md.ObtenerMesas();
+        for (Mesa mesa : lista) {
+            jMesa.addItem(mesa);
+        }
+    }
+private void cabecera(){
+modelo.addColumn("Pedido");
+modelo.addColumn("Precio");
+modelo.addColumn("Estado");
+modelo.addColumn("Mesero");
+
+}
 }

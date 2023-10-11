@@ -8,20 +8,23 @@ public class Pedidos {
     List<Producto> producto;
     Mesero mesero;
     Mesa mesa;
+    boolean estado;
 
-    public Pedidos(int IdPedido, List<Producto> producto, Mesero mesero, Mesa mesa) {
+    public Pedidos(int IdPedido, List<Producto> producto, Mesero mesero, Mesa mesa, boolean estado) {
         this.IdPedido = IdPedido;
         this.producto = producto;
         this.mesero = mesero;
         this.mesa = mesa;
+        this.estado = estado;
     }
 
-    public Pedidos(List<Producto> producto, Mesero mesero, Mesa mesa) {
+    public Pedidos(List<Producto> producto, Mesero mesero, Mesa mesa, boolean estado) {
         this.producto = producto;
         this.mesero = mesero;
         this.mesa = mesa;
+        this.estado = estado;
     }
-
+    
     public Pedidos() {
     }
 
@@ -57,10 +60,19 @@ public class Pedidos {
         this.mesa = mesa;
     }
 
-    @Override
-    public String toString() {
-        return "Pedidos{" + "IdPedido=" + IdPedido + ", producto=" + producto + ", mesero=" + mesero + ", mesa=" + mesa + '}';
+    public boolean isEstado() {
+        return estado;
     }
 
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedidos{" + "IdPedido=" + IdPedido + ", producto=" + producto + ", mesero=" + mesero + ", mesa=" + mesa + ", estado=" + estado + '}';
+    }
+
+   
     
 }

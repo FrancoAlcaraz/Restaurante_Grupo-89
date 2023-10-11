@@ -34,7 +34,6 @@ public class Menu extends javax.swing.JFrame {
         AgregarProducto = new javax.swing.JMenuItem();
         AgregarMesa = new javax.swing.JMenuItem();
         AgregarMesero = new javax.swing.JMenuItem();
-        AgregarReserva = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         PrecioProducto = new javax.swing.JMenuItem();
         PedidosXMesa = new javax.swing.JMenuItem();
@@ -87,14 +86,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu1.add(AgregarMesero);
-
-        AgregarReserva.setText("Agregar Reserva");
-        AgregarReserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AgregarReservaActionPerformed(evt);
-            }
-        });
-        jMenu1.add(AgregarReserva);
 
         jMenuBar1.add(jMenu1);
 
@@ -187,16 +178,6 @@ public class Menu extends javax.swing.JFrame {
       jEscritorio.moveToFront(ame);
     }//GEN-LAST:event_AgregarMeseroActionPerformed
 
-    private void AgregarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarReservaActionPerformed
-
-      jEscritorio.removeAll();
-      jEscritorio.repaint();
-      AgregarReserva ar=new AgregarReserva();
-      ar.setVisible(true);
-      jEscritorio.add(ar);
-      jEscritorio.moveToFront(ar);
-    }//GEN-LAST:event_AgregarReservaActionPerformed
-
     private void PrecioProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrecioProductoActionPerformed
       jEscritorio.removeAll();
       jEscritorio.repaint();
@@ -272,7 +253,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem AgregarMesero;
     private javax.swing.JMenuItem AgregarPedido;
     private javax.swing.JMenuItem AgregarProducto;
-    private javax.swing.JMenuItem AgregarReserva;
     private javax.swing.JMenuItem PedidosXMesa;
     private javax.swing.JMenuItem PrecioProducto;
     private javax.swing.JDesktopPane jEscritorio;

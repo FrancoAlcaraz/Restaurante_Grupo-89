@@ -1,7 +1,9 @@
 
 package AccesoADatos;
 
+import Entidades.Categoria;
 import Entidades.Mesero;
+import Entidades.Producto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -98,6 +100,30 @@ public class MeseroData {
         }
     }
     
-    
+    public List<Mesero> obtenerProductos() {
+        List<Mesero> meseros = new ArrayList<>();
+        String sql = "SELECT * FROM mesero ";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                Mesero mesero = new Mesero();
+                mesero.setIdMesero(rs.getInt("idMesero"));
+               mesero.setNombre(rs.getString("nombre"));
+               mesero.setDni(rs.getInt("dni"));
+               mesero.setEstado(rs.getBoolean("estado"));
+                
+                meseros.add(mesero);
+
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al listar productos: " + ex);
+        }
+        return meseros;
+
+    }
     
 }

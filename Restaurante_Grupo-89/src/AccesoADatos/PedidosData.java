@@ -147,4 +147,30 @@ public class PedidosData {
 
     }
    
+    public List<Pedidos> obtenerPedidosPorMesa(int idMesa) {
+        ArrayList<Pedidos> pedidos = new ArrayList<>();
+        String sql = "SELECT `idPedido`, `idProducto`, `idMesero`, `idMesa`, `estado` FROM `pedido` WHERE idMesa=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idMesa);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                 Pedidos pedido = new Pedidos();
+                Mesero mesero = meserodata.ObtenerMesero(rs.getInt("idMesero"));
+                Mesa mesa = md.ObtenerMesaxID(rs.getInt("idMesa"));
+                Producto prod = data.obtenerProductosxID(rs.getInt("idProducto"));
+                pedido.setIdPedido(rs.getInt("IDPedido"));
+                pedido.setMesero(mesero);
+                pedido.setMesa(mesa);
+                pedido.setProducto1(prod);
+                pedido.setEstado(rs.getBoolean("estado"));
+                pedidos.add(pedido);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al buscar por mesa" + ex.getMessage());
+        }
+        return pedidos;
+    }
 }

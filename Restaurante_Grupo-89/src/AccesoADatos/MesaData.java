@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 public class MesaData {
 
-    private Connection con = null;
+     Connection con = null;
 
     public MesaData() {
         con = Conexion.getConexion();
@@ -74,9 +74,9 @@ public class MesaData {
                 Mesa mesa = new Mesa();
                 mesa.setNumero(rs.getInt("numero"));
                 mesa.setCapacidad(rs.getInt("capacidad"));
+                mesa.setIdMesa(rs.getInt("idMesa"));
                 mesa.setEstado(true);
                 mesas.add(mesa);
-
             }
             ps.close();
         } catch (SQLException ex) {

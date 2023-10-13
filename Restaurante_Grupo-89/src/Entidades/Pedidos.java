@@ -9,6 +9,7 @@ public class Pedidos {
     Mesero mesero;
     Mesa mesa;
     boolean estado;
+    Producto producto1;
 
     public Pedidos(int IdPedido, List<Producto> producto, Mesero mesero, Mesa mesa, boolean estado) {
         this.IdPedido = IdPedido;
@@ -23,6 +24,21 @@ public class Pedidos {
         this.mesero = mesero;
         this.mesa = mesa;
         this.estado = estado;
+    }
+
+    public Pedidos(int IdPedido, Mesero mesero, Mesa mesa, boolean estado, Producto producto1) {
+        this.IdPedido = IdPedido;
+        this.mesero = mesero;
+        this.mesa = mesa;
+        this.estado = estado;
+        this.producto1 = producto1;
+    }
+
+    public Pedidos(Mesero mesero, Mesa mesa, boolean estado, Producto producto1) {
+        this.mesero = mesero;
+        this.mesa = mesa;
+        this.estado = estado;
+        this.producto1 = producto1;
     }
     
     public Pedidos() {
@@ -66,6 +82,14 @@ public class Pedidos {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public Producto getProducto1() {
+        return producto1;
+    }
+
+    public void setProducto1(Producto producto1) {
+        this.producto1 = producto1;
     }
 
     @Override

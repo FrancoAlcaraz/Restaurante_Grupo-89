@@ -6,7 +6,10 @@
 package Vistas;
 
 import AccesoADatos.MesaData;
+import AccesoADatos.PedidosData;
 import Entidades.Mesa;
+import Entidades.Pedidos;
+import Entidades.Producto;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,7 +19,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PedidosPorMesa extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modelo=new DefaultTableModel();
+    DefaultTableModel modelo = new DefaultTableModel();
+
     public PedidosPorMesa() {
         initComponents();
         CargarCombo();
@@ -83,6 +87,11 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
 
         rbnGrouppedidos.add(rbnPendientes);
         rbnPendientes.setText("Pedidos Pendientes");
+        rbnPendientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbnPendientesActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Salir");
 
@@ -173,13 +182,69 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
 
     private void jMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMesaActionPerformed
 
+        Mesa seleccionado = (Mesa) jMesa.getSelectedItem();
+        if (seleccionado != null) {
+            modelo.setRowCount(0);
+            int idmesa = seleccionado.getIdMesa();
+            PedidosData pd = new PedidosData();
+            String estado ="_";
+            List<Pedidos> lista = pd.obtenerPedidosPorMesa(idmesa);
+            for (Pedidos pedido : lista) {
+                if (pedido != null) {
+                    int idpedido = pedido.getIdPedido();
+                    int idMesero = pedido.getMesero().getIdMesero();
+                    String idProducto = pedido.getProducto1().getNombre();
+                    if(pedido.isEstado()==true){
+                    estado="Realizada";
+                    }else{
+                    estado="Pendiente";
+                    }
+                        
+                    modelo.addRow(new Object[]{idpedido, idProducto, idMesero, estado});
+                }
 
+            }
+
+        }
     }//GEN-LAST:event_jMesaActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void rbnPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnPendientesActionPerformed
+        Mesa seleccionado = (Mesa) jMesa.getSelectedItem();
+        if (seleccionado != null) {
+            modelo.setRowCount(0);
+            int idmesa = seleccionado.getIdMesa();
+            boolean estado=true;
+            PedidosData pd = new PedidosData();
+            String estado1 ="_";
+            List<Pedidos> lista = pd.obtenerPedidosPorMesa(idmesa);
+            if(rbnPendientes.isSelected()){
+            estado=false;
+            }else if(rbnRealizadas.isSelected()){
+            estado=true;}
+            for (Pedidos pedido : lista) {
+                if (pedido != null && pedido.isEstado()==estado) {
+                    int idpedido = pedido.getIdPedido();
+                    int idMesero = pedido.getMesero().getIdMesero();
+                    String idProducto = pedido.getProducto1().getNombre();
+                    if(pedido.isEstado()==estado){
+                    estado1="Realizada";
+                    }else{
+                    estado1="Pendiente";
+                    }
+                        
+                    modelo.addRow(new Object[]{idpedido, idProducto, idMesero, estado1});
+                }
+
+            }
+
+        }
+        
+        
+    }//GEN-LAST:event_rbnPendientesActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -202,11 +267,12 @@ private void CargarCombo() {
             jMesa.addItem(mesa);
         }
     }
-private void cabecera(){
-modelo.addColumn("Pedido");
-modelo.addColumn("Precio");
-modelo.addColumn("Estado");
-modelo.addColumn("Mesero");
 
-}
+    private void cabecera() {
+        modelo.addColumn("Pedido");
+        modelo.addColumn("producto");
+        modelo.addColumn("Mesero");
+        modelo.addColumn("Estado");
+     jTablePorMesa.setModel(modelo);
+    }
 }

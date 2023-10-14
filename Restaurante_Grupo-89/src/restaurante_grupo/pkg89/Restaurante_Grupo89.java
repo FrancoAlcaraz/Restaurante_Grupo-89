@@ -49,16 +49,18 @@ public class Restaurante_Grupo89 {
       //  MeseroData md = new MeseroData();
       //  md.AgregarMesero(mesero);
 PedidosData p=new PedidosData();
-   List<Pedidos> pr=p.obtenerPedidosPorMesa(2);
+   List<Pedidos> pr=p.ListarPedidos();
         for (Pedidos pedidos : pr) {
+            
             System.out.println("Pedido "+pedidos.getIdPedido());
             System.out.println("Mesa "+pedidos.getMesa().getIdMesa());
             System.out.println("Mesero "+pedidos.getMesero().getIdMesero());
-            System.out.println("Producto "+pedidos.getProducto1().getIdProducto());
+            System.out.println("Producto "+pedidos.getProducto().getIdProducto());
+            System.out.println("NroPedido "+pedidos.getNroPedido());
+            }
             
             
-            
-        }
+        
     }
 
 }

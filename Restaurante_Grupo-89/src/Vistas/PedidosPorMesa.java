@@ -192,20 +192,20 @@ JComboBox jmesero=new JComboBox();
             int idmesa = seleccionado.getIdMesa();
             PedidosData pd = new PedidosData();
             String estado ="_";
-            List<Pedidos> lista = pd.obtenerPedidosPorMesa(idmesa);
+            List<Pedidos> lista = pd.ListarPedidos();
             for (Pedidos pedido : lista) {
-                if (pedido != null) {
-                    int idpedido = pedido.getIdPedido();
-                   String NombreMesero = pedido.getMesero().getNombre();
-                   Double precio=pedido.getProducto1().getPrecio();
-                    String idProducto = pedido.getProducto1().getNombre();
+                if (pedido != null&&pedido.getMesa().getIdMesa()==idmesa) {
+                   int nropedido = pedido.getNroPedido();
+                    String NombreMesero = pedido.getMesero().getNombre();
+                   Double precio=pedido.getProducto().getPrecio();
+                    String idProducto = pedido.getProducto().getNombre();
                     if(pedido.isEstado()==true){
                     estado="Realizada";
                     }else{
                     estado="Pendiente";
                     }
                         
-                    modelo.addRow(new Object[]{idpedido, idProducto, NombreMesero,precio, estado});
+                    modelo.addRow(new Object[]{nropedido, idProducto, NombreMesero,precio, estado});
                 }
 
             }
@@ -225,22 +225,22 @@ JComboBox jmesero=new JComboBox();
             boolean estado=true;
             PedidosData pd = new PedidosData();
             String estado1 ="_";
-            List<Pedidos> lista = pd.obtenerPedidosPorMesa(idmesa);
+            List<Pedidos> lista = pd.ListarPedidos();
             if(rbnPendientes.isSelected()){
             estado=false;
             }
             for (Pedidos pedido : lista) {
-                if (pedido != null && pedido.isEstado()==estado) {
-                    int idpedido = pedido.getIdPedido();
+                if (pedido != null && pedido.isEstado()==estado && pedido.getMesa().getIdMesa()==idmesa) {
+                    int nropedido = pedido.getNroPedido();
                     String NombreMesero = pedido.getMesero().getNombre();
-                    Double precio=pedido.getProducto1().getPrecio();
-                    String idProducto = pedido.getProducto1().getNombre();
+                    Double precio=pedido.getProducto().getPrecio();
+                    String idProducto = pedido.getProducto().getNombre();
                     if(pedido.isEstado()==true){
                     estado1="Realizada";
                     }else{
                     estado1="Pendiente";
                     }
-                    modelo.addRow(new Object[]{idpedido, idProducto, NombreMesero,precio, estado1});
+                    modelo.addRow(new Object[]{nropedido, idProducto, NombreMesero,precio, estado1});
                 }
             }
         }
@@ -256,23 +256,23 @@ JComboBox jmesero=new JComboBox();
             boolean estado=true;
             PedidosData pd = new PedidosData();
             String estado1 ="_";
-            List<Pedidos> lista = pd.obtenerPedidosPorMesa(idmesa);
+            List<Pedidos> lista = pd.ListarPedidos();
             if(rbnRealizadas.isSelected()){
             estado=true;
             }
             for (Pedidos pedido : lista) {
-                if (pedido != null && pedido.isEstado()==estado) {
-                    int idpedido = pedido.getIdPedido();
+                if (pedido != null &&pedido.isEstado()==estado &&pedido.getMesa().getIdMesa()==idmesa) {
+                    int nropedido = pedido.getNroPedido();
                     String NombreMesero = pedido.getMesero().getNombre();
-                    Double precio=pedido.getProducto1().getPrecio();
-                    String idProducto = pedido.getProducto1().getNombre();
+                    Double precio=pedido.getProducto().getPrecio();
+                    String idProducto = pedido.getProducto().getNombre();
                     if(pedido.isEstado()==true){
                     estado1="Realizada";
                     }else{
                     estado1="Pendiente";
                     }
                         
-                    modelo.addRow(new Object[]{idpedido, idProducto, NombreMesero,precio, estado1});
+                    modelo.addRow(new Object[]{nropedido, idProducto, NombreMesero,precio, estado1});
                 }
 
             }
@@ -308,7 +308,7 @@ private void CargarCombo() {
     }
 
     private void cabecera() {
-        modelo.addColumn("Pedido");
+        modelo.addColumn("NroPedido");
         modelo.addColumn("Nombre producto");
         modelo.addColumn("Nombre Mesero");
         modelo.addColumn("Precio");

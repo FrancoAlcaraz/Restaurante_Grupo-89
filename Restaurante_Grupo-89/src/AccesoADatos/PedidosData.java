@@ -126,6 +126,9 @@ public class PedidosData {
                 pedido.setIdPedido(rs.getInt("idPedido"));
                 pedido.setEstado(rs.getBoolean("estado"));
                 pedido.setNroPedido(rs.getInt("nroPedido"));
+                pedido.setMesa(mesa);
+                pedido.setMesero(mesero);
+                pedido.setProducto(prod);
                 pedidos.add(pedido);
             }
             ps.close();

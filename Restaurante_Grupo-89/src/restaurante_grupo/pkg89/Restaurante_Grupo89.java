@@ -8,10 +8,12 @@ package restaurante_grupo.pkg89;
 import AccesoADatos.CategoriaData;
 import AccesoADatos.MesaData;
 import AccesoADatos.MeseroData;
+import AccesoADatos.PedidosData;
 import AccesoADatos.ProductoData;
 import Entidades.Categoria;
 import Entidades.Mesa;
 import Entidades.Mesero;
+import Entidades.Pedidos;
 import Entidades.Producto;
 import java.util.List;
 
@@ -43,10 +45,20 @@ public class Restaurante_Grupo89 {
         MesaData md=new MesaData();
         
         md.AgregarMesa(ms);*/
-        Mesero mesero = new Mesero(213455, "Carlo", true);
-        MeseroData md = new MeseroData();
-        md.AgregarMesero(mesero);
-
+      //  Mesero mesero = new Mesero(213455, "Carlo", true);
+      //  MeseroData md = new MeseroData();
+      //  md.AgregarMesero(mesero);
+PedidosData p=new PedidosData();
+   List<Pedidos> pr=p.obtenerPedidosPorMesa(2);
+        for (Pedidos pedidos : pr) {
+            System.out.println("Pedido "+pedidos.getIdPedido());
+            System.out.println("Mesa "+pedidos.getMesa().getIdMesa());
+            System.out.println("Mesero "+pedidos.getMesero().getIdMesero());
+            System.out.println("Producto "+pedidos.getProducto1().getIdProducto());
+            
+            
+            
+        }
     }
 
 }

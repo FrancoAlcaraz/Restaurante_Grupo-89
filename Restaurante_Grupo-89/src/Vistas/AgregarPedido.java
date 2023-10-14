@@ -120,6 +120,12 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
             }
         });
 
+        jcProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcProductoActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("Precio total:");
 
         jbEliminarProducto.setText("Eliminar Producto");
@@ -236,40 +242,40 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
 
     private void jbAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarProductoActionPerformed
         try {
-
             Mesa mesa = (Mesa) jcMesa.getSelectedItem();
-            Producto pro = (Producto) jcProducto.getSelectedItem();
+            Producto producto = (Producto) jcProducto.getSelectedItem();
             String hora = (String) jcHora.getSelectedItem();
             int cantidad = Integer.parseInt(jcCantidad.getSelectedItem().toString());
-
-            if (cantidad >= 1) {
-                if (mesa != null && pro != null && hora != null) {
-                    String nombreProducto = pro.getNombre();
-                    double precio = pro.getPrecio();
-                    double precioTotal = precio * (cantidad);
-                    jcMesa.setEnabled(false);
-                    jcHora.setEnabled(false);
-                    modelo.addRow(new Object[]{nombreProducto, cantidad, precio, precioTotal});
-                    jTabla.setModel(modelo);
-                    int cantidadDisponible = pro.getCantidad();
-                    cantidadDisponible = cantidadDisponible - cantidad;
-                    jcCantidad.removeAllItems();
-                    for (int i = 0; i <= cantidadDisponible; i++) {
-                        jcCantidad.addItem(i);
-                    }
-                    pre = pre + precioTotal;
-                    jtPrecioTotal.setText(String.valueOf(pre));
-                } else {
-                    JOptionPane.showMessageDialog(null, "Seleccione todos los campos");
-                }
-            } else {
+            if (cantidad < 1) {
                 JOptionPane.showMessageDialog(null, "Seleccione la cantidad de productos que desea agregar");
+                return;
             }
+            if (mesa == null || producto == null || hora == null) {
+                JOptionPane.showMessageDialog(null, "Seleccione todos los campos");
+                return;
+            }
+            String nombreProducto = producto.getNombre();
+            double precio = producto.getPrecio();
+            double precioTotal = precio * cantidad;
+            jcMesa.setEnabled(false);
+            jcHora.setEnabled(false);
+            modelo.addRow(new Object[]{nombreProducto, cantidad, precio, precioTotal});
+            jTabla.setModel(modelo);
+
+            int cantidadDisponible = producto.getCantidad();
+            int cantidadSeleccionada = cantidad;
+
+            jcCantidad.removeAllItems();
+            for (int i = 0; i <= cantidadDisponible - cantidadSeleccionada; i++) {
+                jcCantidad.addItem(i);
+            }
+
+            pre += precioTotal;
+            jtPrecioTotal.setText(String.valueOf(pre));
 
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(this, "Ingrese correctamente los datos");
         }
-
     }//GEN-LAST:event_jbAgregarProductoActionPerformed
 
     private void jbEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarProductoActionPerformed
@@ -296,94 +302,53 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarProductoActionPerformed
 
     private void jbRealizarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRealizarPedidoActionPerformed
-//        if (modelo.getRowCount() == 0) {
-//        JOptionPane.showMessageDialog(null, "Ingrese productos para su pedido");
-//        return;
-//    } else {
-//        Mesa mesa = (Mesa) jcMesa.getSelectedItem();
-//        MesaData md = new MesaData();
-//        PedidosData pd = new PedidosData();
-//        ProductoData prd = new ProductoData();
-//        MeseroData med = new MeseroData();
-//
-//        String hora = (String) jcHora.getSelectedItem();
-//        int cantidad = Integer.parseInt(jcCantidad.getSelectedItem().toString());
-//        int cont = modelo.getRowCount();
-//
-//        List<String> productos = new ArrayList<>();
-//        for (int i = 0; i < cont; i++) {
-//            Producto pro = (Producto) modelo.getValueAt(i, 0);;
-//            String proNom = pro.getNombre();
-//            productos.add(proNom);
-//        }
-//
-//        Mesa mesaa = md.ObtenerMesaxID(mesa.getIdMesa());
-//        Mesero mesero = med.ObtenerMesero(3);
-//        boolean estado = true;
-//
-//        int nroPedido = 0;
-//        List<Pedidos> listaPedidos = pd.ListarPedidos();
-//
-//        for (Pedidos pedido : listaPedidos) {
-//            if (pedido.getNroPedido() > nroPedido) {
-//                nroPedido = pedido.getNroPedido();
-//            }
-//        }
-//
-//        nroPedido++;
-//
-//        for (String nomP : productos) {
-//            // Obtén el Producto a partir del nombre
-//            Producto producto = (Producto) prd.obtenerProductosxNombre(nomP);
-//            if (producto != null) {
-//                pd.AgregarPedido(producto, mesa, mesero, estado, nroPedido);
-//            }
-//        }
-//    }
-    if (modelo.getRowCount() == 0) {
-        JOptionPane.showMessageDialog(null, "Ingrese productos para su pedido");
-        return;
-    } else {
-        Mesa mesa = (Mesa) jcMesa.getSelectedItem();
-        MesaData md = new MesaData();
-        PedidosData pd = new PedidosData();
-        ProductoData prd = new ProductoData();
-        MeseroData med = new MeseroData();
-
-        String hora = (String) jcHora.getSelectedItem();
-        int cantidad = Integer.parseInt(jcCantidad.getSelectedItem().toString());
-        int cont = modelo.getRowCount();
-
-        List<String> productos = new ArrayList<>();
-        for (int i = 0; i < cont; i++) {
-            String nombreProducto = (String) modelo.getValueAt(i, 0);
-            productos.add(nombreProducto);
-        }
-
-        Mesa mesaa = md.ObtenerMesaxID(mesa.getIdMesa());
-        Mesero mesero = med.ObtenerMesero(3);
-        boolean estado = true;
-
-        int nroPedido = 0;
-        List<Pedidos> listaPedidos = pd.ListarPedidos();
-
-        for (Pedidos pedido : listaPedidos) {
-            if (pedido.getNroPedido() > nroPedido) {
-                nroPedido = pedido.getNroPedido();
+        if (modelo.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Ingrese productos para su pedido");
+            return;
+        } else {
+            Mesa mesa = (Mesa) jcMesa.getSelectedItem();
+            MesaData md = new MesaData();
+            PedidosData pd = new PedidosData();
+            ProductoData prd = new ProductoData();
+            MeseroData med = new MeseroData();
+            String hora = (String) jcHora.getSelectedItem();
+            int cantidad = Integer.parseInt(jcCantidad.getSelectedItem().toString());
+            int cont = modelo.getRowCount();
+            List<String> productos = new ArrayList<>();
+            for (int i = 0; i < cont; i++) {
+                String nombreProducto = (String) modelo.getValueAt(i, 0);
+                productos.add(nombreProducto);
+            }
+            Mesa mesaa = md.ObtenerMesaxID(mesa.getIdMesa());
+            Mesero mesero = med.ObtenerMesero(3);
+            boolean estado = true;
+            int nroPedido = 0;
+            List<Pedidos> listaPedidos = pd.ListarPedidos();
+            for (Pedidos pedido : listaPedidos) {
+                if (pedido.getNroPedido() > nroPedido) {
+                    nroPedido = pedido.getNroPedido();
+                }
+            }
+            nroPedido++;
+            for (String nomP : productos) {
+                // Obtén el Producto a partir del nombre
+                List<Producto> productosEncontrados = prd.obtenerProductosxNombre(nomP);
+                if (!productosEncontrados.isEmpty()) {
+                    Producto producto = productosEncontrados.get(0);
+                    Pedidos pedido = new Pedidos(producto, mesero, mesa, estado, nroPedido);
+                    pd.AgregarPedido(pedido);
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se encontró el producto: " + nomP);
+                }
             }
         }
 
-        nroPedido++;
 
-        for (String nomP : productos) {
-            // Obtén el Producto a partir del nombre
-            Producto producto = (Producto) prd.obtenerProductosxNombre(nomP);
-            if (producto != null) {
-                pd.AgregarPedido(producto, mesa, mesero, estado, nroPedido);
-            }
-        }
-    }
     }//GEN-LAST:event_jbRealizarPedidoActionPerformed
+
+    private void jcProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcProductoActionPerformed
+        CargarComboCantidad();
+    }//GEN-LAST:event_jcProductoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -454,13 +419,11 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
     }
 
     public void CargarComboCantidad() {
-
         jcCantidad.removeAllItems();
-
         Producto pro = (Producto) jcProducto.getSelectedItem();
         if (pro != null) {
-            int producto = pro.getCantidad();
-            for (int i = 0; i <= producto; i++) {
+            int cantidad = pro.getCantidad();
+            for (int i = 0; i <= cantidad; i++) {
                 jcCantidad.addItem(i);
             }
         }

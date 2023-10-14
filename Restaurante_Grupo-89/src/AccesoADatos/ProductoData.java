@@ -154,7 +154,7 @@ public class ProductoData {
 
     public List<Producto> obtenerProductosxNombre(String nombre) {
     List<Producto> productos = new ArrayList<>();
-    String sql = "SELECT * FROM `producto` WHERE nombre";
+    String sql = "SELECT * FROM `producto` WHERE nombre = ?";
     
     try {
         PreparedStatement ps = con.prepareStatement(sql);

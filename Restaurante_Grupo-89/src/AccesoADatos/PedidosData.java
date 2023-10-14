@@ -25,76 +25,64 @@ public class PedidosData {
     }
 
     public void AgregarPedido(Pedidos pedido) {
-    String sql = "INSERT INTO `pedido`(`idMesero`, `idMesa`, `estado`) VALUES (?, ?, ?)";
-    try {
-        PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setInt(1, pedido.getMesero().getIdMesero());
-        ps.setInt(2, pedido.getMesa().getIdMesa());
-        ps.setBoolean(3, pedido.isEstado());
+        String sql =  "INSERT INTO `pedido`(`idProducto`, `idMesero`, `idMesa`, `estado`, `nroPedido`) VALUES (?, ?, ?, ?, ?)";;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, pedido.getProducto().getIdProducto());
+            ps.setInt(2, pedido.getMesero().getIdMesero());
+            ps.setInt(3, pedido.getMesa().getIdMesa());
+            ps.setBoolean(4, pedido.isEstado());
+            ps.setInt(5, pedido.getNroPedido());
 
-        int exito = ps.executeUpdate();
-        if (exito == 1) {
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                pedido.setIdPedido(rs.getInt(1));
+            int exito = ps.executeUpdate();
+            ps.close();
+            if(exito==1){
                 JOptionPane.showMessageDialog(null, "Pedido Agregado");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al agregar el pedido.");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos: " + ex.getMessage());
         }
 
-        ps.close();
-    } catch (SQLException ex) {
-        // Maneja la excepción adecuadamente, por ejemplo, registra el error o muestra un mensaje más informativo.
-        JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos: " + ex.getMessage());
     }
-}
 
     public void ModificarPedido(Pedidos pedido) {
         if (!pedido.isEstado()) {
             JOptionPane.showMessageDialog(null, "El pedido está inactivo y no se puede modificar.");
             return;
         }
-        String sqlE = "DELETE FROM `pedido` WHERE idPedido = ? and estado=?";
-        String sqlI = "INSERT INTO `pedido`(`idPedido`,`idProducto`,`idMesero`, `idMesa`,estado) VALUES (?,?,?,?,?)";
+        String sql = "UPDATE `pedido` SET `idPedido`=?,`idProducto`=?,"
+                + "`idMesero`=?,`idMesa`=?,"
+                + "' WHERE estado=? and `nroPedido`='? ";
 
         PreparedStatement ps = null;
         try {
-            // Eliminar todos los productos asociados al pedido
-            PreparedStatement psE = con.prepareStatement(sqlE);
-            psE.setInt(1, pedido.getIdPedido());
-            psE.setBoolean(2, pedido.isEstado());
-            psE.executeUpdate();
-            psE.close();
+            PreparedStatement psI = con.prepareStatement(sql);
 
-            // Insertar los nuevos productos al pedido
-            PreparedStatement psI = con.prepareStatement(sqlI);
-
-            for (Producto producto : pedido.getProducto()) {
-                psI.setInt(1, pedido.getIdPedido());
-                psI.setInt(2, producto.getIdProducto());
-                psI.setInt(3, pedido.getMesero().getIdMesero());
-                psI.setInt(4, pedido.getMesa().getIdMesa());
-                psI.setBoolean(5, pedido.isEstado());
-                int exito = psI.executeUpdate();
-                if (exito == 1) {
-                    JOptionPane.showMessageDialog(null, "Modificado Exitosamente.");
-                } else {
-                    JOptionPane.showMessageDialog(null, "El pedido no existe");
-                }
+            psI.setInt(1, pedido.getIdPedido());
+            psI.setInt(2, pedido.getProducto().getIdProducto());
+            psI.setInt(3, pedido.getMesero().getIdMesero());
+            psI.setInt(4, pedido.getMesa().getIdMesa());
+            psI.setBoolean(5, pedido.isEstado());
+            int exito = psI.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Modificado Exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "El pedido no existe");
             }
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido " + ex.getMessage());
         }
     }
 
     public void ModificarEstado(Pedidos pedido) {
-        String sql = "UPDATE `pedidos` SET estado = ? WHERE `idPedido` = ?";
+        String sql = "UPDATE `pedidos` SET estado = ? WHERE `nroPedido` = ? and 'idProducto'";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setBoolean(1, !pedido.isEstado()); // Cambia el estado actual
-            ps.setInt(2, pedido.getIdPedido());
+            ps.setInt(2, pedido.getNroPedido());
+            ps.setInt(3, pedido.getProducto().getIdProducto());
 
             int exito = ps.executeUpdate();
 
@@ -109,11 +97,11 @@ public class PedidosData {
         }
     }
 
-    public void EliminarPedido(int IdPedido) {
-        String sql = "DELETE FROM `pedido` WHERE idPedido=?";
+    public void EliminarPedido(int nroPedido) {
+        String sql = "DELETE FROM `pedido` WHERE nroPedido=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, IdPedido);
+            ps.setInt(1, nroPedido);
             int res = ps.executeUpdate();
             if (res > 0) {
                 System.out.println("Pedido Eliminado");
@@ -135,7 +123,9 @@ public class PedidosData {
                 Mesero mesero = meserodata.ObtenerMesero(rs.getInt("idMesero"));
                 Mesa mesa = md.ObtenerMesaxID(rs.getInt("idMesa"));
                 Producto prod = data.obtenerProductosxID(rs.getInt("idProducto"));
-                pedido.setIdPedido(rs.getInt("IDPedido"));
+                pedido.setIdPedido(rs.getInt("idPedido"));
+                pedido.setEstado(rs.getBoolean("estado"));
+                pedido.setNroPedido(rs.getInt("nroPedido"));
                 pedidos.add(pedido);
             }
             ps.close();
@@ -146,5 +136,5 @@ public class PedidosData {
         return pedidos;
 
     }
-   
+
 }

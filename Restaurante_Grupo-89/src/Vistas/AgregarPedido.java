@@ -296,56 +296,93 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarProductoActionPerformed
 
     private void jbRealizarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRealizarPedidoActionPerformed
-        if (modelo.getRowCount() == 0) {
+//        if (modelo.getRowCount() == 0) {
+//        JOptionPane.showMessageDialog(null, "Ingrese productos para su pedido");
+//        return;
+//    } else {
+//        Mesa mesa = (Mesa) jcMesa.getSelectedItem();
+//        MesaData md = new MesaData();
+//        PedidosData pd = new PedidosData();
+//        ProductoData prd = new ProductoData();
+//        MeseroData med = new MeseroData();
+//
+//        String hora = (String) jcHora.getSelectedItem();
+//        int cantidad = Integer.parseInt(jcCantidad.getSelectedItem().toString());
+//        int cont = modelo.getRowCount();
+//
+//        List<String> productos = new ArrayList<>();
+//        for (int i = 0; i < cont; i++) {
+//            Producto pro = (Producto) modelo.getValueAt(i, 0);;
+//            String proNom = pro.getNombre();
+//            productos.add(proNom);
+//        }
+//
+//        Mesa mesaa = md.ObtenerMesaxID(mesa.getIdMesa());
+//        Mesero mesero = med.ObtenerMesero(3);
+//        boolean estado = true;
+//
+//        int nroPedido = 0;
+//        List<Pedidos> listaPedidos = pd.ListarPedidos();
+//
+//        for (Pedidos pedido : listaPedidos) {
+//            if (pedido.getNroPedido() > nroPedido) {
+//                nroPedido = pedido.getNroPedido();
+//            }
+//        }
+//
+//        nroPedido++;
+//
+//        for (String nomP : productos) {
+//            // Obtén el Producto a partir del nombre
+//            Producto producto = (Producto) prd.obtenerProductosxNombre(nomP);
+//            if (producto != null) {
+//                pd.AgregarPedido(producto, mesa, mesero, estado, nroPedido);
+//            }
+//        }
+//    }
+    if (modelo.getRowCount() == 0) {
         JOptionPane.showMessageDialog(null, "Ingrese productos para su pedido");
         return;
     } else {
+        Mesa mesa = (Mesa) jcMesa.getSelectedItem();
+        MesaData md = new MesaData();
         PedidosData pd = new PedidosData();
         ProductoData prd = new ProductoData();
-        MesaData md = new MesaData();
         MeseroData med = new MeseroData();
-        
-        int mesaa;
-        try {
-            mesaa = Integer.parseInt(jcMesa.getSelectedItem().toString());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Ingrese un número de mesa válido.");
-            return;
+
+        String hora = (String) jcHora.getSelectedItem();
+        int cantidad = Integer.parseInt(jcCantidad.getSelectedItem().toString());
+        int cont = modelo.getRowCount();
+
+        List<String> productos = new ArrayList<>();
+        for (int i = 0; i < cont; i++) {
+            String nombreProducto = (String) modelo.getValueAt(i, 0);
+            productos.add(nombreProducto);
         }
-        
-        List<Producto> lp = new ArrayList<>();
-        Mesero mese = med.ObtenerMesero(3);
-        Mesa mes = md.ObtenerMesaxID(mesaa);
-        
-        Pedidos ped = new Pedidos();
-        ped.setMesa(mes);
-        ped.setMesero(mese);
-        ped.setProducto(lp);
-        ped.setEstado(true);
-        
-        for (int i = 0; i < modelo.getRowCount(); i++) {
-            String nombreProducto = (String) modelo.getValueAt(i, 0); // Obtener el nombre del producto
-            int cantidad = (int) modelo.getValueAt(i, 1); // Asume que la cantidad está en la columna 1
-            
-            // Obtener el producto por nombre
-            Producto producto = (Producto) prd.obtenerProductosxNombre(nombreProducto);
-            
-            if (producto != null) {
-                // Agregar el producto la cantidad de veces especificada
-                for (int j = 0; j < cantidad; j++) {
-                    lp.add(producto);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Error: Producto no encontrado");
-                return;
+
+        Mesa mesaa = md.ObtenerMesaxID(mesa.getIdMesa());
+        Mesero mesero = med.ObtenerMesero(3);
+        boolean estado = true;
+
+        int nroPedido = 0;
+        List<Pedidos> listaPedidos = pd.ListarPedidos();
+
+        for (Pedidos pedido : listaPedidos) {
+            if (pedido.getNroPedido() > nroPedido) {
+                nroPedido = pedido.getNroPedido();
             }
         }
-        
-        ped.setProducto(lp);
-        pd.AgregarPedido(ped);
-        JOptionPane.showMessageDialog(null, "Pedido realizado con éxito.");
-    }
 
+        nroPedido++;
+
+        for (String nomP : productos) {
+            // Obtén el Producto a partir del nombre
+            Producto producto = (Producto) prd.obtenerProductosxNombre(nomP);
+            if (producto != null) {
+                pd.AgregarPedido(producto, mesa, mesero, estado, nroPedido);
+            }
+        }
+    }
     }//GEN-LAST:event_jbRealizarPedidoActionPerformed
 
 

@@ -42,12 +42,20 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
+        jPanel1.setBackground(new java.awt.Color(0, 204, 102));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Pedidos por mesa");
 
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Mesa");
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Mesa:");
 
+        jMesa.setBackground(new java.awt.Color(255, 255, 255));
+        jMesa.setForeground(new java.awt.Color(0, 0, 0));
         jMesa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMesaActionPerformed(evt);
@@ -75,7 +83,9 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTablePorMesa);
 
+        rbnRealizadas.setBackground(new java.awt.Color(0, 204, 102));
         rbnGrouppedidos.add(rbnRealizadas);
+        rbnRealizadas.setForeground(new java.awt.Color(0, 0, 0));
         rbnRealizadas.setText("Pedidos Realizados");
         rbnRealizadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,7 +93,9 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
             }
         });
 
+        rbnPendientes.setBackground(new java.awt.Color(0, 204, 102));
         rbnGrouppedidos.add(rbnPendientes);
+        rbnPendientes.setForeground(new java.awt.Color(0, 0, 0));
         rbnPendientes.setText("Pedidos Pendientes");
         rbnPendientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,21 +103,33 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
             }
         });
 
+        jRefrescar.setBackground(new java.awt.Color(255, 255, 255));
+        jRefrescar.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jRefrescar.setForeground(new java.awt.Color(0, 0, 0));
         jRefrescar.setText("Refrescar");
+        jRefrescar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jRefrescar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRefrescarActionPerformed(evt);
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Modificar");
+        jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Salir");
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -126,8 +150,8 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
                                 .addGap(65, 65, 65)
                                 .addComponent(rbnPendientes))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(165, 165, 165)
-                                .addComponent(jLabel2)
+                                .addGap(148, 148, 148)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))

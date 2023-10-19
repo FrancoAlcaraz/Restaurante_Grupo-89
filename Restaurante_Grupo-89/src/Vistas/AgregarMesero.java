@@ -5,6 +5,9 @@
  */
 package Vistas;
 
+import AccesoADatos.MeseroData;
+import Entidades.Mesero;
+
 /**
  *
  * @author Bel
@@ -27,18 +30,19 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btngrupo = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jDni = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jNombre = new javax.swing.JTextField();
+        jActivo = new javax.swing.JRadioButton();
+        inactivo = new javax.swing.JRadioButton();
+        jAgregar = new javax.swing.JButton();
+        jLimpiar = new javax.swing.JButton();
+        jSalir = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -57,9 +61,9 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
         jLabel2.setText("Nombre:");
         jLabel2.setBorder(new javax.swing.border.MatteBorder(null));
 
-        jTextField1.setBackground(java.awt.Color.white);
-        jTextField1.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
+        jDni.setBackground(java.awt.Color.white);
+        jDni.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jDni.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
@@ -75,45 +79,55 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
         jLabel4.setText("DNI:");
         jLabel4.setBorder(new javax.swing.border.MatteBorder(null));
 
-        jTextField2.setBackground(java.awt.Color.white);
-        jTextField2.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(0, 0, 0));
+        jNombre.setBackground(java.awt.Color.white);
+        jNombre.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jNombre.setForeground(new java.awt.Color(0, 0, 0));
 
-        jRadioButton1.setBackground(null);
-        jRadioButton1.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton1.setText("Activo");
+        btngrupo.add(jActivo);
+        jActivo.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jActivo.setForeground(new java.awt.Color(0, 0, 0));
+        jActivo.setText("Activo");
 
-        jRadioButton2.setBackground(null);
-        jRadioButton2.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton2.setText("Inactivo");
-
-        jButton1.setBackground(java.awt.Color.white);
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Agregar");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btngrupo.add(inactivo);
+        inactivo.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        inactivo.setForeground(new java.awt.Color(0, 0, 0));
+        inactivo.setText("Inactivo");
+        inactivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                inactivoActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(java.awt.Color.white);
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Limpiar");
-        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jButton3.setBackground(java.awt.Color.white);
-        jButton3.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("Salir");
-        jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jAgregar.setBackground(java.awt.Color.white);
+        jAgregar.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        jAgregar.setText("Agregar");
+        jAgregar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jAgregarActionPerformed(evt);
+            }
+        });
+
+        jLimpiar.setBackground(java.awt.Color.white);
+        jLimpiar.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jLimpiar.setForeground(new java.awt.Color(0, 0, 0));
+        jLimpiar.setText("Limpiar");
+        jLimpiar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jLimpiarActionPerformed(evt);
+            }
+        });
+
+        jSalir.setBackground(java.awt.Color.white);
+        jSalir.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jSalir.setForeground(new java.awt.Color(0, 0, 0));
+        jSalir.setText("Salir");
+        jSalir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSalirActionPerformed(evt);
             }
         });
 
@@ -136,18 +150,18 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(jActivo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton2))
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(inactivo))
+                            .addComponent(jDni, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(43, 43, 43))
         );
         jPanel1Layout.setVerticalGroup(
@@ -158,21 +172,21 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
                 .addGap(56, 56, 56)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDni, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jRadioButton1)
-                        .addComponent(jRadioButton2)))
+                        .addComponent(jActivo)
+                        .addComponent(inactivo)))
                 .addGap(24, 24, 24)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
 
@@ -190,27 +204,49 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAgregarActionPerformed
+        MeseroData ms = new MeseroData();
+       
+        boolean estado = true;
+        String nombre = jNombre.getText();
+        int dni = Integer.parseInt(jDni.getText());
+        if (jActivo.isSelected()) {
+            estado = true;
+        } else if (inactivo.isSelected()) {
+            estado = false;
+        }
+         Mesero m = new Mesero(dni, nombre, estado);
+     ms.AgregarMesero(m);
+    }//GEN-LAST:event_jAgregarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalirActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jSalirActionPerformed
+
+    private void inactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inactivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inactivoActionPerformed
+
+    private void jLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLimpiarActionPerformed
+        jNombre.setText("");
+        jDni.setText("");
+        btngrupo.clearSelection();
+    }//GEN-LAST:event_jLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.ButtonGroup btngrupo;
+    private javax.swing.JRadioButton inactivo;
+    private javax.swing.JRadioButton jActivo;
+    private javax.swing.JButton jAgregar;
+    private javax.swing.JTextField jDni;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton jLimpiar;
+    private javax.swing.JTextField jNombre;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton jSalir;
     // End of variables declaration//GEN-END:variables
 }

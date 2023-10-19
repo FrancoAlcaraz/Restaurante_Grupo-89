@@ -5,6 +5,10 @@
  */
 package Vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Bel
@@ -27,7 +31,19 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jEscritorio = new javax.swing.JDesktopPane();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Imagen/fondo.png"));
+        Image image = icon.getImage();
+        jEscritorio = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(image,0,0,getWidth(),getHeight(),this);
+            }
+
+        };
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         AgregarPedido = new javax.swing.JMenuItem();
@@ -43,15 +59,56 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setText("jLabel1");
+
+        jButton1.setText("Agregar Pedido");
+
+        jButton2.setText("Agregar Mesero");
+
+        jButton3.setText("Agregar Mesa");
+
+        jButton4.setText("Agregar Producto");
+
+        jEscritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jEscritorio.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jEscritorio.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jEscritorio.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jEscritorio.setLayer(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jEscritorioLayout = new javax.swing.GroupLayout(jEscritorio);
         jEscritorio.setLayout(jEscritorioLayout);
         jEscritorioLayout.setHorizontalGroup(
             jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 717, Short.MAX_VALUE)
+            .addGroup(jEscritorioLayout.createSequentialGroup()
+                .addGroup(jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jEscritorioLayout.createSequentialGroup()
+                        .addGap(246, 246, 246)
+                        .addGroup(jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jEscritorioLayout.createSequentialGroup()
+                        .addGap(248, 248, 248)
+                        .addGroup(jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE))
         );
         jEscritorioLayout.setVerticalGroup(
             jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 631, Short.MAX_VALUE)
+            .addGroup(jEscritorioLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jEscritorioLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jButton4)
+                .addGap(30, 30, 30)
+                .addComponent(jButton3)
+                .addGap(26, 26, 26)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(359, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Nuevos");
@@ -274,7 +331,12 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem AgregarProducto;
     private javax.swing.JMenuItem PedidosXMesa;
     private javax.swing.JMenuItem PrecioProducto;
-    private javax.swing.JDesktopPane jEscritorio;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    public javax.swing.JDesktopPane jEscritorio;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -282,4 +344,5 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem pedidosXMesero;
     private javax.swing.JMenuItem productoXCategoria;
     // End of variables declaration//GEN-END:variables
+
 }

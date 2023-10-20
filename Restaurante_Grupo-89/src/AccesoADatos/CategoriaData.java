@@ -20,16 +20,17 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class CategoriaData {
-    Connection con=null;
+
+    Connection con = null;
 
     public CategoriaData() {
-        con=Conexion.getConexion();
+        con = Conexion.getConexion();
     }
-    
-public Categoria ObtenerCategoria(int id){
+
+    public Categoria ObtenerCategoria(int id) {
 
         String sql = "SELECT * FROM `categoria` WHERE idCategoria=?";
-        
+
         Categoria categoria = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -38,10 +39,9 @@ public Categoria ObtenerCategoria(int id){
             if (rs.next()) {
                 categoria = new Categoria();
                 categoria.setIdcategoria(rs.getInt("idCategoria"));
-                
-                  categoria.setCategoria(rs.getString("nombre"));
-                
-                
+
+                categoria.setCategoria(rs.getString("nombre"));
+
             } else {
                 JOptionPane.showMessageDialog(null, "No existe tal categoria");
                 ps.close();
@@ -51,27 +51,25 @@ public Categoria ObtenerCategoria(int id){
         }
         return categoria;
 
-}
-     public List<Categoria> listarCategorias() {
+    }
 
+    public List<Categoria> listarCategorias() {
         ArrayList<Categoria> categorias = new ArrayList<>();
-       String sql = "SELECT * FROM categoria";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+        String sql = "SELECT * FROM categoria";
+
+        try (PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Categoria categoria = new Categoria();
                 categoria.setIdcategoria(rs.getInt("idCategoria"));
                 categoria.setCategoria(rs.getString("nombre"));
                 categorias.add(categoria);
             }
-            ps.close();
-
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla categoria ");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla categoria: " + ex.getMessage());
+            ex.printStackTrace();
         }
+
         return categorias;
     }
 
-    
 }

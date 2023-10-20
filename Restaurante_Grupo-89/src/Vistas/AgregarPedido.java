@@ -322,7 +322,9 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
                 String nombreProducto = (String) modelo.getValueAt(i, 0);
                 productos.add(nombreProducto);
             }
-            Mesero mesero = med.ObtenerMesero(3);
+            
+            Mesero mesero = med.ObtenerMesero(2);
+//Agregar una lista de recorrido de mesero para que sea aleatorio
             boolean estado = true;
             int nroPedido = 0;
             List<Pedidos> listaPedidos = pd.ListarPedidos();
@@ -436,10 +438,4 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
 
     }
 
-    private void borrarFilas() {
-        int f = jTabla.getRowCount() - 1;
-        for (; f >= 0; f--) {
-            modelo.removeRow(f);
-        }
-    }
 }

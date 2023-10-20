@@ -7,7 +7,7 @@ public class Mesa {
     private int Capacidad;
     private boolean Estado;
 
-    public Mesa(int IdMesa,int numero, int Capacidad, boolean Estado) {
+    public Mesa(int IdMesa, int numero, int Capacidad, boolean Estado) {
         this.IdMesa = IdMesa;
         this.numero = numero;
         this.Capacidad = Capacidad;
@@ -21,7 +21,6 @@ public class Mesa {
         this.Estado = Estado;
     }
 
-    
     public Mesa() {
     }
 
@@ -41,7 +40,6 @@ public class Mesa {
         this.numero = numero;
     }
 
-    
     public int getCapacidad() {
         return Capacidad;
     }
@@ -60,9 +58,7 @@ public class Mesa {
 
     @Override
     public String toString() {
-        return  numero + "";
+        return numero + "";
     }
-
-    
 
 }

@@ -8,17 +8,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class MesaData {
 
-     Connection con = null;
+    Connection con = null;
 
     public MesaData() {
         con = Conexion.getConexion();
     }
+
     public void AgregarMesa(Mesa mesa) {
         String sql = "INSERT INTO `mesa`( `numero`, `capacidad`, `estado`,`idMesa`) VALUES (?,?,?,?)";
         try {
@@ -65,7 +64,7 @@ public class MesaData {
 
     public List<Mesa> ObtenerMesas() {
         List<Mesa> mesas = new ArrayList<>();
-        String sql="SELECT * FROM mesa WHERE estado = 1 ";
+        String sql = "SELECT * FROM mesa WHERE estado = 1 ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -98,7 +97,7 @@ public class MesaData {
                 System.out.println("Error al eliminar");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(MesaData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al acceder a eliminar la Mesa " + ex.getMessage());
         }
     }
 

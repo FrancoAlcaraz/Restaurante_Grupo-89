@@ -1,10 +1,10 @@
-
 package Vistas;
 
 import AccesoADatos.MesaData;
 import Entidades.Mesa;
 import java.util.List;
 import javax.swing.JOptionPane;
+
 public class AgregarMesa extends javax.swing.JInternalFrame {
 
     public AgregarMesa() {
@@ -156,31 +156,31 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        try{
-        if (jNumero.getText().isEmpty() || jcapacidad.getText().isEmpty()|| !rbnLibre.isSelected()&&!rbnOcupada.isSelected() ) {
+        try {
+            if (jNumero.getText().isEmpty() || jcapacidad.getText().isEmpty() || !rbnLibre.isSelected() && !rbnOcupada.isSelected()) {
                 JOptionPane.showMessageDialog(null, "No deje campos vacíos");
                 return;
             }
-        boolean estadoMesa=false;
-        int numero=Integer.parseInt(jNumero.getText());
-        int capacidad=Integer.parseInt(jcapacidad.getText());
-        
-        MesaData md=new MesaData();
-         List<Mesa> m=md.ObtenerMesas();
-         if(rbnLibre.isSelected()){
-            estadoMesa=true;
-         }else if(rbnOcupada.isSelected()){
-            estadoMesa=false;
-         }
-        for (Mesa mesas : m) {
-            if(numero==mesas.getNumero() && mesas.isEstado()==true ){
-            estadoMesa=true;
-            break;
+            boolean estadoMesa = false;
+            int numero = Integer.parseInt(jNumero.getText());
+            int capacidad = Integer.parseInt(jcapacidad.getText());
+
+            MesaData md = new MesaData();
+            List<Mesa> m = md.ObtenerMesas();
+            if (rbnLibre.isSelected()) {
+                estadoMesa = true;
+            } else if (rbnOcupada.isSelected()) {
+                estadoMesa = false;
             }
-           
-        }
-       Mesa mesa=new Mesa(numero, capacidad, estadoMesa);
-        md.AgregarMesa(mesa);
+            for (Mesa mesas : m) {
+                if (numero == mesas.getNumero() && mesas.isEstado() == true) {
+                    estadoMesa = true;
+                    break;
+                }
+
+            }
+            Mesa mesa = new Mesa(numero, capacidad, estadoMesa);
+            md.AgregarMesa(mesa);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error: El número no es válido.");
         } catch (Exception e) {
@@ -189,11 +189,11 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-LimpiarVentadas();
+        LimpiarVentadas();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-dispose();
+        dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
 
@@ -215,6 +215,6 @@ dispose();
  public void LimpiarVentadas() {
         jNumero.setText("");
         jcapacidad.setText("");
-       GroupEstado1.clearSelection();
+        GroupEstado1.clearSelection();
     }
 }

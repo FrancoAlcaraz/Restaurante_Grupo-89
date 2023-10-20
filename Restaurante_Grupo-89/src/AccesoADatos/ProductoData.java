@@ -153,52 +153,52 @@ public class ProductoData {
     }
 
     public List<Producto> obtenerProductosxNombre(String nombre) {
-    List<Producto> productos = new ArrayList<>();
-    String sql = "SELECT * FROM `producto` WHERE nombre = ?";
-    
-    try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, nombre);
-        ResultSet rs = ps.executeQuery();
-        
-        while (rs.next()) {
-            Producto producto = new Producto();
-            producto.setIdProducto(rs.getInt("idProducto"));
-            producto.setNombre(rs.getString("nombre"));
-            producto.setPrecio(rs.getDouble("precio"));
-            Categoria cat = ct.ObtenerCategoria(rs.getInt("idCategoria"));
-            producto.setCategoria(cat);
-            productos.add(producto);
-        }
-        ps.close();
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al listar productos: " + ex);
-    }
-    return productos;
-}
+        List<Producto> productos = new ArrayList<>();
+        String sql = "SELECT * FROM `producto` WHERE nombre = ?";
 
-   public void modificarProducto(Producto producto) {
-    String sql = "UPDATE producto SET nombre=?, cantidad=?, precio=?, idCategoria=? WHERE idProducto=?";
-    
-    try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, producto.getNombre());
-        ps.setInt(2, producto.getCantidad());
-        ps.setDouble(3, producto.getPrecio());
-        ps.setObject(4, producto.getCategoria().getIdcategoria());
-        ps.setInt(5, producto.getIdProducto());
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, nombre);
+            ResultSet rs = ps.executeQuery();
 
-        int exito = ps.executeUpdate();
-        if (exito == 1) {
-            JOptionPane.showMessageDialog(null, "Producto Modificado");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se pudo modificar el producto");
+            while (rs.next()) {
+                Producto producto = new Producto();
+                producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setPrecio(rs.getDouble("precio"));
+                Categoria cat = ct.ObtenerCategoria(rs.getInt("idCategoria"));
+                producto.setCategoria(cat);
+                productos.add(producto);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al listar productos: " + ex);
         }
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al modificar el producto: " + ex.getMessage());
+        return productos;
     }
-    
-}
+
+    public void modificarProducto(Producto producto) {
+        String sql = "UPDATE producto SET nombre=?, cantidad=?, precio=?, idCategoria=? WHERE idProducto=?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, producto.getNombre());
+            ps.setInt(2, producto.getCantidad());
+            ps.setDouble(3, producto.getPrecio());
+            ps.setObject(4, producto.getCategoria().getIdcategoria());
+            ps.setInt(5, producto.getIdProducto());
+
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Producto Modificado");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo modificar el producto");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al modificar el producto: " + ex.getMessage());
+        }
+
+    }
 
     public void eliminarProducto(int idProducto) {
         String sql = "DELETE FROM producto WHERE idProducto=? ";

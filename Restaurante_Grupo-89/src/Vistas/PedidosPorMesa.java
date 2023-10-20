@@ -8,14 +8,10 @@ import Entidades.Mesa;
 import Entidades.Mesero;
 import Entidades.Pedidos;
 import Entidades.Producto;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
-import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 public class PedidosPorMesa extends javax.swing.JInternalFrame {
@@ -23,10 +19,7 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     JComboBox jestado = new JComboBox();
 
-    PanelImagen fondo = new PanelImagen();
-
     public PedidosPorMesa() {
-        this.setContentPane(fondo);
         initComponents();
         CargarCombo();
         cabecera();
@@ -38,7 +31,7 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         rbnGrouppedidos = new javax.swing.ButtonGroup();
-        jPanel1 = new PanelImagen();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jMesa = new javax.swing.JComboBox<>();
@@ -148,57 +141,56 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(200, 200, 200))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 87, 87)
+                        .addComponent(jRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(109, 109, 109)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(46, 46, 46)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(85, 85, 85)
-                                    .addComponent(jRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(142, 142, 142)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(93, 93, 93)
+                            .addComponent(rbnRealizadas)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rbnPendientes))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(59, 59, 59)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(rbnRealizadas))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(rbnPendientes))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(31, 31, 31)
-                                    .addComponent(jMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(250, 250, 250)
-                        .addComponent(jLabel1)))
+                            .addGap(46, 46, 46)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(139, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(91, 91, 91)
+                .addGap(42, 42, 42)
                 .addComponent(jLabel1)
-                .addGap(44, 44, 44)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jMesa))
-                .addGap(18, 18, 18)
+                .addGap(48, 48, 48)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbnRealizadas)
                     .addComponent(rbnPendientes))
-                .addGap(43, 43, 43)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -216,32 +208,6 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMesaActionPerformed
-  Mesa seleccionado = (Mesa) jMesa.getSelectedItem();
-        if (seleccionado != null) {
-            modelo.setRowCount(0);
-            int idmesa = seleccionado.getIdMesa();
-            PedidosData pd = new PedidosData();
-            String estado = "_";
-            List<Pedidos> lista = pd.ListarPedidos();
-
-            for (Pedidos pedido : lista) {
-                if (pedido != null && pedido.getMesa().getIdMesa() == idmesa) {
-                    int nropedido = pedido.getNroPedido();
-                    String NombreMesero = pedido.getMesero().getNombre();
-                    String idProducto = pedido.getProducto().getNombre();
-                    double precio = pedido.getProducto().getPrecio();
-                    if (pedido.isEstado() == true) {
-                        estado = "Realizada";
-                    } else {
-                        estado = "Pendiente";
-                    }
-
-                    modelo.addRow(new Object[]{nropedido, idProducto, NombreMesero, precio, estado});
-                }
-
-            }
-
-        }
     }//GEN-LAST:event_jMesaActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -251,10 +217,10 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
         PedidosData pd = new PedidosData();
         List<Pedidos> lista = pd.ListarPedidos();
         int idproducto = -1;
-     
+        int nropedido = 0;
         for (Pedidos pedidos : lista) {
             idproducto = pedidos.getProducto().getIdProducto();
-           int nropedido = Integer.parseInt(jTablePorMesa.getValueAt(fila, 0).toString());
+            nropedido = Integer.parseInt(jTablePorMesa.getValueAt(fila, 0).toString());
             if (idproducto != -1 && nropedido == pedidos.getNroPedido()) {
 
                 String estado = (String) jestado.getSelectedItem();
@@ -264,11 +230,10 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
                     est = false;
                 }
 
-             pd.ModificarEstado(est, nropedido, idproducto);
             }
 
         }
-       
+        pd.ModificarEstado(est, nropedido, idproducto);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void rbnPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnPendientesActionPerformed
@@ -315,10 +280,9 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
                 estado = true;
             }
             for (Pedidos pedido : lista) {
-                System.out.println("  " + pedido.getMesero().getIdMesero());
                 if (pedido != null && pedido.isEstado() == estado && pedido.getMesa().getIdMesa() == idmesa) {
                     int nropedido = pedido.getNroPedido();
-                    String NombreMesero = pedido.getMesero().getNombre();
+                    String NombreMesero = pedido.getMesero().getNombre().toString();
                     Double precio = pedido.getProducto().getPrecio();
                     String idProducto = pedido.getProducto().getNombre();
 
@@ -413,18 +377,4 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
 
         jTablePorMesa.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(jestado));
     }
-
-    class PanelImagen extends JPanel {
-
-        Image imagen;
-
-        @Override
-        public void paint(Graphics g) {
-            imagen = new ImageIcon(getClass().getResource("/Imagen/Generales.png")).getImage();
-            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
-            setOpaque(false);
-            super.paint(g);
-
-        }
-    }
-    }
+}

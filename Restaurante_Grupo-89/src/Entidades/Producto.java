@@ -8,7 +8,6 @@ public class Producto {
     private double precio;
     private Categoria categoria;
 
-
     public Producto(int idProducto, String nombre, int cantidad, double precio, Categoria categoria) {
         this.idProducto = idProducto;
         this.nombre = nombre;
@@ -24,12 +23,9 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    
-
     public Producto() {
     }
 
-  
     public int getIdProducto() {
         return idProducto;
     }
@@ -72,8 +68,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return  nombre;
+        return nombre;
     }
 
-    
 }

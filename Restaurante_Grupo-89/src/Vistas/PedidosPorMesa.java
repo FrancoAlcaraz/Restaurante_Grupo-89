@@ -18,6 +18,7 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
 
     DefaultTableModel modelo = new DefaultTableModel();
     JComboBox jestado = new JComboBox();
+
     public PedidosPorMesa() {
         initComponents();
         CargarCombo();
@@ -220,19 +221,19 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
         for (Pedidos pedidos : lista) {
             idproducto = pedidos.getProducto().getIdProducto();
             nropedido = Integer.parseInt(jTablePorMesa.getValueAt(fila, 0).toString());
-            if (idproducto != -1 && nropedido==pedidos.getNroPedido()) {
-                
+            if (idproducto != -1 && nropedido == pedidos.getNroPedido()) {
+
                 String estado = (String) jestado.getSelectedItem();
                 if (estado == "Realizada") {
                     est = true;
                 } else if (estado == "Pendiente") {
                     est = false;
                 }
-              
+
             }
-           
+
         }
-           pd.ModificarEstado(est, nropedido, idproducto);
+        pd.ModificarEstado(est, nropedido, idproducto);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void rbnPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnPendientesActionPerformed
@@ -281,7 +282,7 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
             for (Pedidos pedido : lista) {
                 if (pedido != null && pedido.isEstado() == estado && pedido.getMesa().getIdMesa() == idmesa) {
                     int nropedido = pedido.getNroPedido();
-                    String NombreMesero = pedido.getMesero().getNombre();
+                    String NombreMesero = pedido.getMesero().getNombre().toString();
                     Double precio = pedido.getProducto().getPrecio();
                     String idProducto = pedido.getProducto().getNombre();
 
@@ -347,9 +348,7 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rbnPendientes;
     private javax.swing.JRadioButton rbnRealizadas;
     // End of variables declaration//GEN-END:variables
-    
-    
-    
+
     private void CargarCombo() {
         MesaData md = new MesaData();
         List<Mesa> lista = md.ObtenerMesas();

@@ -1,7 +1,5 @@
 package Entidades;
 
-import java.util.List;
-
 public class Pedidos {
 
     int IdPedido;
@@ -81,7 +79,7 @@ public class Pedidos {
 
     @Override
     public String toString() {
-        return nroPedido+"";
+        return nroPedido + "";
     }
 
 }

@@ -25,7 +25,7 @@ public class PedidosData {
     }
 
     public void AgregarPedido(Pedidos pedido) {
-        String sql =  "INSERT INTO `pedido`(`idProducto`, `idMesero`, `idMesa`, `estado`, `nroPedido`) VALUES (?, ?, ?, ?, ?)";;
+        String sql = "INSERT INTO `pedido`(`idProducto`, `idMesero`, `idMesa`, `estado`, `nroPedido`) VALUES (?, ?, ?, ?, ?)";;
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, pedido.getProducto().getIdProducto());
@@ -36,7 +36,7 @@ public class PedidosData {
 
             int exito = ps.executeUpdate();
             ps.close();
-            if(exito==1){
+            if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Pedido Agregado");
             }
         } catch (SQLException ex) {
@@ -75,7 +75,7 @@ public class PedidosData {
         }
     }
 
-    public void ModificarEstado(boolean estado,int nroPedido,int idProducto) {
+    public void ModificarEstado(boolean estado, int nroPedido, int idProducto) {
         String sql = "UPDATE `pedido` SET `estado`=? WHERE `nroPedido`=? AND idProducto=? ";
 
         try {

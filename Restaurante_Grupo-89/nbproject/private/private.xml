@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Bel/Documents/GitHub/Restaurante_Grupo-89/Restaurante_Grupo-89/src/AccesoADatos/ProductoData.java</file>
-            <file>file:/C:/Users/Bel/Documents/GitHub/Restaurante_Grupo-89/Restaurante_Grupo-89/src/Entidades/Categoria.java</file>
-            <file>file:/C:/Users/Bel/Documents/GitHub/Restaurante_Grupo-89/Restaurante_Grupo-89/src/Vistas/Menu.java</file>
-            <file>file:/C:/Users/Bel/Documents/GitHub/Restaurante_Grupo-89/Restaurante_Grupo-89/src/Vistas/ProductosPorCategoria.java</file>
-            <file>file:/C:/Users/Bel/Documents/GitHub/Restaurante_Grupo-89/Restaurante_Grupo-89/src/AccesoADatos/CategoriaData.java</file>
+            <file>file:/C:/Users/Bel/Documents/GitHub/Restaurante_Grupo-89/Restaurante_Grupo-89/src/Vistas/AgregarPedido.java</file>
+            <file>file:/C:/Users/Bel/Documents/GitHub/Restaurante_Grupo-89/Restaurante_Grupo-89/src/Vistas/PedidosPorMesa.java</file>
+            <file>file:/C:/Users/Bel/Documents/GitHub/Restaurante_Grupo-89/Restaurante_Grupo-89/src/AccesoADatos/MesaData.java</file>
         </group>
     </open-files>
 </project-private>

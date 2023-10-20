@@ -171,57 +171,57 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
 
     private void btnmodificarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarListaActionPerformed
         int fila = jlistaCategoria.getSelectedRow();
-try{
-        if (fila == -1) {
-            JOptionPane.showMessageDialog(null, "Seleccione el producto que desea modificar");
-            return;
-        }
-
         String nNombre = jlistaCategoria.getValueAt(fila, 1).toString();
         int nCantidad = Integer.parseInt(jlistaCategoria.getValueAt(fila, 2).toString());
         double nPrecio = Double.parseDouble(jlistaCategoria.getValueAt(fila, 3).toString());
         String nCategoria = c.getSelectedItem().toString();
-        if (nNombre.isEmpty()||nCantidad==-1||nPrecio<-1|| nCategoria.isEmpty()){
+        if (nNombre.isEmpty() || nCantidad == -1 || nPrecio < -1 || nCategoria.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Complete los cambpos a modificar");
             return;
         }
+        try {
+            if (fila == -1) {
+                JOptionPane.showMessageDialog(null, "Seleccione el producto que desea modificar");
+                return;
+            }
 
-        Categoria cat = (Categoria) jcategoria.getSelectedItem();
-        if (cat == null) {
-            JOptionPane.showMessageDialog(null, "Seleccione una categoría válida");
-            return;
-        }
+            Categoria cat = (Categoria) jcategoria.getSelectedItem();
+            if (cat == null) {
+                JOptionPane.showMessageDialog(null, "Seleccione una categoría válida");
+                return;
+            }
 
-        int idcategoria = 0;
-        if (nCategoria.equalsIgnoreCase("BEBIDA NA")) {
-            idcategoria = 4;
-        } else if (nCategoria.equalsIgnoreCase("COMIDA")) {
-            idcategoria = 5;
-        } else if (nCategoria.equalsIgnoreCase("BEBIDA")) {
-            idcategoria = 6;
-        }
+            int idcategoria = 0;
+            if (nCategoria.equalsIgnoreCase("BEBIDA NA")) {
+                idcategoria = 4;
+            } else if (nCategoria.equalsIgnoreCase("COMIDA")) {
+                idcategoria = 5;
+            } else if (nCategoria.equalsIgnoreCase("BEBIDA")) {
+                idcategoria = 6;
+            }
 
-        int id = (int) jlistaCategoria.getValueAt(fila, 0);
-        for (Producto producto : pd.obtenerProductos()) {
-            if (producto.getIdProducto() == id) {
+            int id = (int) jlistaCategoria.getValueAt(fila, 0);
+            for (Producto producto : pd.obtenerProductos()) {
+                if (producto.getIdProducto() == id) {
 
-                producto.setNombre(nNombre);
-                producto.setCantidad(nCantidad);
-                producto.setPrecio(nPrecio);
+                    producto.setNombre(nNombre);
+                    producto.setCantidad(nCantidad);
+                    producto.setPrecio(nPrecio);
 
-                if (!producto.getCategoria().equals(nCategoria)) {
-                    Categoria cate = new Categoria(idcategoria, nCategoria);
-                    producto.setCategoria(cate);
+                    if (!producto.getCategoria().equals(nCategoria)) {
+                        Categoria cate = new Categoria(idcategoria, nCategoria);
+                        producto.setCategoria(cate);
+                    }
+
+                    pd.modificarProducto(producto);
+
+                    armarTabla();
+                    break;
                 }
-
-                pd.modificarProducto(producto);
-
-                armarTabla();
-                break;
             }
-        }} catch (NumberFormatException nf) {
-                JOptionPane.showMessageDialog(this, "Ingrese correctamente los datos");
-            }
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "Ingrese correctamente los datos");
+        }
 
     }//GEN-LAST:event_btnmodificarListaActionPerformed
 

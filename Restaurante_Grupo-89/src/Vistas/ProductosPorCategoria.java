@@ -166,68 +166,63 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcategoriaActionPerformed
-        Categoria pr = (Categoria) jcategoria.getSelectedItem();
-        if (pr != null) {
-            modelo.setRowCount(0);
-            int cat = pr.getIdcategoria();
-            List<Producto> lis = pd.obtenerProductosXCategoria(cat);
-            for (Producto producto : lis) {
-                int idP = producto.getIdProducto();
-                String nombre = producto.getNombre();
-                int cantidad = producto.getCantidad();
-                double precio = producto.getPrecio();
-                String cate = pr.getCategoria();
-                modelo.addRow(new Object[]{idP, nombre, cantidad, precio, cate});
-            }
-
-        }
-
+        armarTabla();
     }//GEN-LAST:event_jcategoriaActionPerformed
 
     private void btnmodificarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarListaActionPerformed
         int fila = jlistaCategoria.getSelectedRow();
+try{
         if (fila == -1) {
             JOptionPane.showMessageDialog(null, "Seleccione el producto que desea modificar");
             return;
         }
 
-        // Obtén los valores de la fila seleccionada en el JTable
-        String nuevoNombre = jlistaCategoria.getValueAt(fila, 1).toString();
-        int nuevaCantidad = Integer.parseInt(jlistaCategoria.getValueAt(fila, 2).toString());
-        double nuevoPrecio = Double.parseDouble(jlistaCategoria.getValueAt(fila, 3).toString());
-        String nuevaCategoria = c.getSelectedItem().toString();
-        
+        String nNombre = jlistaCategoria.getValueAt(fila, 1).toString();
+        int nCantidad = Integer.parseInt(jlistaCategoria.getValueAt(fila, 2).toString());
+        double nPrecio = Double.parseDouble(jlistaCategoria.getValueAt(fila, 3).toString());
+        String nCategoria = c.getSelectedItem().toString();
+        if (nNombre.isEmpty()||nCantidad==-1||nPrecio<-1|| nCategoria.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Complete los cambpos a modificar");
+            return;
+        }
 
-        // Obtén el objeto Categoria seleccionado
         Categoria cat = (Categoria) jcategoria.getSelectedItem();
         if (cat == null) {
             JOptionPane.showMessageDialog(null, "Seleccione una categoría válida");
             return;
         }
 
-        // Mapea el nombre de la categoría a su correspondiente ID
-        int idcategoria;
-        if (nuevaCategoria.equalsIgnoreCase("BEBIDA NA")) {
+        int idcategoria = 0;
+        if (nCategoria.equalsIgnoreCase("BEBIDA NA")) {
             idcategoria = 4;
-        } else if (nuevaCategoria.equalsIgnoreCase("COMIDA")) {
+        } else if (nCategoria.equalsIgnoreCase("COMIDA")) {
             idcategoria = 5;
-        } else if (nuevaCategoria.equalsIgnoreCase("BEBIDA")) {
+        } else if (nCategoria.equalsIgnoreCase("BEBIDA")) {
             idcategoria = 6;
-        } else {
-            idcategoria = cat.getIdcategoria();
         }
 
-        // Obtén el nombre del producto a modificar desde la fila seleccionada
-        String nombreProducto = jlistaCategoria.getValueAt(fila, 0).toString();
-        
-
-        // Busca el producto correspondiente en la lista de productos
+        int id = (int) jlistaCategoria.getValueAt(fila, 0);
         for (Producto producto : pd.obtenerProductos()) {
-            if (producto.getNombre().equals(nombreProducto)) {
-                pd.modificarProducto();
-                break; // Sal del bucle una vez que se haya encontrado y modificado el producto
+            if (producto.getIdProducto() == id) {
+
+                producto.setNombre(nNombre);
+                producto.setCantidad(nCantidad);
+                producto.setPrecio(nPrecio);
+
+                if (!producto.getCategoria().equals(nCategoria)) {
+                    Categoria cate = new Categoria(idcategoria, nCategoria);
+                    producto.setCategoria(cate);
+                }
+
+                pd.modificarProducto(producto);
+
+                armarTabla();
+                break;
             }
-        }
+        }} catch (NumberFormatException nf) {
+                JOptionPane.showMessageDialog(this, "Ingrese correctamente los datos");
+            }
+
     }//GEN-LAST:event_btnmodificarListaActionPerformed
 
     private void btnEliminarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProdActionPerformed
@@ -237,16 +232,11 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
             int idproducto = -1;
             for (Producto producto : pr) {
                 idproducto = producto.getIdProducto();
-
             }
             if (idproducto != -1) {
                 pd.eliminarProducto(idproducto);
-
             }
-
         }
-
-
     }//GEN-LAST:event_btnEliminarProdActionPerformed
 
 
@@ -289,5 +279,22 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
             c.addItem(dato1);
         }
         jlistaCategoria.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(c));
+    }
+
+    private void armarTabla() {
+        Categoria pr = (Categoria) jcategoria.getSelectedItem();
+        if (pr != null) {
+            modelo.setRowCount(0);
+            int cat = pr.getIdcategoria();
+            List<Producto> lis = pd.obtenerProductosXCategoria(cat);
+            for (Producto producto : lis) {
+                int idP = producto.getIdProducto();
+                String nombre = producto.getNombre();
+                int cantidad = producto.getCantidad();
+                double precio = producto.getPrecio();
+                String cate = pr.getCategoria();
+                modelo.addRow(new Object[]{idP, nombre, cantidad, precio, cate});
+            }
+        }
     }
 }

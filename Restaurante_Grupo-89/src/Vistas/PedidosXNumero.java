@@ -7,7 +7,11 @@ package Vistas;
 
 import AccesoADatos.PedidosData;
 import Entidades.Pedidos;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,9 +21,9 @@ import javax.swing.table.DefaultTableModel;
 public class PedidosXNumero extends javax.swing.JInternalFrame {
 
     DefaultTableModel modelo = new DefaultTableModel();
-    
-
+    PanelImagen fondo=new PanelImagen();
     public PedidosXNumero() {
+        this.setContentPane(fondo);
         initComponents();
         cabecera();
         combo();
@@ -34,14 +38,13 @@ public class PedidosXNumero extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new PanelImagen();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablaPedidos = new javax.swing.JTable();
         jnumeros = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
 
         jTablaPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -66,10 +69,6 @@ public class PedidosXNumero extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Precio Total:");
 
-        jLabel3.setBackground(null);
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/pngegg (1).png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -90,10 +89,6 @@ public class PedidosXNumero extends javax.swing.JInternalFrame {
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(103, 103, 103))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(312, 312, 312)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,9 +103,7 @@ public class PedidosXNumero extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addGap(30, 30, 30))
+                .addGap(48, 48, 48))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -135,7 +128,7 @@ public class PedidosXNumero extends javax.swing.JInternalFrame {
             PedidosData pd = new PedidosData();
             List<Pedidos> lista = pd.ListarPedidos();
             String estado = "_";
-            
+
             for (Pedidos pedidos : lista) {
                 if (pedidos != null && pedidos.getNroPedido() == numero) {
 
@@ -145,12 +138,12 @@ public class PedidosXNumero extends javax.swing.JInternalFrame {
                     } else if (pedidos.isEstado() == true) {
                         double precio = pedidos.getProducto().getPrecio() * pedidos.getProducto().getCantidad();
                         double pr = 0.0;
-                         pr += precio;
+                        pr += precio;
                         jTextField1.setText(String.valueOf(pr));
                         estado = "Realizado";
                     }
                     modelo.addRow(new Object[]{pedidos.getProducto().getNombre(), pedidos.getProducto().getPrecio(), pedidos.getProducto().getCantidad(), estado});
-                  
+
                 }
             }
         }
@@ -160,7 +153,6 @@ public class PedidosXNumero extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablaPedidos;
@@ -190,4 +182,17 @@ private void combo() {
         jTablaPedidos.setModel(modelo);
     }
 
+    class PanelImagen extends JPanel {
+
+        Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+            imagen=new ImageIcon(getClass().getResource("/Imagen/Generales.png")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+
+        }
+    }
 }

@@ -177,16 +177,16 @@ public class ProductoData {
     return productos;
 }
 
-   public void modificarProducto(String nombre, int cantidad, double precio, int categoria, int idProducto) {
+   public void modificarProducto(Producto producto) {
     String sql = "UPDATE producto SET nombre=?, cantidad=?, precio=?, idCategoria=? WHERE idProducto=?";
     
     try {
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, nombre);
-        ps.setInt(2, cantidad);
-        ps.setDouble(3, precio);
-        ps.setInt(4, categoria);
-        ps.setInt(5, idProducto);
+        ps.setString(1, producto.getNombre());
+        ps.setInt(2, producto.getCantidad());
+        ps.setDouble(3, producto.getPrecio());
+        ps.setObject(4, producto.getCategoria().getIdcategoria());
+        ps.setInt(5, producto.getIdProducto());
 
         int exito = ps.executeUpdate();
         if (exito == 1) {

@@ -196,6 +196,7 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
         int nuevaCantidad = Integer.parseInt(jlistaCategoria.getValueAt(fila, 2).toString());
         double nuevoPrecio = Double.parseDouble(jlistaCategoria.getValueAt(fila, 3).toString());
         String nuevaCategoria = c.getSelectedItem().toString();
+        
 
         // Obtén el objeto Categoria seleccionado
         Categoria cat = (Categoria) jcategoria.getSelectedItem();
@@ -217,13 +218,13 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
         }
 
         // Obtén el nombre del producto a modificar desde la fila seleccionada
-        String nombreProducto = (String) jlistaCategoria.getValueAt(fila, 0).toString();
+        String nombreProducto = jlistaCategoria.getValueAt(fila, 0).toString();
+        
 
         // Busca el producto correspondiente en la lista de productos
         for (Producto producto : pd.obtenerProductos()) {
             if (producto.getNombre().equals(nombreProducto)) {
-                // Llama al método para modificar el producto con los nuevos valores
-                pd.modificarProducto(nuevoNombre, nuevaCantidad, nuevoPrecio, idcategoria, producto.getIdProducto());
+                pd.modificarProducto();
                 break; // Sal del bucle una vez que se haya encontrado y modificado el producto
             }
         }

@@ -12,10 +12,9 @@ import Entidades.Producto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 
 public class ProductosPorCategoria extends javax.swing.JInternalFrame {
 
@@ -55,17 +54,17 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
 
         jlistaCategoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "idProducto", "Nombre", "Precio", "Categoria"
+                "ID Producto", "Nombre", "Cantidad", "Precio", "Categoria"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -109,9 +108,6 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(167, 167, 167)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(99, 99, 99)
                         .addComponent(btnmodificarLista)
                         .addGap(164, 164, 164)
@@ -127,9 +123,12 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
                         .addComponent(jButton3)
                         .addGap(27, 27, 27))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(jcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(jcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(217, 217, 217))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -147,7 +146,7 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnmodificarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addContainerGap())
         );
@@ -186,37 +185,48 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcategoriaActionPerformed
 
     private void btnmodificarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarListaActionPerformed
-       int fila = jlistaCategoria.getSelectedRow();
-        Categoria cat = (Categoria) jcategoria.getSelectedItem();
-        List<Producto> p = new ArrayList<>(pd.obtenerProductos());
-        if (cat != null && fila != -1) {
-            int idcategoria = cat.getIdcategoria();
-            String nombre = (String) jlistaCategoria.getValueAt(fila, 1);
-        int idproducto=-1;
-            for (Producto producto : p) {
-                if (producto.getNombre().equals(nombre)) {
-                    idproducto = producto.getIdProducto();
-                  
-                }
-                if (idproducto != -1) {
-                    
-                    String nuevoNombre=jlistaCategoria.getValueAt(fila, 1).toString();
-                    int nuevaCantidad=Integer.parseInt(jlistaCategoria.getValueAt(fila, 2).toString());
-                    double nuevoPrecio=Double.parseDouble(jlistaCategoria.getValueAt(fila, 3).toString());
-                    String nuevaCategoria=c.getSelectedItem().toString();
-                    if(nuevaCategoria.equalsIgnoreCase("BEBIDA NA")){
-                     idcategoria=4;
-                    }else if(nuevaCategoria.equalsIgnoreCase("COMIDA")){
-                     idcategoria=5;
-                    }else if(nuevaCategoria.equalsIgnoreCase("BEBIDA")){
-                     idcategoria=6; }
-                    pd.modificarProducto(nuevoNombre,nuevaCantidad, nuevoPrecio, idcategoria,idproducto);
-                }
-            }
-
+        int fila = jlistaCategoria.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione el producto que desea modificar");
+            return;
         }
 
+        // Obtén los valores de la fila seleccionada en el JTable
+        String nuevoNombre = jlistaCategoria.getValueAt(fila, 1).toString();
+        int nuevaCantidad = Integer.parseInt(jlistaCategoria.getValueAt(fila, 2).toString());
+        double nuevoPrecio = Double.parseDouble(jlistaCategoria.getValueAt(fila, 3).toString());
+        String nuevaCategoria = c.getSelectedItem().toString();
 
+        // Obtén el objeto Categoria seleccionado
+        Categoria cat = (Categoria) jcategoria.getSelectedItem();
+        if (cat == null) {
+            JOptionPane.showMessageDialog(null, "Seleccione una categoría válida");
+            return;
+        }
+
+        // Mapea el nombre de la categoría a su correspondiente ID
+        int idcategoria;
+        if (nuevaCategoria.equalsIgnoreCase("BEBIDA NA")) {
+            idcategoria = 4;
+        } else if (nuevaCategoria.equalsIgnoreCase("COMIDA")) {
+            idcategoria = 5;
+        } else if (nuevaCategoria.equalsIgnoreCase("BEBIDA")) {
+            idcategoria = 6;
+        } else {
+            idcategoria = cat.getIdcategoria();
+        }
+
+        // Obtén el nombre del producto a modificar desde la fila seleccionada
+        String nombreProducto = (String) jlistaCategoria.getValueAt(fila, 0).toString();
+
+        // Busca el producto correspondiente en la lista de productos
+        for (Producto producto : pd.obtenerProductos()) {
+            if (producto.getNombre().equals(nombreProducto)) {
+                // Llama al método para modificar el producto con los nuevos valores
+                pd.modificarProducto(nuevoNombre, nuevaCantidad, nuevoPrecio, idcategoria, producto.getIdProducto());
+                break; // Sal del bucle una vez que se haya encontrado y modificado el producto
+            }
+        }
     }//GEN-LAST:event_btnmodificarListaActionPerformed
 
     private void btnEliminarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProdActionPerformed
@@ -226,7 +236,7 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
             int idproducto = -1;
             for (Producto producto : pr) {
                 idproducto = producto.getIdProducto();
-               
+
             }
             if (idproducto != -1) {
                 pd.eliminarProducto(idproducto);
@@ -263,13 +273,14 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
     }
 
     private void CabeceraLista() {
-        modelo.addColumn("ID");
+        modelo.addColumn("ID Producto");
         modelo.addColumn("Nombre");
         modelo.addColumn("Cantidad");
         modelo.addColumn("Precio");
         modelo.addColumn("Categoria");
         jlistaCategoria.setModel(modelo);
     }
+
     private void boxTable() {
 
         String dato[] = {"COMIDA", "BEBIDA", "BEBIDA NA"};

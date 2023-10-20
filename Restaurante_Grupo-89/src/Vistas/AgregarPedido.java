@@ -105,6 +105,11 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTabla);
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jbRealizarPedido.setText("Realizar Pedido");
         jbRealizarPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -280,13 +285,14 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
 
     private void jbEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarProductoActionPerformed
         int filaS = jTabla.getSelectedRow();
+        double pre = 0;
         if (filaS == -1) {
             JOptionPane.showMessageDialog(null, "Selecciona una fila primero.");
             return;
         } else {
 
             try {
-                double pre = Double.parseDouble(jtPrecioTotal.getText());
+                pre = Double.parseDouble(jtPrecioTotal.getText());
                 double precioTotal = Double.parseDouble(modelo.getValueAt(filaS, 3).toString());
                 pre -= precioTotal;
                 jtPrecioTotal.setText(String.valueOf(pre));
@@ -307,19 +313,15 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
             return;
         } else {
             Mesa mesa = (Mesa) jcMesa.getSelectedItem();
-            MesaData md = new MesaData();
             PedidosData pd = new PedidosData();
             ProductoData prd = new ProductoData();
             MeseroData med = new MeseroData();
-            String hora = (String) jcHora.getSelectedItem();
-            int cantidad = Integer.parseInt(jcCantidad.getSelectedItem().toString());
             int cont = modelo.getRowCount();
             List<String> productos = new ArrayList<>();
             for (int i = 0; i < cont; i++) {
                 String nombreProducto = (String) modelo.getValueAt(i, 0);
                 productos.add(nombreProducto);
             }
-            Mesa mesaa = md.ObtenerMesaxID(mesa.getIdMesa());
             Mesero mesero = med.ObtenerMesero(3);
             boolean estado = true;
             int nroPedido = 0;
@@ -349,6 +351,10 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
     private void jcProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcProductoActionPerformed
         CargarComboCantidad();
     }//GEN-LAST:event_jcProductoActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

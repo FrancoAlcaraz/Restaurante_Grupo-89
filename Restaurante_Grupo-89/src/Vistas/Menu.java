@@ -31,7 +31,7 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/Imagen/fondo.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Imagen/Menu.png"));
         Image image = icon.getImage();
         jEscritorio = new javax.swing.JDesktopPane(){
             public void paintComponent(Graphics g){
@@ -39,41 +39,91 @@ public class Menu extends javax.swing.JFrame {
             }
 
         };
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnAgregarPedido = new javax.swing.JButton();
+        bAgregarMesero = new javax.swing.JButton();
+        btnAgregarMesa = new javax.swing.JButton();
+        btnAgregarP = new javax.swing.JButton();
+        btPreciosProductos = new javax.swing.JButton();
+        btPedidosXmesa = new javax.swing.JButton();
+        btPedidosXmesero = new javax.swing.JButton();
+        btProductosXcategoria = new javax.swing.JButton();
+        btPedidosXnumero = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        AgregarPedido = new javax.swing.JMenuItem();
-        AgregarProducto = new javax.swing.JMenuItem();
-        AgregarMesa = new javax.swing.JMenuItem();
-        AgregarMesero = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        PrecioProducto = new javax.swing.JMenuItem();
-        PedidosXMesa = new javax.swing.JMenuItem();
-        pedidosXMesero = new javax.swing.JMenuItem();
-        productoXCategoria = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("jLabel1");
+        btnAgregarPedido.setText("Agregar Pedido");
+        btnAgregarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarPedidoActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Agregar Pedido");
+        bAgregarMesero.setText("Agregar Mesero");
+        bAgregarMesero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAgregarMeseroActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Agregar Mesero");
+        btnAgregarMesa.setText("Agregar Mesa");
+        btnAgregarMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarMesaActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Agregar Mesa");
+        btnAgregarP.setText("Agregar Producto");
+        btnAgregarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarPActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Agregar Producto");
+        btPreciosProductos.setText("Precios Productos");
+        btPreciosProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPreciosProductosActionPerformed(evt);
+            }
+        });
 
-        jEscritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jEscritorio.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jEscritorio.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jEscritorio.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jEscritorio.setLayer(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        btPedidosXmesa.setText("PedidosXmesa");
+        btPedidosXmesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPedidosXmesaActionPerformed(evt);
+            }
+        });
+
+        btPedidosXmesero.setText("PedidosXmesero");
+        btPedidosXmesero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPedidosXmeseroActionPerformed(evt);
+            }
+        });
+
+        btProductosXcategoria.setText("ProductosXcategoria");
+        btProductosXcategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btProductosXcategoriaActionPerformed(evt);
+            }
+        });
+
+        btPedidosXnumero.setText("PedidosXnumero");
+        btPedidosXnumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPedidosXnumeroActionPerformed(evt);
+            }
+        });
+
+        jEscritorio.setLayer(btnAgregarPedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jEscritorio.setLayer(bAgregarMesero, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jEscritorio.setLayer(btnAgregarMesa, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jEscritorio.setLayer(btnAgregarP, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jEscritorio.setLayer(btPreciosProductos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jEscritorio.setLayer(btPedidosXmesa, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jEscritorio.setLayer(btPedidosXmesero, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jEscritorio.setLayer(btProductosXcategoria, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jEscritorio.setLayer(btPedidosXnumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jEscritorioLayout = new javax.swing.GroupLayout(jEscritorio);
         jEscritorio.setLayout(jEscritorioLayout);
@@ -81,115 +131,53 @@ public class Menu extends javax.swing.JFrame {
             jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jEscritorioLayout.createSequentialGroup()
                 .addGroup(jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jEscritorioLayout.createSequentialGroup()
-                        .addGap(246, 246, 246)
-                        .addGroup(jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jEscritorioLayout.createSequentialGroup()
-                        .addGap(248, 248, 248)
+                    .addGroup(jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE))
+                            .addGroup(jEscritorioLayout.createSequentialGroup()
+                                .addGap(285, 285, 285)
+                                .addComponent(bAgregarMesero, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jEscritorioLayout.createSequentialGroup()
+                                .addGap(106, 106, 106)
+                                .addGroup(jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btProductosXcategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btPedidosXmesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btPreciosProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btPedidosXmesero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(44, 44, 44)
+                                .addComponent(btnAgregarMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jEscritorioLayout.createSequentialGroup()
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnAgregarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAgregarP, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jEscritorioLayout.createSequentialGroup()
+                        .addGap(190, 190, 190)
+                        .addComponent(btPedidosXnumero, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(389, Short.MAX_VALUE))
         );
         jEscritorioLayout.setVerticalGroup(
             jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jEscritorioLayout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jEscritorioLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jButton4)
-                .addGap(30, 30, 30)
-                .addComponent(jButton3)
-                .addGap(26, 26, 26)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(359, Short.MAX_VALUE))
+                .addGap(82, 82, 82)
+                .addGroup(jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btPreciosProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61)
+                .addGroup(jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bAgregarMesero, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btPedidosXmesa, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(64, 64, 64)
+                .addGroup(jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarP, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btPedidosXmesero, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(79, 79, 79)
+                .addGroup(jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btProductosXcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addComponent(btPedidosXnumero, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(97, Short.MAX_VALUE))
         );
-
-        jMenu1.setText("Nuevos");
-
-        AgregarPedido.setText("Agregar Pedido");
-        AgregarPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AgregarPedidoActionPerformed(evt);
-            }
-        });
-        jMenu1.add(AgregarPedido);
-
-        AgregarProducto.setText("Agregar Producto");
-        AgregarProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AgregarProductoActionPerformed(evt);
-            }
-        });
-        jMenu1.add(AgregarProducto);
-
-        AgregarMesa.setText("Agregar Mesa");
-        AgregarMesa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AgregarMesaActionPerformed(evt);
-            }
-        });
-        jMenu1.add(AgregarMesa);
-
-        AgregarMesero.setText("Agregar Mesero");
-        AgregarMesero.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AgregarMeseroActionPerformed(evt);
-            }
-        });
-        jMenu1.add(AgregarMesero);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Consultas");
-
-        PrecioProducto.setText("Precios de Productos");
-        PrecioProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PrecioProductoActionPerformed(evt);
-            }
-        });
-        jMenu2.add(PrecioProducto);
-
-        PedidosXMesa.setText("Pedidos por Mesa");
-        PedidosXMesa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PedidosXMesaActionPerformed(evt);
-            }
-        });
-        jMenu2.add(PedidosXMesa);
-
-        pedidosXMesero.setText("Pedidos por Mesero");
-        pedidosXMesero.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pedidosXMeseroActionPerformed(evt);
-            }
-        });
-        jMenu2.add(pedidosXMesero);
-
-        productoXCategoria.setText("Productos por Categoria");
-        productoXCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                productoXCategoriaActionPerformed(evt);
-            }
-        });
-        jMenu2.add(productoXCategoria);
-
-        jMenuItem1.setText("PedidosXNumero");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -207,91 +195,94 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AgregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarPedidoActionPerformed
-         jEscritorio.removeAll();
-      jEscritorio.repaint();
-      AgregarPedido ap=new AgregarPedido();
-      ap.setVisible(true);
-      jEscritorio.add(ap);
-      jEscritorio.moveToFront(ap);
-    }//GEN-LAST:event_AgregarPedidoActionPerformed
+    private void btnAgregarMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMesaActionPerformed
+       
+        jEscritorio.repaint();
+        AgregarMesa am = new AgregarMesa();
+        am.setVisible(true);
+        jEscritorio.add(am);
+        jEscritorio.moveToFront(am);
+    }//GEN-LAST:event_btnAgregarMesaActionPerformed
 
-    private void AgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarProductoActionPerformed
-       jEscritorio.removeAll();
-      jEscritorio.repaint();
-      AgregarProducto apr=new AgregarProducto();
-      apr.setVisible(true);
-      jEscritorio.add(apr);
-      jEscritorio.moveToFront(apr);
-    }//GEN-LAST:event_AgregarProductoActionPerformed
-
-    private void AgregarMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarMesaActionPerformed
-
-      jEscritorio.removeAll();
-      jEscritorio.repaint();
-     AgregarMesa am=new AgregarMesa();
-      am.setVisible(true);
-      jEscritorio.add(am);
-      jEscritorio.moveToFront(am);
-    }//GEN-LAST:event_AgregarMesaActionPerformed
-
-    private void AgregarMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarMeseroActionPerformed
-      jEscritorio.removeAll();
-      jEscritorio.repaint();
-      AgregarMesero ame=new AgregarMesero();
-      ame.setVisible(true);
-      jEscritorio.add(ame);
-      jEscritorio.moveToFront(ame);
-    }//GEN-LAST:event_AgregarMeseroActionPerformed
-
-    private void PrecioProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrecioProductoActionPerformed
-      jEscritorio.removeAll();
-      jEscritorio.repaint();
-      PreciosDeProducto pp=new PreciosDeProducto();
-      pp.setVisible(true);
-      jEscritorio.add(pp);
-      jEscritorio.moveToFront(pp);
+    private void bAgregarMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarMeseroActionPerformed
         
-    }//GEN-LAST:event_PrecioProductoActionPerformed
+        jEscritorio.repaint();
+        AgregarMesero ame = new AgregarMesero();
+        ame.setVisible(true);
+        jEscritorio.add(ame);
+        jEscritorio.moveToFront(ame);
+    }//GEN-LAST:event_bAgregarMeseroActionPerformed
 
-    private void PedidosXMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosXMesaActionPerformed
-     jEscritorio.removeAll();
-     jEscritorio.repaint();
-      PedidosPorMesa ppm=new PedidosPorMesa();
-      ppm.setVisible(true);
-      jEscritorio.add(ppm);
-      jEscritorio.moveToFront(ppm);        
-    }//GEN-LAST:event_PedidosXMesaActionPerformed
-
-    private void pedidosXMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidosXMeseroActionPerformed
-    jEscritorio.removeAll();
-    jEscritorio.repaint();
-    PedidosPorMesero ppme=new PedidosPorMesero();
-    ppme.setVisible(true);
-    jEscritorio.add(ppme);
-    jEscritorio.moveToFront(ppme);
-    }//GEN-LAST:event_pedidosXMeseroActionPerformed
-
-    private void productoXCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productoXCategoriaActionPerformed
-    jEscritorio.removeAll();
-    jEscritorio.repaint();
-    ProductosPorCategoria ppc=new ProductosPorCategoria();
-      ppc.setVisible(true);
-    jEscritorio.add(ppc);
-    jEscritorio.moveToFront(ppc);
-    }//GEN-LAST:event_productoXCategoriaActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-    jEscritorio.repaint();
-    PedidosXNumero pn=new PedidosXNumero();
-    pn.setVisible(true);
-    jEscritorio.add(pn);
-    jEscritorio.moveToFront(pn);
+    private void btnAgregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPedidoActionPerformed
         
+        
+        jEscritorio.repaint();
+        AgregarPedido ap = new AgregarPedido();
+        ap.setVisible(true);
+        jEscritorio.add(ap);
+        jEscritorio.moveToFront(ap);
+    }//GEN-LAST:event_btnAgregarPedidoActionPerformed
 
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void btnAgregarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPActionPerformed
+       
+        jEscritorio.repaint();
+        AgregarProducto apr = new AgregarProducto();
+        apr.setVisible(true);
+        jEscritorio.add(apr);
+        jEscritorio.moveToFront(apr);
+    }//GEN-LAST:event_btnAgregarPActionPerformed
 
-   
+    private void btPreciosProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreciosProductosActionPerformed
+     
+        jEscritorio.repaint();
+        PreciosDeProducto pp = new PreciosDeProducto();
+        pp.setVisible(true);
+        jEscritorio.add(pp);
+        jEscritorio.moveToFront(pp);
+
+    }//GEN-LAST:event_btPreciosProductosActionPerformed
+
+    private void btPedidosXmesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidosXmesaActionPerformed
+        
+        jEscritorio.repaint();
+        PedidosPorMesa ppm = new PedidosPorMesa();
+        ppm.setVisible(true);
+        jEscritorio.add(ppm);
+        jEscritorio.moveToFront(ppm);
+    }//GEN-LAST:event_btPedidosXmesaActionPerformed
+
+    private void btPedidosXmeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidosXmeseroActionPerformed
+
+  
+        jEscritorio.repaint();
+        PedidosPorMesero ame = new PedidosPorMesero();
+        ame.setVisible(true);
+        jEscritorio.add(ame);
+        jEscritorio.moveToFront(ame);
+
+    }//GEN-LAST:event_btPedidosXmeseroActionPerformed
+
+    private void btProductosXcategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProductosXcategoriaActionPerformed
+
+        
+        jEscritorio.repaint();
+        ProductosPorCategoria ppc = new ProductosPorCategoria();
+        ppc.setVisible(true);
+        jEscritorio.add(ppc);
+        jEscritorio.moveToFront(ppc);
+
+    }//GEN-LAST:event_btProductosXcategoriaActionPerformed
+
+    private void btPedidosXnumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidosXnumeroActionPerformed
+
+        jEscritorio.repaint();
+        PedidosXNumero pn = new PedidosXNumero();
+        pn.setVisible(true);
+        jEscritorio.add(pn);
+        jEscritorio.moveToFront(pn);
+
+    }//GEN-LAST:event_btPedidosXnumeroActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -325,24 +316,19 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem AgregarMesa;
-    private javax.swing.JMenuItem AgregarMesero;
-    private javax.swing.JMenuItem AgregarPedido;
-    private javax.swing.JMenuItem AgregarProducto;
-    private javax.swing.JMenuItem PedidosXMesa;
-    private javax.swing.JMenuItem PrecioProducto;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton bAgregarMesero;
+    private javax.swing.JButton btPedidosXmesa;
+    private javax.swing.JButton btPedidosXmesero;
+    private javax.swing.JButton btPedidosXnumero;
+    private javax.swing.JButton btPreciosProductos;
+    private javax.swing.JButton btProductosXcategoria;
+    private javax.swing.JButton btnAgregarMesa;
+    private javax.swing.JButton btnAgregarP;
+    private javax.swing.JButton btnAgregarP1;
+    private javax.swing.JButton btnAgregarP2;
+    private javax.swing.JButton btnAgregarPedido;
     public javax.swing.JDesktopPane jEscritorio;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem pedidosXMesero;
-    private javax.swing.JMenuItem productoXCategoria;
     // End of variables declaration//GEN-END:variables
 
 }

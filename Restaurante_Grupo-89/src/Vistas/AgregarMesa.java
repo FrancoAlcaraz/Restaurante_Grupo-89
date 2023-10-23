@@ -2,12 +2,17 @@ package Vistas;
 
 import AccesoADatos.MesaData;
 import Entidades.Mesa;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class AgregarMesa extends javax.swing.JInternalFrame {
-
+PanelImagen fondo=new PanelImagen();
     public AgregarMesa() {
+         this.setContentPane(fondo);   
         initComponents();
     }
 
@@ -21,7 +26,7 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         GroupEstado1 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new PanelImagen();
         rbnLibre = new javax.swing.JRadioButton();
         rbnOcupada = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
@@ -217,4 +222,20 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
         jcapacidad.setText("");
         GroupEstado1.clearSelection();
     }
+    
+
+
+    class PanelImagen extends JPanel {
+
+        Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+            imagen=new ImageIcon(getClass().getResource("/Imagen/Generales.png")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+
+        }
+    } 
 }

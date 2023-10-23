@@ -75,23 +75,21 @@ public class PedidosData {
         }
     }
 
-    public void ModificarEstado(boolean estado, int nroPedido, int idProducto) {
-        String sql = "UPDATE `pedido` SET `estado`=? WHERE `nroPedido`=? AND idProducto=? ";
+    public void ModificarEstado(boolean estado, int nroPedido) {
+        String sql = "UPDATE `pedido` SET `estado`=? WHERE `nroPedido`=?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setBoolean(1, estado); // Cambia el estado actual
+            ps.setBoolean(1, estado);
             ps.setInt(2, nroPedido);
-            ps.setInt(3, idProducto);
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Estado del Pedido Modificado Exitosamente.");
             } else {
                 JOptionPane.showMessageDialog(null, "El Pedido no existe");
             }
-
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de pedidos generales " + ex.getMessage());
         }
     }
 

@@ -81,7 +81,7 @@
                           <Component id="btPedidosXnumero" min="-2" pref="134" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="389" max="32767" attributes="0"/>
+                  <EmptySpace pref="589" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -110,7 +110,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Component id="btPedidosXnumero" min="-2" pref="39" max="-2" attributes="0"/>
-                  <EmptySpace pref="97" max="32767" attributes="0"/>
+                  <EmptySpace pref="298" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

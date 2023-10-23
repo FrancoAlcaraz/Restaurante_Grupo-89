@@ -45,19 +45,22 @@ public class MeseroData {
     public Mesero ObtenerMesero(int idmesero) {
         Mesero mesero = null;
         try {
-            Statement ps = con.createStatement();
-            ResultSet rs = ps.executeQuery("SELECT `idMesero`, `dni`, `nombre`, `estado` FROM `mesero` WHERE `estado`=1");
-            while (rs.next()) {
+            String sql = "SELECT `idMesero`, `dni`, `nombre`, `estado` FROM `mesero` WHERE `idMesero`=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idmesero);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
                 mesero = new Mesero();
                 mesero.setIdMesero(idmesero);
                 mesero.setDni(rs.getInt("dni"));
                 mesero.setNombre(rs.getString("nombre"));
                 mesero.setEstado(rs.getBoolean("estado"));
             }
-            ps.close();
 
+            ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Mesero " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero " + ex.getMessage());
         }
         return mesero;
     }

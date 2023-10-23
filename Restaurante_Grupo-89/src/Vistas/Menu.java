@@ -153,7 +153,7 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(jEscritorioLayout.createSequentialGroup()
                         .addGap(190, 190, 190)
                         .addComponent(btPedidosXnumero, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(389, Short.MAX_VALUE))
+                .addContainerGap(589, Short.MAX_VALUE))
         );
         jEscritorioLayout.setVerticalGroup(
             jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +176,7 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(btProductosXcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(btPedidosXnumero, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(298, Short.MAX_VALUE))
         );
 
         setJMenuBar(jMenuBar1);
@@ -324,8 +324,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btProductosXcategoria;
     private javax.swing.JButton btnAgregarMesa;
     private javax.swing.JButton btnAgregarP;
-    private javax.swing.JButton btnAgregarP1;
-    private javax.swing.JButton btnAgregarP2;
     private javax.swing.JButton btnAgregarPedido;
     public javax.swing.JDesktopPane jEscritorio;
     private javax.swing.JMenuBar jMenuBar1;

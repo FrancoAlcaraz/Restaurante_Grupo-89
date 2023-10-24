@@ -5,10 +5,12 @@ import Entidades.Mesero;
 import Entidades.Pedidos;
 import Entidades.Producto;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -25,7 +27,7 @@ public class PedidosData {
     }
 
     public void AgregarPedido(Pedidos pedido) {
-        String sql = "INSERT INTO `pedido`(`idProducto`, `idMesero`, `idMesa`, `estado`, `nroPedido`) VALUES (?, ?, ?, ?, ?)";;
+        String sql = "INSERT INTO `pedido`(`idProducto`, `idMesero`, `idMesa`, `estado`, `nroPedido`,cantidadProducto, fecha, hora) VALUES (?, ?, ?, ?, ?,?,?,?)";;
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, pedido.getProducto().getIdProducto());
@@ -33,6 +35,9 @@ public class PedidosData {
             ps.setInt(3, pedido.getMesa().getIdMesa());
             ps.setBoolean(4, pedido.isEstado());
             ps.setInt(5, pedido.getNroPedido());
+            ps.setInt(6, pedido.getCantidadProducto());
+            ps.setDate(7, Date.valueOf(pedido.getFecha()));
+            ps.setTime(8, Time.valueOf(pedido.getHora()));
 
             int exito = ps.executeUpdate();
             ps.close();
@@ -122,9 +127,13 @@ public class PedidosData {
                 pedido.setIdPedido(rs.getInt("idPedido"));
                 pedido.setEstado(rs.getBoolean("estado"));
                 pedido.setNroPedido(rs.getInt("nroPedido"));
+                pedido.setCantidadProducto(rs.getInt("cantidadProducto"));
+                pedido.setFecha(rs.getDate("fecha").toLocalDate());
+                pedido.setHora(rs.getTime("hora").toLocalTime());
                 pedido.setMesa(mesa);
                 pedido.setMesero(mesero);
                 pedido.setProducto(prod);
+                
                 pedidos.add(pedido);
             }
             ps.close();

@@ -6,11 +6,14 @@
 package Vistas;
 
 import AccesoADatos.ProductoData;
+import Entidades.Categoria;
 import Entidades.Producto;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.List;
+import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -22,10 +25,12 @@ import javax.swing.table.DefaultTableModel;
 public class PreciosDeProducto extends javax.swing.JInternalFrame {
 DefaultTableModel modelo=new DefaultTableModel();
   PanelImagen fondo=new PanelImagen();
+    JComboBox c = new JComboBox();
     public PreciosDeProducto() {
        this.setContentPane(fondo);
         initComponents();
         cabecera();
+        boxTable();
 
     }
 
@@ -48,7 +53,7 @@ DefaultTableModel modelo=new DefaultTableModel();
         jprecioA = new javax.swing.JTextField();
         jprecioB = new javax.swing.JTextField();
         jbuscar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jModificar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -87,10 +92,10 @@ DefaultTableModel modelo=new DefaultTableModel();
             }
         });
 
-        jButton2.setText("Modificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jModificar.setText("Modificar");
+        jModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jModificarActionPerformed(evt);
             }
         });
 
@@ -105,7 +110,7 @@ DefaultTableModel modelo=new DefaultTableModel();
                         .addComponent(jbuscar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
-                        .addComponent(jButton2)
+                        .addComponent(jModificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)))
                 .addGap(43, 43, 43))
@@ -146,7 +151,7 @@ DefaultTableModel modelo=new DefaultTableModel();
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jModificar))
                 .addGap(179, 179, 179))
         );
 
@@ -169,7 +174,12 @@ DefaultTableModel modelo=new DefaultTableModel();
     }//GEN-LAST:event_jprecioBActionPerformed
 
     private void jbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuscarActionPerformed
-   modelo.setRowCount(0);
+      try{
+        if(jprecioA.getText().isEmpty()&& jprecioB.getText().isEmpty()){
+        JOptionPane.showMessageDialog(null, "no deje campos vacio");
+        
+        }
+        modelo.setRowCount(0);
         double precioa=Double.parseDouble(jprecioA.getText());
     double preciob=Double.parseDouble(jprecioB.getText());
      
@@ -177,42 +187,70 @@ DefaultTableModel modelo=new DefaultTableModel();
   List<Producto> lista=pd.obtenerProductos();
     for (Producto producto : lista) {
         if(producto!=null && precioa<=producto.getPrecio() && preciob>=producto.getPrecio()){
+            int id=producto.getIdProducto();
         String nombreProducto=producto.getNombre();
         int cantidad=producto.getCantidad();
         String categoria=producto.getCategoria().getCategoria();
         double precio=producto.getPrecio();
-        modelo.addRow(new Object[]{nombreProducto,cantidad,categoria,precio});
+        modelo.addRow(new Object[]{id,nombreProducto,cantidad,categoria,precio});
         }
+    }}catch(Exception e){
+    JOptionPane.showMessageDialog(null, "Error de tipo "+e);
+    
     }
   
         
     }//GEN-LAST:event_jbuscarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
+    try{
         int fila=jTable1.getSelectedRow();
-        String nNombre=jTable1.getValueAt(fila, 0).toString();
-        int nCantidad=Integer.parseInt(jTable1.getValueAt(fila, 1).toString());
-        double precion=Double.parseDouble(jTable1.getValueAt(fila, 3).toString());
+        int id=(int) jTable1.getValueAt(fila, 0);
+        String nNombre=jTable1.getValueAt(fila, 1).toString();
+        int nCantidad=Integer.parseInt(jTable1.getValueAt(fila, 2).toString());
+        double precion=Double.parseDouble(jTable1.getValueAt(fila, 4).toString());
+        String nCategoria=c.getSelectedItem().toString();
         ProductoData pd=new ProductoData();
         List<Producto> lista=pd.obtenerProductos();
-       
-        for (Producto producto : lista) {
-            if(producto.getNombre()==nNombre){
-            
-            
+      int idcategoria = 0;
+            if (nCategoria.equalsIgnoreCase("BEBIDA NA")) {
+                idcategoria = 4;
+            } else if (nCategoria.equalsIgnoreCase("COMIDA")) {
+                idcategoria = 5;
+            } else if (nCategoria.equalsIgnoreCase("BEBIDA")) {
+                idcategoria = 6;
             }
             
+        for (Producto producto : lista) {
+           
+            System.out.println(id);
+            if(producto!=null && id==producto.getIdProducto()){
+           producto.setNombre(nNombre);
+            producto.setCantidad(nCantidad);
+            producto.setPrecio(precion);
+            
+                    if (!producto.getCategoria().equals(nCategoria)) {
+                        Categoria cate = new Categoria(idcategoria, nCategoria);
+                        producto.setCategoria(cate);
+                    }
+            pd.modificarProducto(producto);
+            }
+          
+            
+        }
+            }catch(Exception e){
+        JOptionPane.showMessageDialog(null, "Error Exception "+e);
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton jModificar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -221,6 +259,8 @@ DefaultTableModel modelo=new DefaultTableModel();
     private javax.swing.JTextField jprecioB;
     // End of variables declaration//GEN-END:variables
 public void cabecera(){
+    
+ modelo.addColumn("id");
  modelo.addColumn("Nombre");
  modelo.addColumn("Cantidad");
  modelo.addColumn("Categoria");
@@ -228,6 +268,16 @@ public void cabecera(){
  jTable1.setModel(modelo);
 }
  
+    private void boxTable() {
+
+        String dato[] = {"COMIDA", "BEBIDA", "BEBIDA NA"};
+        for (String dato1 : dato) {
+            c.addItem(dato1);
+        }
+        jTable1.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(c));
+    }
+
+
 
     
     class PanelImagen extends JPanel {

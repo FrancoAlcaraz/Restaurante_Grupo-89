@@ -7,17 +7,22 @@ package Vistas;
 
 import AccesoADatos.MeseroData;
 import Entidades.Mesero;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Bel
  */
 public class AgregarMesero extends javax.swing.JInternalFrame {
+PanelImagen fondo=new PanelImagen();
 
-    /**
-     * Creates new form AgregarMesero
-     */
+
+
     public AgregarMesero() {
+ this.setContentPane(fondo);   
         initComponents();
     }
 
@@ -31,7 +36,7 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         btngrupo = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new PanelImagen();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jDni = new javax.swing.JTextField();
@@ -46,7 +51,7 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 102));
+        jPanel1.setBackground(null);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -249,4 +254,18 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jSalir;
     // End of variables declaration//GEN-END:variables
+
+    class PanelImagen extends JPanel {
+
+        Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+            imagen=new ImageIcon(getClass().getResource("/Imagen/Generales.png")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+
+        }
+    } 
 }

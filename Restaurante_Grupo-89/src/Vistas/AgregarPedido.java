@@ -13,9 +13,13 @@ import Entidades.Mesa;
 import Entidades.Mesero;
 import Entidades.Pedidos;
 import Entidades.Producto;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,11 +34,12 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
         }
     };
     double pre = 0.0;
-
+PanelImagen fondo=new PanelImagen();
     /**
      * Creates new form AgregarPedido
      */
     public AgregarPedido() {
+        this.setContentPane(fondo); 
         initComponents();
         armarCabecera();
         CargarComboMesa();
@@ -53,7 +58,7 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new PanelImagen();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -438,4 +443,17 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
 
     }
 
+        class PanelImagen extends JPanel {
+
+        Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+            imagen=new ImageIcon(getClass().getResource("/Imagen/Generales.png")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+
+        }
+    } 
 }

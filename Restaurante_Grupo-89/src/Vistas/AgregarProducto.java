@@ -9,18 +9,20 @@ import AccesoADatos.CategoriaData;
 import AccesoADatos.ProductoData;
 import Entidades.Categoria;
 import Entidades.Producto;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Bel
  */
 public class AgregarProducto extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form AgregarProducto
-     */
+PanelImagen fondo=new PanelImagen();
     public AgregarProducto() {
+        this.setContentPane(fondo);  
         initComponents();
         cargarcombo();
     }
@@ -34,7 +36,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new PanelImagen();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -48,7 +50,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         btnSalir = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 102));
+        jPanel1.setBackground(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -263,4 +265,17 @@ private void cargarcombo() {
         }
     }
 
+    class PanelImagen extends JPanel {
+
+        Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+            imagen=new ImageIcon(getClass().getResource("/Imagen/Generales.png")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+
+        }
+    } 
 }

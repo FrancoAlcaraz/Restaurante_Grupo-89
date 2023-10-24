@@ -10,6 +10,7 @@ import Entidades.Mesero;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -17,12 +18,11 @@ import javax.swing.JPanel;
  * @author Bel
  */
 public class AgregarMesero extends javax.swing.JInternalFrame {
-PanelImagen fondo=new PanelImagen();
 
-
+    PanelImagen fondo = new PanelImagen();
 
     public AgregarMesero() {
- this.setContentPane(fondo);   
+        this.setContentPane(fondo);
         initComponents();
     }
 
@@ -210,8 +210,11 @@ PanelImagen fondo=new PanelImagen();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAgregarActionPerformed
+
         MeseroData ms = new MeseroData();
-       
+        if (jNombre.getText().isEmpty() && jDni.getText().isEmpty() ) {
+            JOptionPane.showMessageDialog(null, "No dejes campos vacios ");
+        }
         boolean estado = true;
         String nombre = jNombre.getText();
         int dni = Integer.parseInt(jDni.getText());
@@ -220,8 +223,8 @@ PanelImagen fondo=new PanelImagen();
         } else if (inactivo.isSelected()) {
             estado = false;
         }
-         Mesero m = new Mesero(dni, nombre, estado);
-     ms.AgregarMesero(m);
+        Mesero m = new Mesero(dni, nombre, estado);
+        ms.AgregarMesero(m);
     }//GEN-LAST:event_jAgregarActionPerformed
 
     private void jSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalirActionPerformed
@@ -261,11 +264,11 @@ PanelImagen fondo=new PanelImagen();
 
         @Override
         public void paint(Graphics g) {
-            imagen=new ImageIcon(getClass().getResource("/Imagen/Generales.png")).getImage();
+            imagen = new ImageIcon(getClass().getResource("/Imagen/Generales.png")).getImage();
             g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);
 
         }
-    } 
+    }
 }

@@ -24,7 +24,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PedidosXNumero extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modelo = new DefaultTableModel();
+    DefaultTableModel modelo = new DefaultTableModel(){
+       public boolean isCellEditable(int f, int c){
+       return false;
+       } 
+    };
     PanelImagen fondo=new PanelImagen();
     public PedidosXNumero() {
         this.setContentPane(fondo);
@@ -55,16 +59,15 @@ public class PedidosXNumero extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jHora = new javax.swing.JTextField();
 
-        jTablaPedidos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 204, 51), new java.awt.Color(255, 153, 153), new java.awt.Color(255, 204, 0), new java.awt.Color(255, 204, 204)));
         jTablaPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(jTablaPedidos);
@@ -180,7 +183,8 @@ public class PedidosXNumero extends javax.swing.JInternalFrame {
             PedidosData pd = new PedidosData();
             List<Pedidos> lista = pd.ListarPedidos();
             String estado = "_";
-
+            double precio=0.0;
+            double pr=0.0;
             for (Pedidos pedidos : lista) {
                 if (pedidos != null && pedidos.getNroPedido() == numero) {
 
@@ -188,8 +192,8 @@ public class PedidosXNumero extends javax.swing.JInternalFrame {
                         estado = "Pendiente";
                         jTextField1.setText(String.valueOf(0));
                     } else if (pedidos.isEstado() == true) {
-                        double precio = pedidos.getProducto().getPrecio() * pedidos.getCantidadProducto();
-                        double pr = 0.0;
+                         precio = pedidos.getProducto().getPrecio() * pedidos.getCantidadProducto();
+                       
                         pr += precio;
                         SimpleDateFormat f=new SimpleDateFormat("dd/MM/yyyy");
                         jFecha.setText(pedidos.getFecha().toString());

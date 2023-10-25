@@ -359,7 +359,6 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
 
     private void boxEstado() {
         MeseroData pd = new MeseroData();
-        List<Mesero> dato = pd.obtenerProductos();
         String estado[] = new String[2];
         estado[0] = "Realizada";
         estado[1] = "Pendiente";

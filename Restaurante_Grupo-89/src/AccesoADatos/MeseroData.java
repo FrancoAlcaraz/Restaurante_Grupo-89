@@ -103,7 +103,7 @@ public class MeseroData {
         }
     }
 
-    public List<Mesero> obtenerProductos() {
+    public List<Mesero> obtenerMeseros() {
         List<Mesero> meseros = new ArrayList<>();
         String sql = "SELECT * FROM mesero ";
 

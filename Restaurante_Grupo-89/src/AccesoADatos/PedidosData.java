@@ -39,11 +39,8 @@ public class PedidosData {
             ps.setDate(7, Date.valueOf(pedido.getFecha()));
             ps.setTime(8, Time.valueOf(pedido.getHora()));
 
-            int exito = ps.executeUpdate();
+            ps.executeUpdate();
             ps.close();
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Pedido Agregado");
-            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos: " + ex.getMessage());
         }

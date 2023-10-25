@@ -50,24 +50,28 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jcProducto" pref="201" max="32767" attributes="0"/>
-                                      <Component id="jcMesa" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jcMesa" min="-2" pref="72" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jcHora" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="jcProducto" min="-2" pref="201" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="jcCantidad" min="-2" pref="133" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
                                           <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="jdFecha" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                  </Group>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jcHora" pref="133" max="32767" attributes="0"/>
-                                      <Component id="jcCantidad" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -112,6 +116,7 @@
                               <Component id="jcMesa" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jcHora" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -120,7 +125,8 @@
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                          <Component id="jdFecha" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jcCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -134,7 +140,7 @@
                       <Component id="jbAgregarProducto" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jbEliminarProducto" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="57" max="32767" attributes="0"/>
+                  <EmptySpace pref="61" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jbSalir" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jbRealizarPedido" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -308,6 +314,13 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Integer&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="jdFecha">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel7">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fecha:"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

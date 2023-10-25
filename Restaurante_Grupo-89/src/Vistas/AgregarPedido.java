@@ -15,7 +15,11 @@ import Entidades.Pedidos;
 import Entidades.Producto;
 import java.awt.Graphics;
 import java.awt.Image;
+<<<<<<< Updated upstream
 import java.sql.Time;
+=======
+import java.sql.Date;
+>>>>>>> Stashed changes
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -75,7 +79,6 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jbRealizarPedido = new javax.swing.JButton();
         jbAgregarProducto = new javax.swing.JButton();
-        jcMesa = new javax.swing.JComboBox<>();
         jcProducto = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jbEliminarProducto = new javax.swing.JButton();
@@ -84,6 +87,10 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
         jcCantidad = new javax.swing.JComboBox<>();
         jdFecha = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
+<<<<<<< Updated upstream
+=======
+        jcMesa = new javax.swing.JComboBox<>();
+>>>>>>> Stashed changes
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Haz Tu Pedido");
@@ -173,6 +180,7 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel2))
                                 .addGap(18, 18, 18)
+<<<<<<< Updated upstream
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jcMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,17 +189,32 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jcHora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jcProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+=======
+>>>>>>> Stashed changes
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jcProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jcCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
+<<<<<<< Updated upstream
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+=======
+                                        .addComponent(jcMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jcHora, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jdFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+>>>>>>> Stashed changes
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addComponent(jLabel6)
@@ -208,18 +231,28 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
                         .addComponent(jbEliminarProducto)
                         .addGap(106, 106, 106)))
                 .addGap(50, 50, 50))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(193, 193, 193)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(221, 221, 221))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(41, 41, 41)
                 .addComponent(jLabel1)
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3)
+                        .addComponent(jcHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)
+                        .addComponent(jcMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< Updated upstream
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -237,13 +270,25 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jcCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+=======
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(jcProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jcCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+>>>>>>> Stashed changes
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAgregarProducto)
                     .addComponent(jbEliminarProducto))
+<<<<<<< Updated upstream
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+=======
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+>>>>>>> Stashed changes
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSalir)
                     .addComponent(jbRealizarPedido)
@@ -260,7 +305,7 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -272,13 +317,29 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
             Producto producto = (Producto) jcProducto.getSelectedItem();
             String horaStr = (String) jcHora.getSelectedItem();
             LocalTime hora = LocalTime.parse(horaStr);
+<<<<<<< Updated upstream
             LocalDate fecha = jdFecha.getDate().
                     toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+=======
+            LocalDate fecha = jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+>>>>>>> Stashed changes
             int cantidad = Integer.parseInt(jcCantidad.getSelectedItem().toString());
             if (cantidad < 1) {
                 JOptionPane.showMessageDialog(null, "Seleccione la cantidad de productos que desea agregar");
                 return;
             }
+<<<<<<< Updated upstream
+=======
+            LocalDate hoy = LocalDate.now();
+            LocalTime horaAhora = LocalTime.now();
+            if (fecha.isEqual(hoy) && hora.isBefore(horaAhora)) {
+                JOptionPane.showMessageDialog(null, "Ingrese una hora posterior a la actual");
+                return;
+            } else if (fecha.isBefore(hoy)) {
+                JOptionPane.showMessageDialog(null, "Debe ingresar una fecha posterior al dia u hora actual");
+                return;
+            }
+>>>>>>> Stashed changes
             if (mesa == null || producto == null || hora == null || fecha == null) {
                 JOptionPane.showMessageDialog(null, "Seleccione todos los campos");
                 return;
@@ -366,10 +427,25 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
                 productos.add(nombreProducto);
                 cantidades.add(cantidadProducto);
             }
+<<<<<<< Updated upstream
 
             Random random = new Random();
             int idAle = random.nextInt(med.obtenerMeseros().size());
             Mesero mesero = med.ObtenerMesero(idAle);
+=======
+            //Busqueda por mesero aleatorio//
+            ArrayList<Mesero> lismesero = (ArrayList<Mesero>) med.obtenerMeseros();
+            Random random = new Random();
+            int indiceAleatorio = random.nextInt(lismesero.size());
+            Mesero meseroAleatorio = lismesero.get(indiceAleatorio);
+            int idMesero = meseroAleatorio.getIdMesero();
+            Mesero mesero = med.ObtenerMesero(idMesero);
+            int cantidadProducto = (Integer) jcCantidad.getSelectedIndex();
+            String horaStr = (String) jcHora.getSelectedItem();
+            LocalTime hora = LocalTime.parse(horaStr);
+            LocalDate fecha = jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+>>>>>>> Stashed changes
             boolean estado = true;
             int nroPedido = 0;
 

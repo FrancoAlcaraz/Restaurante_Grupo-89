@@ -166,6 +166,7 @@ public class ProductoData {
                 producto.setIdProducto(rs.getInt("idProducto"));
                 producto.setNombre(rs.getString("nombre"));
                 producto.setPrecio(rs.getDouble("precio"));
+                producto.setCantidad(rs.getInt("cantidad")); 
                 Categoria cat = ct.ObtenerCategoria(rs.getInt("idCategoria"));
                 producto.setCategoria(cat);
                 productos.add(producto);

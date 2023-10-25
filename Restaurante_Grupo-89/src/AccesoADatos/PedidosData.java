@@ -26,26 +26,25 @@ public class PedidosData {
         con = Conexion.getConexion();
     }
 
-    public void AgregarPedido(Pedidos pedido) {
-        String sql = "INSERT INTO `pedido`(`idProducto`, `idMesero`, `idMesa`, `estado`, `nroPedido`,cantidadProducto, fecha, hora) VALUES (?, ?, ?, ?, ?,?,?,?)";;
-        try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, pedido.getProducto().getIdProducto());
-            ps.setInt(2, pedido.getMesero().getIdMesero());
-            ps.setInt(3, pedido.getMesa().getIdMesa());
-            ps.setBoolean(4, pedido.isEstado());
-            ps.setInt(5, pedido.getNroPedido());
-            ps.setInt(6, pedido.getCantidadProducto());
-            ps.setDate(7, Date.valueOf(pedido.getFecha()));
-            ps.setTime(8, Time.valueOf(pedido.getHora()));
+   public void AgregarPedido(Pedidos pedido) {
+    String sql = "INSERT INTO `pedido`(`idProducto`, `idMesero`, `idMesa`, `estado`, `nroPedido`, `cantidadProducto`, `fecha`, `hora`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    try {
+        PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.setInt(1, pedido.getProducto().getIdProducto());
+        ps.setInt(2, pedido.getMesero().getIdMesero());
+        ps.setInt(3, pedido.getMesa().getIdMesa());
+        ps.setBoolean(4, pedido.isEstado());
+        ps.setInt(5, pedido.getNroPedido());
+        ps.setInt(6, pedido.getCantidadProducto());
+        ps.setDate(7, Date.valueOf(pedido.getFecha()));
+        ps.setTime(8, Time.valueOf(pedido.getHora()));
 
-            ps.executeUpdate();
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos: " + ex.getMessage());
-        }
-
+        ps.executeUpdate();
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos: " + ex.getMessage());
     }
+}
 
     public void ModificarPedido(Pedidos pedido) {
         if (!pedido.isEstado()) {

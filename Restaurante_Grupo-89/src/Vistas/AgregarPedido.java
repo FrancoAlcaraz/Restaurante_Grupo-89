@@ -283,13 +283,13 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Seleccione todos los campos");
                 return;
             }
-            LocalDate hoy=LocalDate.now();
-            LocalTime ahora=LocalTime.now();
-           if(fecha.equals(hoy)&&hora.isBefore(ahora)){
-                JOptionPane.showMessageDialog(null,"Ingrese un horario posterior al actual ");
+            LocalDate hoy = LocalDate.now();
+            LocalTime ahora = LocalTime.now();
+            if (fecha.equals(hoy) && hora.isBefore(ahora)) {
+                JOptionPane.showMessageDialog(null, "Ingrese un horario posterior al actual ");
                 return;
-            }else  if(fecha.isBefore(hoy)){
-                JOptionPane.showMessageDialog(null,"Ingrese la fecha actual o una posterior a la actual");
+            } else if (fecha.isBefore(hoy)) {
+                JOptionPane.showMessageDialog(null, "Ingrese la fecha actual o una posterior a la actual");
                 return;
             }
             String nombreProducto = producto.getNombre();
@@ -355,11 +355,11 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
             LocalTime hora = LocalTime.parse(horaStr);
             LocalDate fecha = jdFecha.getDate().
                     toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            
 
             int cont = modelo.getRowCount();
             List<String> productos = new ArrayList<>();
-            List<Integer> cantidades = new ArrayList<>();
+            List<Integer> cantidades = new ArrayList();
+
             for (int i = 0; i < cont; i++) {
                 String nombreProducto = (String) modelo.getValueAt(i, 0);
                 int cantidadProducto = (Integer) modelo.getValueAt(i, 1);
@@ -368,17 +368,11 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
             }
 
             Random random = new Random();
-
             int idAle = random.nextInt(med.obtenerMeseros().size());
-
-            Mesero meseroAleatorio = med.ObtenerMesero(idAle);
-
-            // Obtener el ID del mesero usando el método getIdMesero()
-            int idMesero = meseroAleatorio.getIdMesero();
-            Mesero mesero = med.ObtenerMesero(2);
-
+            Mesero mesero = med.ObtenerMesero(idAle);
             boolean estado = true;
             int nroPedido = 0;
+
             List<Pedidos> listaPedidos = pd.ListarPedidos();
             for (Pedidos pedido : listaPedidos) {
                 if (pedido.getNroPedido() > nroPedido) {
@@ -386,33 +380,23 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
                 }
             }
             nroPedido++;
-            for (String nomP : productos) {
-                // Obtén el Producto a partir del nombre
+            for (int i = 0; i < productos.size(); i++) {
+                String nomP = productos.get(i);
+                int cantidadProducto = cantidades.get(i);
+
                 List<Producto> productosEncontrados = prd.obtenerProductosxNombre(nomP);
                 if (!productosEncontrados.isEmpty()) {
                     Producto producto = productosEncontrados.get(0);
-                    for (int i = 0; i < cont; i++) {
-                        int cantidadProducto = (Integer) modelo.getValueAt(i, 1);
-                        cantidades.add(cantidadProducto);
-                        Pedidos pedido = new Pedidos(producto, mesero, mesa, estado, nroPedido, cantidadProducto, fecha, hora);
-                        pd.AgregarPedido(pedido);
-                        JOptionPane.showMessageDialog(null,"Su pedido fue agregado");
-                        List<Producto> actuProd=new ArrayList<>();                        
-                        for (Producto producto1 : actuProd) {
-                            
-                        }
-                        break;
-                    }
+                    Pedidos pedido = new Pedidos(producto, mesero, mesa, estado, nroPedido, cantidadProducto, fecha, hora);
+                    pd.AgregarPedido(pedido);
                 } else {
                     JOptionPane.showMessageDialog(null, "No se encontró el producto: " + nomP);
                 }
             }
+            JOptionPane.showMessageDialog(null, "Su pedido fue agregado");
+            modelo.setRowCount(0);
+            jTabla.setModel(modelo);
         }
-         modelo.setRowCount(0);
-        jTabla.setModel(modelo);
-        
-
-
     }//GEN-LAST:event_jbRealizarPedidoActionPerformed
 
     private void jcProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcProductoActionPerformed
@@ -457,9 +441,7 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
 
     public void CargarComboMesa() {
         jcMesa.removeAllItems();
-        Mesa mesa = new Mesa();
         MesaData md = new MesaData();
-        ArrayList<Mesa> lista = new ArrayList();
         List<Mesa> mes = md.ObtenerMesas();
         for (Mesa mesas : mes) {
             jcMesa.addItem(mesas);
@@ -468,9 +450,7 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
 
     public void CargarComboProducto() {
         jcProducto.removeAllItems();
-        Producto prod = new Producto();
         ProductoData pd = new ProductoData();
-        ArrayList lista = new ArrayList();
         List<Producto> pro = pd.obtenerProductos();
         for (Producto prou : pro) {
             jcProducto.addItem(prou);

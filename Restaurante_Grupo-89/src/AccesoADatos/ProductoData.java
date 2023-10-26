@@ -166,7 +166,7 @@ public class ProductoData {
                 producto.setIdProducto(rs.getInt("idProducto"));
                 producto.setNombre(rs.getString("nombre"));
                 producto.setPrecio(rs.getDouble("precio"));
-                producto.setCantidad(rs.getInt("cantidad")); 
+                producto.setCantidad(rs.getInt("cantidad"));
                 Categoria cat = ct.ObtenerCategoria(rs.getInt("idCategoria"));
                 producto.setCategoria(cat);
                 productos.add(producto);
@@ -189,12 +189,8 @@ public class ProductoData {
             ps.setObject(4, producto.getCategoria().getIdcategoria());
             ps.setInt(5, producto.getIdProducto());
 
-            int exito = ps.executeUpdate();
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Producto Modificado");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo modificar el producto");
-            }
+            ps.executeUpdate();
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al modificar el producto: " + ex.getMessage());
         }

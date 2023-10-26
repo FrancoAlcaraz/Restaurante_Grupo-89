@@ -23,15 +23,17 @@ import javax.swing.table.DefaultTableModel;
  * @author Bel
  */
 public class PreciosDeProducto extends javax.swing.JInternalFrame {
-DefaultTableModel modelo=new DefaultTableModel();
-  PanelImagen fondo=new PanelImagen();
+
+    DefaultTableModel modelo = new DefaultTableModel();
+    PanelImagen fondo = new PanelImagen();
     JComboBox c = new JComboBox();
+
     public PreciosDeProducto() {
-       this.setContentPane(fondo);
+        this.setContentPane(fondo);
         initComponents();
         cabecera();
-        boxTable();
-
+        
+        mostrar();
     }
 
     /**
@@ -179,45 +181,46 @@ DefaultTableModel modelo=new DefaultTableModel();
     }//GEN-LAST:event_jprecioBActionPerformed
 
     private void jbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuscarActionPerformed
-      try{
-        if(jprecioA.getText().isEmpty()&& jprecioB.getText().isEmpty()){
-        JOptionPane.showMessageDialog(null, "no deje campos vacio");
-        
+        try {
+            if (jprecioA.getText().isEmpty() && jprecioB.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "no deje campos vacio");
+
+            }
+            modelo.setRowCount(0);
+            double precioa = Double.parseDouble(jprecioA.getText());
+            double preciob = Double.parseDouble(jprecioB.getText());
+
+            ProductoData pd = new ProductoData();
+            List<Producto> lista = pd.obtenerProductos();
+            for (Producto producto : lista) {
+                if (producto != null && precioa <= producto.getPrecio() && preciob >= producto.getPrecio()) {
+                    int id = producto.getIdProducto();
+                    String nombreProducto = producto.getNombre();
+                    int cantidad = producto.getCantidad();
+                    String categoria = producto.getCategoria().getCategoria();
+                    double precio = producto.getPrecio();
+                    modelo.addRow(new Object[]{id, nombreProducto, cantidad, categoria, precio});
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error de tipo " + e);
+
         }
-        modelo.setRowCount(0);
-        double precioa=Double.parseDouble(jprecioA.getText());
-    double preciob=Double.parseDouble(jprecioB.getText());
-     
-  ProductoData pd=new ProductoData();
-  List<Producto> lista=pd.obtenerProductos();
-    for (Producto producto : lista) {
-        if(producto!=null && precioa<=producto.getPrecio() && preciob>=producto.getPrecio()){
-            int id=producto.getIdProducto();
-        String nombreProducto=producto.getNombre();
-        int cantidad=producto.getCantidad();
-        String categoria=producto.getCategoria().getCategoria();
-        double precio=producto.getPrecio();
-        modelo.addRow(new Object[]{id,nombreProducto,cantidad,categoria,precio});
-        }
-    }}catch(Exception e){
-    JOptionPane.showMessageDialog(null, "Error de tipo "+e);
-    
-    }
-  
-        
+
+
     }//GEN-LAST:event_jbuscarActionPerformed
 
     private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
-    try{
-        int fila=jTable1.getSelectedRow();
-        int id=(int) jTable1.getValueAt(fila, 0);
-        String nNombre=jTable1.getValueAt(fila, 1).toString();
-        int nCantidad=Integer.parseInt(jTable1.getValueAt(fila, 2).toString());
-        double precion=Double.parseDouble(jTable1.getValueAt(fila, 4).toString());
-        String nCategoria=c.getSelectedItem().toString();
-        ProductoData pd=new ProductoData();
-        List<Producto> lista=pd.obtenerProductos();
-      int idcategoria = 0;
+        try {
+            int fila = jTable1.getSelectedRow();
+            int id = (int) jTable1.getValueAt(fila, 0);
+            String nNombre = jTable1.getValueAt(fila, 1).toString();
+            int nCantidad = Integer.parseInt(jTable1.getValueAt(fila, 2).toString());
+            double precion = Double.parseDouble(jTable1.getValueAt(fila, 4).toString());
+            String nCategoria = c.getSelectedItem().toString();
+            ProductoData pd = new ProductoData();
+            List<Producto> lista = pd.obtenerProductos();
+            int idcategoria = 0;
             if (nCategoria.equalsIgnoreCase("BEBIDA NA")) {
                 idcategoria = 4;
             } else if (nCategoria.equalsIgnoreCase("COMIDA")) {
@@ -225,26 +228,25 @@ DefaultTableModel modelo=new DefaultTableModel();
             } else if (nCategoria.equalsIgnoreCase("BEBIDA")) {
                 idcategoria = 6;
             }
-            
-        for (Producto producto : lista) {
-           
-            System.out.println(id);
-            if(producto!=null && id==producto.getIdProducto()){
-           producto.setNombre(nNombre);
-            producto.setCantidad(nCantidad);
-            producto.setPrecio(precion);
-            
+
+            for (Producto producto : lista) {
+
+                System.out.println(id);
+                if (producto != null && id == producto.getIdProducto()) {
+                    producto.setNombre(nNombre);
+                    producto.setCantidad(nCantidad);
+                    producto.setPrecio(precion);
+
                     if (!producto.getCategoria().equals(nCategoria)) {
                         Categoria cate = new Categoria(idcategoria, nCategoria);
                         producto.setCategoria(cate);
                     }
-            pd.modificarProducto(producto);
+                    pd.modificarProducto(producto);
+                }
+
             }
-          
-            
-        }
-            }catch(Exception e){
-        JOptionPane.showMessageDialog(null, "Error Exception "+e);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error Exception " + e);
         }
 
     }//GEN-LAST:event_jModificarActionPerformed
@@ -268,35 +270,46 @@ DefaultTableModel modelo=new DefaultTableModel();
     private javax.swing.JTextField jprecioA;
     private javax.swing.JTextField jprecioB;
     // End of variables declaration//GEN-END:variables
-public void cabecera(){
-    
- modelo.addColumn("id");
- modelo.addColumn("Nombre");
- modelo.addColumn("Cantidad");
- modelo.addColumn("Categoria");
- modelo.addColumn("Precio");
- jTable1.setModel(modelo);
-}
- 
-    private void boxTable() {
+public void cabecera() {
 
-        String dato[] = {"COMIDA", "BEBIDA", "BEBIDA NA"};
-        for (String dato1 : dato) {
-            c.addItem(dato1);
-        }
-        jTable1.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(c));
+        modelo.addColumn("id");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("Categoria");
+        modelo.addColumn("Precio");
+        jTable1.setModel(modelo);
     }
 
-
-
     
+
+    public void mostrar() {
+        try {
+            modelo.setRowCount(0);
+            ProductoData pd = new ProductoData();
+            List<Producto> lista = pd.obtenerProductos();
+            for (Producto producto : lista) {
+                if (producto != null) {
+                    int id = producto.getIdProducto();
+                    String nombreProducto = producto.getNombre();
+                    int cantidad = producto.getCantidad();
+                    String categoria = producto.getCategoria().getCategoria();
+                    double precio = producto.getPrecio();
+                    modelo.addRow(new Object[]{id, nombreProducto, cantidad, categoria, precio});
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error de tipo " + e);
+
+        }
+    }
+
     class PanelImagen extends JPanel {
 
         Image imagen;
 
         @Override
         public void paint(Graphics g) {
-            imagen=new ImageIcon(getClass().getResource("/Imagen/Generales.png")).getImage();
+            imagen = new ImageIcon(getClass().getResource("/Imagen/Generales.png")).getImage();
             g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);

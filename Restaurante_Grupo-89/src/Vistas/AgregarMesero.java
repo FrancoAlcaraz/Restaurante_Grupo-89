@@ -28,9 +28,9 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
         this.setContentPane(fondo);
         initComponents();
         num(jDni);
-        num1(jNombre);
+        validarLetra(jNombre);
     }
-      public void num1(JTextField a) {
+      public void validarLetra(JTextField a) {
         a.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();

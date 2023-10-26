@@ -27,7 +27,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PreciosDeProducto extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modelo = new DefaultTableModel();
+    DefaultTableModel modelo = new DefaultTableModel(){
+    public boolean isCellEditable(int f, int c){
+       return false;
+       } 
+    
+    };
     PanelImagen fondo = new PanelImagen();
     JComboBox c = new JComboBox();
 

@@ -412,91 +412,100 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
 //            jcHora.setEnabled(true);
 //            jdFecha.setEnabled(true);
 //        }
-    if (modelo.getRowCount() == 0) {
-        JOptionPane.showMessageDialog(null, "Ingrese productos para su pedido");
-        return;
-    }
+        if (modelo.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Ingrese productos para su pedido");
+            return;
+        }
 
-    Mesa mesa = (Mesa) jcMesa.getSelectedItem();
-    MesaData md = new MesaData();
-    PedidosData pd = new PedidosData();
-    ProductoData prd = new ProductoData();
-    MeseroData med = new MeseroData();
-    String horaStr = (String) jcHora.getSelectedItem();
-    LocalTime hora = LocalTime.parse(horaStr);
-    LocalDate fecha = jdFecha.getDate()
-            .toInstant()
-            .atZone(ZoneId.systemDefault())
-            .toLocalDate();
+        Mesa mesa = (Mesa) jcMesa.getSelectedItem();
+        MesaData md = new MesaData();
+        PedidosData pd = new PedidosData();
+        ProductoData prd = new ProductoData();
+        MeseroData med = new MeseroData();
+        String horaStr = (String) jcHora.getSelectedItem();
+        LocalTime hora = LocalTime.parse(horaStr);
+        LocalDate fecha = jdFecha.getDate().toInstant()
+                .atZone(ZoneId.systemDefault()).toLocalDate();
+        int pedidoReali = 0;
+        int cont = modelo.getRowCount();
+        List<String> productos = new ArrayList<>();
+        List<Integer> cantidades = new ArrayList();
 
-    int cont = modelo.getRowCount();
-    List<String> productos = new ArrayList<>();
-    List<Integer> cantidades = new ArrayList();
+        for (int i = 0; i < cont; i++) {
+            String nombreProducto = (String) modelo.getValueAt(i, 0);
+            int cantidadProducto = (Integer) modelo.getValueAt(i, 1);
+            productos.add(nombreProducto);
+            cantidades.add(cantidadProducto);
+        }
 
-    for (int i = 0; i < cont; i++) {
-        String nombreProducto = (String) modelo.getValueAt(i, 0);
-        int cantidadProducto = (Integer) modelo.getValueAt(i, 1);
-        productos.add(nombreProducto);
-        cantidades.add(cantidadProducto);
-    }
+        Mesa mesaSeleccionada = md.ObtenerMesaxID(mesa.getIdMesa());
 
-    Mesa mesaSeleccionada = md.ObtenerMesaxID(mesa.getIdMesa());
+        if (mesaSeleccionada == null || !mesaSeleccionada.isEstado()) {
+            JOptionPane.showMessageDialog(null, "La mesa no está disponible.");
+            return;
+        }
 
-    if (mesaSeleccionada == null || !mesaSeleccionada.isEstado()) {
-        JOptionPane.showMessageDialog(null, "La mesa no está disponible.");
-        return;
-    }
-
-    List<Pedidos> listaPedidos = pd.ListarPedidos();
-    int nroPedido = listaPedidos.isEmpty() ? 1 : listaPedidos.get(listaPedidos.size() - 1).getNroPedido() + 1;
-
-    for (int i = 0; i < productos.size(); i++) {
-        String nomP = productos.get(i);
-        int cantidadProducto = cantidades.get(i);
-
-        List<Producto> productosEncontrados = prd.obtenerProductosxNombre(nomP);
-        if (!productosEncontrados.isEmpty()) {
-            Producto producto = productosEncontrados.get(0);
+        int nroPedido;
+        List<Pedidos> listaPedidos = pd.ListarPedidos();
+        if (listaPedidos.isEmpty()) {
+            nroPedido = 1;
+        } else {
+            int ultimoNroPedido = listaPedidos.get(listaPedidos.size() - 1).getNroPedido();
+            nroPedido = ultimoNroPedido + 1;
 
             // Verificar si la mesa está ocupada en la fecha y hora especificadas.
-            boolean mesaOcupada = false;
             for (Pedidos pedido : listaPedidos) {
                 if (pedido.getMesa().equals(mesaSeleccionada) && pedido.getFecha().equals(fecha) && pedido.getHora().equals(hora)) {
-                    mesaOcupada = true;
-                    break; // La mesa ya está ocupada, no es necesario seguir buscando.
+                    JOptionPane.showMessageDialog(null, "La mesa seleccionada está ocupada en la fecha y hora especificadas, seleccione otra.");
+                    return;
                 }
             }
 
-            if (mesaOcupada) {
-                JOptionPane.showMessageDialog(null, "La mesa seleccionada está ocupada en la fecha y hora especificadas, seleccione otra.");
-                return;
-            }
+            for (int i = 0; i < productos.size(); i++) {
+                String nomP = productos.get(i);
+                int cantidadProducto = cantidades.get(i);
 
-            if (producto.getCantidad() >= cantidadProducto) {
-                Pedidos pedido = new Pedidos(producto, med.ObtenerMesero(new Random().nextInt(med.obtenerMeseros().size())),
-                        mesaSeleccionada, true, nroPedido, cantidadProducto, fecha, hora);
-                pd.AgregarPedido(pedido);
-                producto.setCantidad(producto.getCantidad() - cantidadProducto);
-                prd.modificarProducto(producto);
-            } else {
-                JOptionPane.showMessageDialog(null, "No hay suficiente cantidad del producto: " + nomP + " en el inventario.");
+                List<Producto> productosEncontrados = prd.obtenerProductosxNombre(nomP);
+                if (!productosEncontrados.isEmpty()) {
+                    Producto producto = productosEncontrados.get(0);
+
+                    if (producto.getCantidad() >= cantidadProducto) {
+                        List<Mesero> meserosDisponibles = med.obtenerMeseros();
+                        if (!meserosDisponibles.isEmpty()) {
+                            int indiceAleatorio = new Random().nextInt(meserosDisponibles.size());
+                            Mesero meseroAsignado = meserosDisponibles.get(indiceAleatorio);
+                            Pedidos pedido = new Pedidos(producto, meseroAsignado,
+                                    mesaSeleccionada, true, nroPedido, cantidadProducto, fecha, hora);
+                            pd.AgregarPedido(pedido); // Agregar el pedido a la base de datos
+                            pedidoReali++;
+                            // Descontar la cantidad del producto en el inventario después de agregar el pedido a la base de datos
+                            producto.setCantidad(producto.getCantidad() - cantidadProducto);
+                            prd.modificarProducto(producto);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No hay meseros disponibles para asignar al pedido.");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No hay suficiente cantidad del producto: " + nomP + " en el inventario.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se encontró el producto: " + nomP);
+                }
+            }
+        }
+        if (pedidoReali > 0) {
+            JOptionPane.showMessageDialog(null, "Su pedido fue agregado");
+            modelo.setRowCount(0);
+            jTabla.setModel(modelo);
+
+            if ((modelo.getRowCount() == 0)) {
+                jtPrecioTotal.setText("0.0");
+                jcMesa.setEnabled(true);
+                jcHora.setEnabled(true);
+                jdFecha.setEnabled(true);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "No se encontró el producto: " + nomP);
+            JOptionPane.showMessageDialog(null, "No se pudo agregar el pedido");
         }
-    }
-
-    JOptionPane.showMessageDialog(null, "Su pedido fue agregado");
-    modelo.setRowCount(0);
-    jTabla.setModel(modelo);
-
-    if ((modelo.getRowCount() == 0)) {
-        jtPrecioTotal.setText("0.0");
-        jcMesa.setEnabled(true);
-        jcHora.setEnabled(true);
-        jdFecha.setEnabled(true);
-    }
-
     }//GEN-LAST:event_jbRealizarPedidoActionPerformed
 
     private void jcProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcProductoActionPerformed

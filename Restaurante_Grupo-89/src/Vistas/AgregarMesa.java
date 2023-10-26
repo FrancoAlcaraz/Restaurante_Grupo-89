@@ -4,16 +4,21 @@ import AccesoADatos.MesaData;
 import Entidades.Mesa;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class AgregarMesa extends javax.swing.JInternalFrame {
 PanelImagen fondo=new PanelImagen();
     public AgregarMesa() {
          this.setContentPane(fondo);   
         initComponents();
+        num(jNumero);
+        num(jcapacidad);
     }
 
     /**
@@ -223,7 +228,18 @@ PanelImagen fondo=new PanelImagen();
         GroupEstado1.clearSelection();
     }
     
+  public void num(JTextField a) {
+        a.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) ) {
+                    e.consume();
+                }
+            }
 
+        });
+
+    }
 
     class PanelImagen extends JPanel {
 

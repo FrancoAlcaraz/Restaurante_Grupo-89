@@ -9,9 +9,12 @@ import AccesoADatos.MeseroData;
 import Entidades.Mesero;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -24,8 +27,33 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
     public AgregarMesero() {
         this.setContentPane(fondo);
         initComponents();
+        num(jDni);
+        num1(jNombre);
     }
+      public void num1(JTextField a) {
+        a.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (Character.isDigit(c)) {
+                    e.consume();
+                }
+            }
 
+        });
+
+    }
+  public void num(JTextField a) {
+        a.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) ) {
+                    e.consume();
+                }
+            }
+
+        });
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

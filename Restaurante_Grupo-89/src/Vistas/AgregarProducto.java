@@ -11,10 +11,13 @@ import Entidades.Categoria;
 import Entidades.Producto;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -25,10 +28,12 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
     PanelImagen fondo = new PanelImagen();
 
     public AgregarProducto() {
-        this.setContentPane(fondo);        
+        this.setContentPane(fondo);
         initComponents();
         cargarcombo();
         cargarProducto();
+        num(jTextPrecio);
+        num(jTextStock);
     }
 
     /**
@@ -285,12 +290,12 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void jproductoAgregadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jproductoAgregadosActionPerformed
-        
+
     }//GEN-LAST:event_jproductoAgregadosActionPerformed
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
         Producto seleccion = (Producto) jproductoAgregados.getSelectedItem();
-       Categoria cat= (Categoria) jcategoria.getSelectedItem();
+        Categoria cat = (Categoria) jcategoria.getSelectedItem();
         if (seleccion != null) {
             int idProducto = seleccion.getIdProducto();
             ProductoData pd = new ProductoData();
@@ -302,57 +307,78 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                     String precio = Double.toString(p.getPrecio());
                     jTextStock.setText(Stock);
                     jTextPrecio.setText(precio);
-                    
-                        }
-                    }
-                
+
+                }
             }
-        
+
+        }
+
     }//GEN-LAST:event_jBuscarActionPerformed
 
     private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
-  try {
-          Producto prods=(Producto) jproductoAgregados.getSelectedItem();
-          if(prods!=null){
-              int idproducto=prods.getIdProducto();
-            String nNombre = jTextNombre.getText();
-            double nprecio = Double.parseDouble(jTextPrecio.getText());
-            int cantidad = Integer.parseInt(jTextStock.getText());
-            String nCategoria = jcategoria.getSelectedItem().toString();
-            ProductoData pd = new ProductoData();
-            List<Producto> lista = pd.obtenerProductos();
-            int idcategoria = 0;
-            if (nCategoria.equalsIgnoreCase("BEBIDA NA")) {
-                idcategoria = 4;
-            } else if (nCategoria.equalsIgnoreCase("COMIDA")) {
-                idcategoria = 5;
-            } else if (nCategoria.equalsIgnoreCase("BEBIDA")) {
-                idcategoria = 6;
+
+        Producto prods = (Producto) jproductoAgregados.getSelectedItem();
+        if (prods != null) {
+            if (jTextNombre.getText().isEmpty() && jTextPrecio.getText().isEmpty() && jTextStock.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No dejes Campos vacios");
+
             }
 
-            for (Producto producto : lista) {           
-                if (producto != null && idproducto==producto.getIdProducto()) {
-                    producto.setNombre(nNombre);
-                    producto.setCantidad(cantidad);
-                    producto.setPrecio(nprecio);
-
-                    if (!producto.getCategoria().equals(nCategoria)) {
-                        Categoria cate = new Categoria(idcategoria, nCategoria);
-                        producto.setCategoria(cate);
-                        
-                    }
-                    pd.modificarProducto(producto);
-                    
+            int idproducto = prods.getIdProducto();
+            String nNombre = jTextNombre.getText();
+            try {
+                double nprecio = Double.parseDouble(jTextPrecio.getText());
+                int cantidad = Integer.parseInt(jTextStock.getText());
+                String nCategoria = jcategoria.getSelectedItem().toString();
+                ProductoData pd = new ProductoData();
+                List<Producto> lista = pd.obtenerProductos();
+                int idcategoria = 0;
+                if (nCategoria.equalsIgnoreCase("BEBIDA NA")) {
+                    idcategoria = 4;
+                } else if (nCategoria.equalsIgnoreCase("COMIDA")) {
+                    idcategoria = 5;
+                } else if (nCategoria.equalsIgnoreCase("BEBIDA")) {
+                    idcategoria = 6;
                 }
 
-            }}
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error Exception " + e);
+                for (Producto producto : lista) {
+                    if (producto != null && idproducto == producto.getIdProducto()) {
+                        producto.setNombre(nNombre);
+                        producto.setCantidad(cantidad);
+                        producto.setPrecio(nprecio);
+
+                        if (!producto.getCategoria().equals(nCategoria)) {
+                            Categoria cate = new Categoria(idcategoria, nCategoria);
+                            producto.setCategoria(cate);
+
+                        }
+                        pd.modificarProducto(producto);
+
+                    }
+
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Error Exception " + e);
+            }
         }
 
 
     }//GEN-LAST:event_jModificarActionPerformed
+    public void num(JTextField a) {
+        a.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) && c != '.') {
+                    e.consume();
+                }if(c=='.'&& jTextPrecio.getText().contains(".")){
+                
+                e.consume();
+                }
+            }
 
+        });
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
@@ -378,7 +404,7 @@ private void cargarcombo() {
         Categoria c = new Categoria();
         List<Categoria> list = cd.listarCategorias();
         for (Categoria cat : list) {
-            
+
             jcategoria.addItem(cat);
             System.out.println(cat.getIdcategoria());
         }
@@ -387,24 +413,24 @@ private void cargarcombo() {
     private void cargarProducto() {
         jproductoAgregados.removeAllItems();
         ProductoData pd = new ProductoData();
-        
+
         List<Producto> list = pd.obtenerProductos();
         for (Producto produ : list) {
             jproductoAgregados.addItem(produ);
         }
     }
-    
+
     class PanelImagen extends JPanel {
-        
+
         Image imagen;
-        
+
         @Override
         public void paint(Graphics g) {
             imagen = new ImageIcon(getClass().getResource("/Imagen/Generales.png")).getImage();
             g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);
-            
+
         }
-    }    
+    }
 }

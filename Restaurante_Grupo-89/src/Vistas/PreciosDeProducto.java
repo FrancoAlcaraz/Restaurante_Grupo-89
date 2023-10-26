@@ -10,12 +10,15 @@ import Entidades.Categoria;
 import Entidades.Producto;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,10 +35,25 @@ public class PreciosDeProducto extends javax.swing.JInternalFrame {
         this.setContentPane(fondo);
         initComponents();
         cabecera();
-        
         mostrar();
+        num(jprecioA);
+        num(jprecioB);
     }
+  public void num(JTextField a) {
+        a.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) && c != '.') {
+                    e.consume();
+                }if(c=='.'&& jprecioA.getText().contains(".")){
+                
+                e.consume();
+                }
+            }
 
+        });
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,7 +73,6 @@ public class PreciosDeProducto extends javax.swing.JInternalFrame {
         jprecioA = new javax.swing.JTextField();
         jprecioB = new javax.swing.JTextField();
         jbuscar = new javax.swing.JButton();
-        jModificar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -99,27 +116,13 @@ public class PreciosDeProducto extends javax.swing.JInternalFrame {
             }
         });
 
-        jModificar.setText("Modificar");
-        jModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jModificarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jbuscar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jModificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                .addGap(49, 482, Short.MAX_VALUE)
+                .addComponent(jButton1)
                 .addGap(43, 43, 43))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +140,9 @@ public class PreciosDeProducto extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
-                        .addComponent(jprecioB, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jprecioB, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(77, 77, 77)
+                        .addComponent(jbuscar)))
                 .addContainerGap(91, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -145,20 +150,17 @@ public class PreciosDeProducto extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbuscar)
-                .addGap(10, 10, 10)
+                .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jprecioA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jprecioB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jprecioB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jModificar))
+                .addComponent(jButton1)
                 .addGap(179, 179, 179))
         );
 
@@ -210,47 +212,6 @@ public class PreciosDeProducto extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jbuscarActionPerformed
 
-    private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
-        try {
-            int fila = jTable1.getSelectedRow();
-            int id = (int) jTable1.getValueAt(fila, 0);
-            String nNombre = jTable1.getValueAt(fila, 1).toString();
-            int nCantidad = Integer.parseInt(jTable1.getValueAt(fila, 2).toString());
-            double precion = Double.parseDouble(jTable1.getValueAt(fila, 4).toString());
-            String nCategoria = c.getSelectedItem().toString();
-            ProductoData pd = new ProductoData();
-            List<Producto> lista = pd.obtenerProductos();
-            int idcategoria = 0;
-            if (nCategoria.equalsIgnoreCase("BEBIDA NA")) {
-                idcategoria = 4;
-            } else if (nCategoria.equalsIgnoreCase("COMIDA")) {
-                idcategoria = 5;
-            } else if (nCategoria.equalsIgnoreCase("BEBIDA")) {
-                idcategoria = 6;
-            }
-
-            for (Producto producto : lista) {
-
-                System.out.println(id);
-                if (producto != null && id == producto.getIdProducto()) {
-                    producto.setNombre(nNombre);
-                    producto.setCantidad(nCantidad);
-                    producto.setPrecio(precion);
-
-                    if (!producto.getCategoria().equals(nCategoria)) {
-                        Categoria cate = new Categoria(idcategoria, nCategoria);
-                        producto.setCategoria(cate);
-                    }
-                    pd.modificarProducto(producto);
-                }
-
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error Exception " + e);
-        }
-
-    }//GEN-LAST:event_jModificarActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
 
@@ -262,7 +223,6 @@ public class PreciosDeProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JButton jModificar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

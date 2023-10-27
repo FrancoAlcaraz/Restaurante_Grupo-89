@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-10-2023 a las 15:56:46
+-- Tiempo de generación: 27-10-2023 a las 17:46:03
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -65,7 +65,8 @@ INSERT INTO `mesa` (`idMesa`, `numero`, `capacidad`, `estado`) VALUES
 (6, 9, 4, 1),
 (7, 20, 6, 1),
 (8, 21, 2, 1),
-(9, 22, 5, 1);
+(9, 22, 5, 1),
+(10, 30, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -87,7 +88,8 @@ CREATE TABLE `mesero` (
 INSERT INTO `mesero` (`idMesero`, `dni`, `nombre`, `estado`) VALUES
 (1, 3698741, 'Julian', 1),
 (2, 1478963, 'Javier', 1),
-(3, 112233, 'Jorgelina', 1);
+(3, 112233, 'Jorgelina', 1),
+(4, 668822, 'Julia', 1);
 
 -- --------------------------------------------------------
 
@@ -103,8 +105,8 @@ CREATE TABLE `pedido` (
   `estado` tinyint(4) NOT NULL,
   `nroPedido` int(60) NOT NULL,
   `cantidadProducto` int(60) NOT NULL,
-  `fecha` date DEFAULT NULL,
-  `hora` time DEFAULT NULL
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -112,24 +114,52 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`idPedido`, `idProducto`, `idMesero`, `idMesa`, `estado`, `nroPedido`, `cantidadProducto`, `fecha`, `hora`) VALUES
-(5, 7, 3, 1, 0, 0, 0, NULL, NULL),
-(6, 6, 3, 1, 1, 1, 0, NULL, NULL),
-(7, 6, 3, 1, 1, 2, 0, NULL, NULL),
-(8, 7, 3, 1, 1, 2, 0, NULL, NULL),
-(9, 7, 3, 1, 1, 2, 0, NULL, NULL),
-(10, 7, 3, 7, 1, 3, 0, NULL, NULL),
-(11, 7, 3, 7, 1, 3, 0, NULL, NULL),
-(12, 7, 3, 1, 1, 4, 0, NULL, NULL),
-(13, 6, 3, 1, 1, 4, 0, NULL, NULL),
-(14, 7, 3, 1, 1, 4, 0, NULL, NULL),
-(15, 7, 3, 1, 0, 5, 0, NULL, NULL),
-(16, 7, 3, 1, 0, 5, 0, NULL, NULL),
-(17, 6, 3, 1, 0, 5, 0, NULL, NULL),
-(18, 7, 3, 1, 1, 6, 0, NULL, NULL),
-(19, 8, 2, 1, 0, 7, 0, NULL, NULL),
-(20, 8, 2, 1, 1, 8, 0, NULL, NULL),
-(21, 10, 2, 1, 1, 8, 0, NULL, NULL),
-(22, 8, 2, 8, 1, 9, 0, NULL, NULL);
+(5, 7, 3, 1, 0, 0, 0, '2023-10-26', '13:00:00'),
+(6, 6, 3, 1, 1, 1, 0, '2023-10-24', '14:00:00'),
+(7, 6, 3, 1, 1, 2, 0, '2023-10-24', '15:00:00'),
+(8, 7, 3, 1, 1, 2, 0, '2023-10-24', '15:00:00'),
+(9, 7, 3, 1, 1, 2, 0, '2023-10-24', '15:00:00'),
+(10, 7, 3, 7, 1, 3, 0, '2023-10-31', '14:00:00'),
+(11, 7, 3, 7, 1, 3, 0, '2023-10-31', '14:00:00'),
+(12, 7, 3, 1, 1, 4, 0, '2023-11-01', '18:00:00'),
+(13, 6, 3, 1, 1, 4, 0, '2023-11-01', '18:00:00'),
+(14, 7, 3, 1, 1, 4, 0, '2023-11-01', '18:00:00'),
+(15, 7, 3, 1, 0, 5, 0, '2023-11-15', '20:00:00'),
+(16, 7, 3, 1, 0, 5, 0, '2023-11-15', '20:00:00'),
+(17, 6, 3, 1, 0, 5, 0, '2023-11-15', '20:00:00'),
+(18, 7, 3, 1, 1, 6, 0, '2023-10-29', '20:00:00'),
+(19, 8, 2, 1, 0, 7, 0, '2023-11-15', '22:00:00'),
+(20, 8, 2, 1, 1, 8, 0, '2023-10-27', '10:00:00'),
+(21, 10, 2, 1, 1, 8, 0, '2023-10-27', '10:00:00'),
+(22, 8, 2, 8, 1, 9, 0, '2023-10-24', '22:00:00'),
+(23, 6, 1, 8, 0, 10, 0, '2023-10-25', '10:00:00'),
+(24, 8, 1, 8, 0, 10, 0, '2023-10-25', '10:00:00'),
+(25, 8, 1, 8, 0, 10, 0, '2023-10-25', '10:00:00'),
+(26, 6, 2, 1, 1, 11, 4, '2023-10-25', '14:00:00'),
+(27, 10, 2, 1, 1, 11, 4, '2023-10-25', '14:00:00'),
+(28, 8, 2, 1, 1, 11, 4, '2023-10-25', '14:00:00'),
+(29, 6, 2, 1, 1, 12, 4, '2023-10-25', '14:00:00'),
+(30, 10, 2, 1, 1, 12, 4, '2023-10-25', '14:00:00'),
+(31, 8, 2, 1, 1, 12, 4, '2023-10-25', '14:00:00'),
+(32, 9, 2, 1, 1, 13, 1, '2023-10-27', '10:00:00'),
+(33, 8, 2, 1, 1, 13, 1, '2023-10-27', '10:00:00'),
+(34, 6, 1, 7, 1, 14, 6, '2023-10-29', '17:00:00'),
+(35, 9, 1, 7, 1, 14, 4, '2023-10-29', '17:00:00'),
+(36, 6, 2, 1, 1, 15, 5, '2023-10-27', '10:00:00'),
+(37, 6, 2, 1, 1, 16, 3, '2023-10-26', '10:00:00'),
+(38, 6, 1, 1, 1, 17, 5, '2023-10-26', '10:00:00'),
+(39, 6, 2, 1, 1, 18, 1, '2023-10-26', '10:00:00'),
+(40, 6, 3, 1, 1, 19, 1, '2023-10-26', '10:00:00'),
+(41, 6, 3, 1, 1, 20, 2, '2023-10-26', '10:00:00'),
+(42, 6, 1, 1, 1, 21, 1, '2023-10-27', '10:00:00'),
+(43, 6, 4, 1, 1, 22, 1, '2023-10-26', '17:00:00'),
+(44, 9, 1, 1, 1, 22, 5, '2023-10-26', '17:00:00'),
+(45, 9, 2, 1, 1, 23, 6, '2023-10-26', '17:00:00'),
+(46, 10, 1, 10, 1, 24, 3, '2023-10-27', '10:00:00'),
+(47, 10, 1, 10, 1, 25, 5, '2023-10-27', '10:00:00'),
+(48, 9, 2, 10, 1, 26, 2, '2023-10-27', '10:00:00'),
+(49, 9, 2, 10, 1, 27, 3, '2023-10-27', '10:00:00'),
+(50, 9, 3, 10, 1, 28, 2, '2023-10-27', '10:00:00');
 
 -- --------------------------------------------------------
 
@@ -142,19 +172,20 @@ CREATE TABLE `producto` (
   `nombre` varchar(60) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `precio` double NOT NULL,
-  `idCategoria` int(11) NOT NULL
+  `idCategoria` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`idProducto`, `nombre`, `cantidad`, `precio`, `idCategoria`) VALUES
-(6, 'Jugo', 20, 600, 4),
-(7, 'Vino', 15, 900, 6),
-(8, 'Pollo', 20, 900, 5),
-(9, 'Pastas', 30, 700, 5),
-(10, 'Hamburguesa', 15, 500, 5);
+INSERT INTO `producto` (`idProducto`, `nombre`, `cantidad`, `precio`, `idCategoria`, `estado`) VALUES
+(6, 'Jugo', 1, 600, 4, 1),
+(7, 'Vino', 15, 900, 6, 1),
+(8, 'Pollo', 20, 900, 5, 1),
+(9, 'Pollo', 20, 900, 5, 1),
+(10, 'Hamburguesa', 7, 500, 5, 1);
 
 --
 -- Índices para tablas volcadas
@@ -210,19 +241,19 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `mesa`
 --
 ALTER TABLE `mesa`
-  MODIFY `idMesa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idMesa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `mesero`
 --
 ALTER TABLE `mesero`
-  MODIFY `idMesero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idMesero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`

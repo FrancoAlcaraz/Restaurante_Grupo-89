@@ -7,20 +7,23 @@ public class Producto {
     private int cantidad;
     private double precio;
     private Categoria categoria;
+    private boolean estado;
 
-    public Producto(int idProducto, String nombre, int cantidad, double precio, Categoria categoria) {
+    public Producto(int idProducto, String nombre, int cantidad, double precio, Categoria categoria, boolean estado) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.precio = precio;
         this.categoria = categoria;
+        this.estado = estado;
     }
 
-    public Producto(String nombre, int cantidad, double precio, Categoria categoria) {
+    public Producto(String nombre, int cantidad, double precio, Categoria categoria, boolean estado) {
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.precio = precio;
         this.categoria = categoria;
+        this.estado = estado;
     }
 
     public Producto() {
@@ -64,6 +67,14 @@ public class Producto {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     @Override

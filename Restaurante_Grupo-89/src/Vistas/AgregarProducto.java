@@ -6,6 +6,7 @@
 package Vistas;
 
 import AccesoADatos.CategoriaData;
+import AccesoADatos.PedidosData;
 import AccesoADatos.ProductoData;
 import Entidades.Categoria;
 import Entidades.Producto;
@@ -14,6 +15,7 @@ import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -54,58 +56,38 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         jTextNombre = new javax.swing.JTextField();
         jTextPrecio = new javax.swing.JTextField();
         jcategoria = new javax.swing.JComboBox<>();
-        jTextStock = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         jproductoAgregados = new javax.swing.JComboBox<>();
         jBuscar = new javax.swing.JButton();
         jModificar = new javax.swing.JButton();
+        jTextStock = new javax.swing.JTextField();
+        jbEliminar = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jrEstado = new javax.swing.JRadioButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Agregar Producto");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nombre:");
         jLabel2.setBorder(new javax.swing.border.MatteBorder(null));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Stock:");
         jLabel3.setBorder(new javax.swing.border.MatteBorder(null));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Precio:");
         jLabel4.setBorder(new javax.swing.border.MatteBorder(null));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Categoria");
         jLabel5.setBorder(new javax.swing.border.MatteBorder(null));
 
-        jTextNombre.setBackground(java.awt.Color.white);
-        jTextNombre.setForeground(new java.awt.Color(0, 0, 0));
-
-        jTextPrecio.setBackground(java.awt.Color.white);
-        jTextPrecio.setForeground(new java.awt.Color(0, 0, 0));
-
-        jcategoria.setBackground(java.awt.Color.white);
-        jcategoria.setForeground(new java.awt.Color(0, 0, 0));
-
-        jTextStock.setBackground(java.awt.Color.white);
-        jTextStock.setForeground(new java.awt.Color(0, 0, 0));
-        jTextStock.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextStockActionPerformed(evt);
-            }
-        });
-
         btnGuardar.setBackground(new java.awt.Color(255, 255, 255));
         btnGuardar.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        btnGuardar.setForeground(new java.awt.Color(0, 0, 0));
         btnGuardar.setText("Guardar");
         btnGuardar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +98,6 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
 
         btnSalir.setBackground(new java.awt.Color(255, 255, 255));
         btnSalir.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        btnSalir.setForeground(new java.awt.Color(0, 0, 0));
         btnSalir.setText("Salir");
         btnSalir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +108,6 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
 
         btnLimpiar.setBackground(new java.awt.Color(255, 255, 255));
         btnLimpiar.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        btnLimpiar.setForeground(new java.awt.Color(0, 0, 0));
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -156,6 +136,15 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
             }
         });
 
+        jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
+
+        jTextField1.setText("Estado:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -170,6 +159,11 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                         .addGap(119, 119, 119)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(35, 35, 35)
@@ -179,23 +173,26 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(54, 54, 54)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(68, 68, 68)
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jcategoria, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextPrecio, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextStock, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jproductoAgregados, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(50, 50, 50)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jTextStock, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jcategoria, javax.swing.GroupLayout.Alignment.LEADING, 0, 182, Short.MAX_VALUE)
+                                    .addComponent(jTextPrecio, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(jrEstado)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jproductoAgregados, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jbEliminar))
                 .addGap(31, 31, 31))
         );
         jPanel1Layout.setVerticalGroup(
@@ -218,9 +215,9 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                         .addGap(14, 14, 14)
                         .addComponent(jBuscar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextStock))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -234,11 +231,16 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(58, 58, 58)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jrEstado))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbEliminar)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(67, 67, 67)
                 .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -257,10 +259,6 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextStockActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextStockActionPerformed
-
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         jTextNombre.setText("");
         jTextPrecio.setText("");
@@ -276,15 +274,16 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         Categoria seleccion = (Categoria) jcategoria.getSelectedItem();
         ProductoData pd = new ProductoData();
-        Categoria ct = new Categoria();
+       
         CategoriaData cd = new CategoriaData();
         if (seleccion != null) {
             int idcategoria = seleccion.getIdcategoria();
-            ct = cd.ObtenerCategoria(idcategoria);
+            Categoria ct = cd.ObtenerCategoria(idcategoria);
             int stock = Integer.parseInt(jTextStock.getText());
             String NombreProducto = jTextNombre.getText();
             double Precio = Double.parseDouble(jTextPrecio.getText());
-            Producto producto = new Producto(NombreProducto, stock, Precio, ct);
+            boolean estado=jrEstado.isSelected();
+            Producto producto = new Producto(NombreProducto, stock, Precio, ct,estado);
             pd.agregarProducto(producto);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -295,7 +294,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
         Producto seleccion = (Producto) jproductoAgregados.getSelectedItem();
-        Categoria cat = (Categoria) jcategoria.getSelectedItem();
+
         if (seleccion != null) {
             int idProducto = seleccion.getIdProducto();
             ProductoData pd = new ProductoData();
@@ -303,23 +302,31 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
             for (Producto p : list) {
                 if (p != null && p.getIdProducto() == idProducto) {
                     jTextNombre.setText(p.getNombre());
-                    String Stock = Integer.toString(p.getCantidad());
+                    String stock = Integer.toString(p.getCantidad());
                     String precio = Double.toString(p.getPrecio());
-                    jTextStock.setText(Stock);
+                    jTextStock.setText(stock);
                     jTextPrecio.setText(precio);
-
+                    Categoria categoriaProducto = p.getCategoria();
+                    DefaultComboBoxModel<Categoria> model
+                            = (DefaultComboBoxModel<Categoria>) jcategoria.getModel();
+                    model.setSelectedItem(categoriaProducto);
+                    boolean est=p.isEstado();
+                    if (est==true){
+                        jrEstado.setSelected(est);
+                    }else{
+                        jrEstado.setSelected(est);
+                        
+                    }
                 }
             }
-
         }
-
     }//GEN-LAST:event_jBuscarActionPerformed
 
     private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
-
         Producto prods = (Producto) jproductoAgregados.getSelectedItem();
         if (prods != null) {
-            if (jTextNombre.getText().isEmpty() && jTextPrecio.getText().isEmpty() && jTextStock.getText().isEmpty()) {
+            if (jTextNombre.getText().isEmpty() && jTextPrecio.getText().isEmpty()
+                    && jTextStock.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "No dejes Campos vacios");
 
             }
@@ -364,15 +371,36 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jModificarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        Producto prod = (Producto) jproductoAgregados.getSelectedItem();
+        if (prod != null) {
+            if (jTextNombre.getText().isEmpty() && jTextPrecio.getText().isEmpty()
+                    && jTextStock.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No dejes Campos vacios");
+            } else {
+                int idProducto = prod.getIdProducto();
+                ProductoData pd = new ProductoData();
+                List<Producto> list = pd.obtenerProductos();
+                for (Producto p : list) {
+                    if (p != null && p.getIdProducto() == idProducto) {
+                        pd.eliminarProducto(idProducto);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
     public void num(JTextField a) {
         a.addKeyListener(new KeyAdapter() {
+            @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
                 if (!Character.isDigit(c) && c != '.') {
                     e.consume();
-                }if(c=='.'&& jTextPrecio.getText().contains(".")){
-                
-                e.consume();
+                }
+                if (c == '.' && jTextPrecio.getText().contains(".")) {
+
+                    e.consume();
                 }
             }
 
@@ -392,19 +420,20 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JButton jModificar;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextNombre;
     private javax.swing.JTextField jTextPrecio;
     private javax.swing.JTextField jTextStock;
+    private javax.swing.JButton jbEliminar;
     private javax.swing.JComboBox<Categoria> jcategoria;
     private javax.swing.JComboBox<Producto> jproductoAgregados;
+    private javax.swing.JRadioButton jrEstado;
     // End of variables declaration//GEN-END:variables
 private void cargarcombo() {
         jcategoria.removeAllItems();
         CategoriaData cd = new CategoriaData();
-        Categoria c = new Categoria();
         List<Categoria> list = cd.listarCategorias();
         for (Categoria cat : list) {
-
             jcategoria.addItem(cat);
             System.out.println(cat.getIdcategoria());
         }
@@ -413,7 +442,6 @@ private void cargarcombo() {
     private void cargarProducto() {
         jproductoAgregados.removeAllItems();
         ProductoData pd = new ProductoData();
-
         List<Producto> list = pd.obtenerProductos();
         for (Producto produ : list) {
             jproductoAgregados.addItem(produ);

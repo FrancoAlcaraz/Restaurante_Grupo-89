@@ -64,7 +64,7 @@ public class MesaData {
 
     public List<Mesa> ObtenerMesas() {
         List<Mesa> mesas = new ArrayList<>();
-        String sql = "SELECT * FROM mesa WHERE estado = 1 ";
+        String sql = "SELECT * FROM mesa ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -74,7 +74,7 @@ public class MesaData {
                 mesa.setNumero(rs.getInt("numero"));
                 mesa.setCapacidad(rs.getInt("capacidad"));
                 mesa.setIdMesa(rs.getInt("idMesa"));
-                mesa.setEstado(true);
+                mesa.setEstado(rs.getBoolean("estado"));
                 mesas.add(mesa);
             }
             ps.close();
@@ -92,9 +92,9 @@ public class MesaData {
             ps.setInt(1, IdMesa);
             int res = ps.executeUpdate();
             if (res > 0) {
-                System.out.println("Mesa Eliminada");
+                JOptionPane.showMessageDialog(null,"Mesa Eliminada");
             } else {
-                System.out.println("Error al eliminar");
+                JOptionPane.showMessageDialog(null,"Error al eliminar");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a eliminar la Mesa " + ex.getMessage());
@@ -102,7 +102,7 @@ public class MesaData {
     }
 
     public void ModificarMesa(Mesa mesa) {
-        String sql = "UPDATE `mesa` SET `numero`=?, `cantidad`=?,`estado`=? WHERE idMesa=?";
+        String sql = "UPDATE `mesa` SET `numero`=?,`capacidad`=?,`estado`=? WHERE idMesa=?";
         PreparedStatement ps = null;
 
         try {
@@ -110,6 +110,7 @@ public class MesaData {
             ps.setInt(1, mesa.getNumero());
             ps.setInt(2, mesa.getCapacidad());
             ps.setBoolean(3, mesa.isEstado());
+            ps.setInt(4, mesa.getIdMesa());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {

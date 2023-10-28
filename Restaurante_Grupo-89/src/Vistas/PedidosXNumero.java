@@ -190,7 +190,6 @@ public class PedidosXNumero extends javax.swing.JInternalFrame {
 
                     if (pedidos.isEstado() == false) {
                         estado = "Pendiente";
-                        jTextField1.setText(String.valueOf(0));
                     } else if (pedidos.isEstado() == true) {
                          precio = pedidos.getProducto().getPrecio() * pedidos.getCantidadProducto();
                        
@@ -198,9 +197,10 @@ public class PedidosXNumero extends javax.swing.JInternalFrame {
                         SimpleDateFormat f=new SimpleDateFormat("dd/MM/yyyy");
                         jFecha.setText(pedidos.getFecha().toString());
                         jHora.setText(pedidos.getHora().toString());
-                        jTextField1.setText(String.valueOf(pr));
+                      
                         estado = "Realizado";
                     }
+                      jTextField1.setText(String.valueOf(pr));
                     modelo.addRow(new Object[]{pedidos.getProducto().getNombre(), pedidos.getProducto().getPrecio(), pedidos.getCantidadProducto(), estado});
 
                 }

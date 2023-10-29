@@ -22,7 +22,7 @@ public class ProductoData {
     CategoriaData ct = new CategoriaData();
 
     public void agregarProducto(Producto producto) {
-        String sql = "INSERT INTO `producto`( `nombre`, `cantidad`, `precio`, `idCategoria` ) "
+        String sql = "INSERT INTO `producto`( `nombre`, `cantidad`, `precio`, `idCategoria`, `estado`) "
                 + "VALUES (?,?,?,?)";
 
         try {
@@ -31,6 +31,7 @@ public class ProductoData {
             ps.setInt(2, producto.getCantidad());
             ps.setDouble(3, producto.getPrecio());
             ps.setObject(4, producto.getCategoria().getIdcategoria());
+            ps.setBoolean(5, producto.isEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -62,6 +63,7 @@ public class ProductoData {
                 producto.setPrecio(rs.getDouble("precio"));
                 Categoria cat = ct.ObtenerCategoria(rs.getInt("idCategoria"));
                 producto.setCategoria(cat);
+                producto.setEstado(rs.getBoolean("estado"));
                 prod.add(producto);
 
             }
@@ -75,7 +77,7 @@ public class ProductoData {
 
     public List<Producto> obtenerProductosXCategoria(int id) {
         ArrayList<Producto> producto = new ArrayList<>();
-        String sql = "SELECT `idProducto`, `nombre`, `cantidad`, `precio`, `idCategoria` FROM `producto` WHERE idCategoria=? ";
+        String sql = "SELECT `idProducto`, `nombre`, `cantidad`, `precio`, `idCategoria`, `estado` FROM `producto` WHERE idCategoria=? ";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -89,6 +91,7 @@ public class ProductoData {
                 produ.setPrecio(rs.getInt("precio"));
                 Categoria cat = ct.ObtenerCategoria(rs.getInt("idCategoria"));
                 produ.setCategoria(cat);
+                produ.setEstado(rs.getBoolean("estado"));
                 producto.add(produ);
             }
             ps.close();
@@ -116,6 +119,7 @@ public class ProductoData {
                 producto.setCantidad(rs.getInt("cantidad"));
                 producto.setPrecio(rs.getDouble("precio"));
                 Categoria cat = ct.ObtenerCategoria(rs.getInt("idCategoria"));
+                producto.setEstado(rs.getBoolean("estado"));
                 producto.setCategoria(cat);
 
             }
@@ -142,6 +146,7 @@ public class ProductoData {
                 producto.setPrecio(rs.getDouble("precio"));
                 Categoria cat = ct.ObtenerCategoria(rs.getInt("idCategoria"));
                 producto.setCategoria(cat);
+                producto.setEstado(rs.getBoolean("estado"));
                 prod.add(producto);
 
             }
@@ -169,6 +174,7 @@ public class ProductoData {
                 producto.setCantidad(rs.getInt("cantidad"));
                 Categoria cat = ct.ObtenerCategoria(rs.getInt("idCategoria"));
                 producto.setCategoria(cat);
+                producto.setEstado(rs.getBoolean("estado"));
                 productos.add(producto);
             }
             ps.close();
@@ -179,7 +185,7 @@ public class ProductoData {
     }
 
     public void modificarProducto(Producto producto) {
-        String sql = "UPDATE producto SET nombre=?, cantidad=?, precio=?, idCategoria=? WHERE idProducto=?";
+        String sql = "UPDATE producto SET nombre=?, cantidad=?, precio=?, idCategoria=?, estado=? WHERE idProducto=?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -187,7 +193,8 @@ public class ProductoData {
             ps.setInt(2, producto.getCantidad());
             ps.setDouble(3, producto.getPrecio());
             ps.setObject(4, producto.getCategoria().getIdcategoria());
-            ps.setInt(5, producto.getIdProducto());
+            ps.setBoolean(5, producto.isEstado());
+            ps.setInt(6, producto.getIdProducto());
 
             ps.executeUpdate();
 

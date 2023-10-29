@@ -125,8 +125,18 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         jTextField1.setText("Estado:");
 
         jrActivo.setText("Activo");
+        jrActivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrActivoActionPerformed(evt);
+            }
+        });
 
         jrDesactivo.setText("Desactivo");
+        jrDesactivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrDesactivoActionPerformed(evt);
+            }
+        });
 
         jproductoAgregados.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -166,14 +176,12 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                             .addComponent(jcategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextPrecio))))
                 .addGap(116, 152, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                        .addComponent(jproductoAgregados, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jproductoAgregados, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31))
         );
         jPanel1Layout.setVerticalGroup(
@@ -181,42 +189,39 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addGap(17, 17, 17)
+                .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextNombre)
                         .addComponent(jproductoAgregados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jModificar))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jModificar)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(13, 13, 13)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)))
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jrActivo))
+                            .addComponent(jrDesactivo)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jrActivo))
-                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jrDesactivo))
-                .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(81, Short.MAX_VALUE))
         );
@@ -243,6 +248,8 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         jTextNombre.setText("");
         jTextPrecio.setText("");
         jTextStock.setText("");
+        jrActivo.setSelected(false);
+        jrDesactivo.setSelected(false);
 
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
@@ -254,17 +261,44 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         Categoria seleccion = (Categoria) jcategoria.getSelectedItem();
         ProductoData pd = new ProductoData();
-       
         CategoriaData cd = new CategoriaData();
-        if (seleccion != null) {
-            int idcategoria = seleccion.getIdcategoria();
-            Categoria ct = cd.ObtenerCategoria(idcategoria);
-            int stock = Integer.parseInt(jTextStock.getText());
-            String NombreProducto = jTextNombre.getText();
-            double Precio = Double.parseDouble(jTextPrecio.getText());
-            boolean estado=jrActivo.isSelected();
-            Producto producto = new Producto(NombreProducto, stock, Precio, ct,estado);
-            pd.agregarProducto(producto);
+        try {
+            if (seleccion != null) {
+                int idcategoria = seleccion.getIdcategoria();
+                Categoria ct = cd.ObtenerCategoria(idcategoria);
+                int stock = Integer.parseInt(jTextStock.getText());
+                String NombreProducto = jTextNombre.getText();
+                double Precio = Double.parseDouble(jTextPrecio.getText());
+                boolean estado = true;
+
+                if (jrActivo.isSelected()) {
+                    estado = true;
+                } else if (jrDesactivo.isSelected()) {
+                    estado = false;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Seleccione el estado del producto");
+                    return;
+                }
+                if (!NombreProducto.matches(".*[a-zA-Z].*")) {
+                    JOptionPane.showMessageDialog(null, "El nombre del producto debe contener al menos una letra.");
+                    return;
+                }
+                List<Producto> nombresProductos = pd.obtenerProductosxNombre(NombreProducto);
+                for (Producto nombre : nombresProductos) {
+                    if (nombre.getNombre().equalsIgnoreCase(NombreProducto)) {
+                        JOptionPane.showMessageDialog(null, "Ya existe un producto con el mismo nombre");
+                        return;
+                    }
+                }
+                Producto producto = new Producto(NombreProducto, stock, Precio, ct, estado);
+                pd.agregarProducto(producto);
+                cargarProducto();
+
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Ingrese valores válidos para Stock y Precio");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error al guardar el producto: " + e.getMessage());
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -273,19 +307,34 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         if (prods != null) {
             if (jTextNombre.getText().isEmpty() && jTextPrecio.getText().isEmpty()
                     && jTextStock.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "No dejes Campos vacios");
-
+                JOptionPane.showMessageDialog(null, "No dejes campos vacíos");
+                return;
             }
-
-            int idproducto = prods.getIdProducto();
-            String nNombre = jTextNombre.getText();
             try {
+                int idproducto = prods.getIdProducto();
+                String nNombre = jTextNombre.getText();
                 double nprecio = Double.parseDouble(jTextPrecio.getText());
                 int cantidad = Integer.parseInt(jTextStock.getText());
                 String nCategoria = jcategoria.getSelectedItem().toString();
+                boolean estado = true;
+
+                if (jrActivo.isSelected()) {
+                    estado = true;
+                } else if (jrDesactivo.isSelected()) {
+                    estado = false;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Seleccione el estado del producto");
+                    return;
+                }
+                if (!nNombre.matches(".*[a-zA-Z].*")) {
+                    JOptionPane.showMessageDialog(null, "El nombre del producto debe contener al menos una letra.");
+                    return;
+                }
+
                 ProductoData pd = new ProductoData();
                 List<Producto> lista = pd.obtenerProductos();
                 int idcategoria = 0;
+
                 if (nCategoria.equalsIgnoreCase("BEBIDA NA")) {
                     idcategoria = 4;
                 } else if (nCategoria.equalsIgnoreCase("COMIDA")) {
@@ -293,60 +342,85 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                 } else if (nCategoria.equalsIgnoreCase("BEBIDA")) {
                     idcategoria = 6;
                 }
-
+                boolean productoEncontrado = false;
+                
                 for (Producto producto : lista) {
                     if (producto != null && idproducto == producto.getIdProducto()) {
                         producto.setNombre(nNombre);
                         producto.setCantidad(cantidad);
                         producto.setPrecio(nprecio);
+                        producto.setEstado(estado);
 
-                        if (!producto.getCategoria().equals(nCategoria)) {
+                        if (!producto.getCategoria().getCategoria().equals(nCategoria)) {
                             Categoria cate = new Categoria(idcategoria, nCategoria);
                             producto.setCategoria(cate);
-
                         }
                         pd.modificarProducto(producto);
-
+                        productoEncontrado = true;
+                        break;
                     }
+                }
 
+                if (!productoEncontrado) {
+                    JOptionPane.showMessageDialog(null, "El producto no existe en la lista");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Producto modificado con éxito.");
+                    cargarProducto();
                 }
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Error Exception " + e);
+                JOptionPane.showMessageDialog(null, "Error al ingresar valores numéricos: " + e.getMessage());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ha ocurrido un error al modificar el producto: " + e.getMessage());
             }
         }
-
-
     }//GEN-LAST:event_jModificarActionPerformed
 
     private void jproductoAgregadosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jproductoAgregadosItemStateChanged
-          Producto seleccion = (Producto) jproductoAgregados.getSelectedItem();
-
-        if (seleccion != null) {
-            int idProducto = seleccion.getIdProducto();
-            ProductoData pd = new ProductoData();
-            List<Producto> list = pd.obtenerProductos();
-            for (Producto p : list) {
-                if (p != null && p.getIdProducto() == idProducto) {
-                    jTextNombre.setText(p.getNombre());
-                    String stock = Integer.toString(p.getCantidad());
-                    String precio = Double.toString(p.getPrecio());
-                    jTextStock.setText(stock);
-                    jTextPrecio.setText(precio);
-                    Categoria categoriaProducto = p.getCategoria();
-                    DefaultComboBoxModel<Categoria> model
-                            = (DefaultComboBoxModel<Categoria>) jcategoria.getModel();
-                    model.setSelectedItem(categoriaProducto);
-                    boolean est=p.isEstado();
-                    if (est==true){
-                        jrActivo.setSelected(est);
-                    }else{
-                        jrActivo.setSelected(est);
-                        
+        try {
+            Producto seleccion = (Producto) jproductoAgregados.getSelectedItem();
+            if (seleccion != null) {
+                int idProducto = seleccion.getIdProducto();
+                ProductoData pd = new ProductoData();
+                List<Producto> list = pd.obtenerProductos();
+                for (Producto p : list) {
+                    if (p != null && p.getIdProducto() == idProducto) {
+                        jTextNombre.setText(p.getNombre());
+                        String stock = Integer.toString(p.getCantidad());
+                        String precio = Double.toString(p.getPrecio());
+                        jTextStock.setText(stock);
+                        jTextPrecio.setText(precio);
+                        Categoria categoriaProducto = p.getCategoria();
+                        DefaultComboBoxModel<Categoria> model
+                                = (DefaultComboBoxModel<Categoria>) jcategoria.getModel();
+                        model.setSelectedItem(categoriaProducto);
+                        boolean est = p.isEstado();
+                        if (est) {
+                            jrActivo.setSelected(true);
+                            jrDesactivo.setSelected(false);
+                        } else {
+                            jrActivo.setSelected(false);
+                            jrDesactivo.setSelected(true);
+                        }
                     }
                 }
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar los datos del producto: " + e.getMessage());
         }
     }//GEN-LAST:event_jproductoAgregadosItemStateChanged
+
+    private void jrActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrActivoActionPerformed
+        if(jrActivo.isSelected()){
+            jrDesactivo.setSelected(false);
+        }
+    }//GEN-LAST:event_jrActivoActionPerformed
+
+    private void jrDesactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrDesactivoActionPerformed
+       if(jrDesactivo.isSelected()){
+            jrActivo.setSelected(false);
+        }
+    }//GEN-LAST:event_jrDesactivoActionPerformed
+
     public void num(JTextField a) {
         a.addKeyListener(new KeyAdapter() {
             @Override

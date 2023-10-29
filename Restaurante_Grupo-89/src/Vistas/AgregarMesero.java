@@ -76,70 +76,47 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jNombre = new javax.swing.JTextField();
-        jActivo = new javax.swing.JRadioButton();
-        inactivo = new javax.swing.JRadioButton();
         jAgregar = new javax.swing.JButton();
         jLimpiar = new javax.swing.JButton();
         jSalir = new javax.swing.JButton();
-        jBuscar = new javax.swing.JButton();
+        modificar = new javax.swing.JButton();
         jComboMesero = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jActivo = new javax.swing.JRadioButton();
+        inactivo = new javax.swing.JRadioButton();
+        jId = new javax.swing.JTextField();
 
         setClosable(true);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Agregar Mesero");
 
         jLabel2.setBackground(java.awt.Color.white);
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Nombre:");
         jLabel2.setBorder(new javax.swing.border.MatteBorder(null));
 
-        jDni.setBackground(java.awt.Color.white);
-        jDni.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jDni.setForeground(new java.awt.Color(0, 0, 0));
+        jDni.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Estado:");
         jLabel3.setBorder(new javax.swing.border.MatteBorder(null));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("DNI:");
         jLabel4.setBorder(new javax.swing.border.MatteBorder(null));
 
-        jNombre.setBackground(java.awt.Color.white);
-        jNombre.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jNombre.setForeground(new java.awt.Color(0, 0, 0));
-
-        btngrupo.add(jActivo);
-        jActivo.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jActivo.setForeground(new java.awt.Color(0, 0, 0));
-        jActivo.setText("Activo");
-
-        btngrupo.add(inactivo);
-        inactivo.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        inactivo.setForeground(new java.awt.Color(0, 0, 0));
-        inactivo.setText("Inactivo");
-        inactivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inactivoActionPerformed(evt);
-            }
-        });
+        jNombre.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
 
         jAgregar.setBackground(java.awt.Color.white);
         jAgregar.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jAgregar.setForeground(new java.awt.Color(0, 0, 0));
         jAgregar.setText("Agregar");
         jAgregar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -150,7 +127,6 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
 
         jLimpiar.setBackground(java.awt.Color.white);
         jLimpiar.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jLimpiar.setForeground(new java.awt.Color(0, 0, 0));
         jLimpiar.setText("Limpiar");
         jLimpiar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -161,7 +137,6 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
 
         jSalir.setBackground(java.awt.Color.white);
         jSalir.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jSalir.setForeground(new java.awt.Color(0, 0, 0));
         jSalir.setText("Salir");
         jSalir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -170,98 +145,108 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
             }
         });
 
-        jBuscar.setText("Buscar");
-        jBuscar.addActionListener(new java.awt.event.ActionListener() {
+        modificar.setBackground(java.awt.Color.white);
+        modificar.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        modificar.setText("Modificar");
+        modificar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBuscarActionPerformed(evt);
+                modificarActionPerformed(evt);
             }
         });
 
-        jComboMesero.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboMeseroActionPerformed(evt);
+        jComboMesero.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jComboMesero.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboMeseroItemStateChanged(evt);
             }
         });
 
-        jButton2.setText("Modificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        jLabel5.setBackground(java.awt.Color.white);
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("ID:");
+        jLabel5.setBorder(new javax.swing.border.MatteBorder(null));
+
+        jActivo.setText("Activo");
+
+        inactivo.setText("Inactivo");
+
+        jId.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(165, 165, 165)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(50, 50, 50)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jActivo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(inactivo))
-                            .addComponent(jDni, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jDni))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jNombre))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jId)))
+                        .addGap(44, 44, 44))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(jActivo)
+                        .addGap(50, 50, 50)
+                        .addComponent(inactivo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(modificar, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                     .addComponent(jComboMesero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(23, 23, 23))
+                .addGap(50, 50, 50))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(227, 227, 227)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(200, 200, 200))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
-                .addComponent(jComboMesero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDni, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(60, 60, 60))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jBuscar)
-                        .addGap(55, 55, 55)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jActivo)
-                        .addComponent(inactivo)))
-                .addGap(24, 24, 24)
+                .addGap(72, 72, 72)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jId)
+                    .addComponent(jComboMesero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDni, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inactivo)
+                    .addComponent(jLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
+                .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -279,52 +264,106 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAgregarActionPerformed
-
         MeseroData ms = new MeseroData();
-        if (jNombre.getText().isEmpty() && jDni.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No dejes campos vacios ");
+        List<Mesero> listaMeseros = ms.obtenerMeseros();
+
+        if (jNombre.getText().isEmpty() || jDni.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No dejes campos vacíos.");
+        } else {
+            if (jId.getText().isEmpty()) {
+                boolean estado = true;
+                String nombre = jNombre.getText();
+                int dni = Integer.parseInt(jDni.getText());
+
+                // Verifica si el DNI ya existe en la lista de Meseros
+                boolean dniExistente = false;
+                for (Mesero mesero : listaMeseros) {
+                    if (mesero.getDni() == dni) {
+                        dniExistente = true;
+                        break;
+                    }
+                }
+
+                if (dniExistente) {
+                    JOptionPane.showMessageDialog(null, "El DNI ya existe en la lista de Meseros.");
+                } else {
+                    if (jActivo.isSelected()) {
+                        estado = true;
+                    } else if (inactivo.isSelected()) {
+                        estado = false;
+                    }
+
+                    Mesero m = new Mesero(dni, nombre, estado);
+                    ms.AgregarMesero(m);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El id se ingresara automatico, deje el campo vacio");
+            }
         }
-        boolean estado = true;
-        String nombre = jNombre.getText();
-        int dni = Integer.parseInt(jDni.getText());
-        if (jActivo.isSelected()) {
-            estado = true;
-        } else if (inactivo.isSelected()) {
-            estado = false;
-        }
-        Mesero m = new Mesero(dni, nombre, estado);
-        ms.AgregarMesero(m);
     }//GEN-LAST:event_jAgregarActionPerformed
 
     private void jSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalirActionPerformed
         dispose();
     }//GEN-LAST:event_jSalirActionPerformed
 
-    private void inactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inactivoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inactivoActionPerformed
-
     private void jLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLimpiarActionPerformed
         jNombre.setText("");
         jDni.setText("");
+        jId.setText("");
         btngrupo.clearSelection();
     }//GEN-LAST:event_jLimpiarActionPerformed
 
-    private void jComboMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboMeseroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboMeseroActionPerformed
+    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+        MeseroData ms = new MeseroData();
+        List<Mesero> meseros = ms.obtenerMeseros();
 
-    private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
+        // Verificar si jId es un número válido
+        try {
+            int id = Integer.parseInt(jId.getText());
+
+            if (jNombre.getText().isEmpty() || jDni.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No dejes campos vacíos.");
+            } else {
+                boolean estado = true;
+                String nombre = jNombre.getText();
+                int dni = Integer.parseInt(jDni.getText());
+
+                boolean encontrado = false; // Variable para verificar si se ha encontrado el Mesero
+                for (Mesero mesero : meseros) {
+                    if (id == mesero.getIdMesero()) {
+                        encontrado = true;
+                        break; // Salir del bucle una vez que se ha encontrado el Mesero
+                    }
+                }
+
+                if (!encontrado) {
+                    JOptionPane.showMessageDialog(null, "No se ha encontrado un Mesero con el ID proporcionado.");
+                } else {
+                    if (jActivo.isSelected()) {
+                        estado = true;
+                    } else if (inactivo.isSelected()) {
+                        estado = false;
+                    }
+                    ms.ModificarMesero(dni, nombre, estado, id);
+                }
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Ingrese un numero de ID valido");
+        }
+    }//GEN-LAST:event_modificarActionPerformed
+
+    private void jComboMeseroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboMeseroItemStateChanged
         Integer dni = jComboMesero.getItemAt(jComboMesero.getSelectedIndex());
         if (dni != null) {
             try {
-               
+
                 MeseroData ms = new MeseroData();
                 List<Mesero> list = ms.obtenerMeseros();
                 for (Mesero mesero1 : list) {
-                    if (mesero1!=null && dni ==mesero1.getDni()) {
+                    if (mesero1 != null && dni == mesero1.getDni()) {
                         jDni.setText(String.valueOf(mesero1.getDni()));
                         jNombre.setText(mesero1.getNombre());
+                        jId.setText(String.valueOf(mesero1.getIdMesero()));
                         if (mesero1.isEstado() == true) {
                             jActivo.setSelected(true);
                         }
@@ -338,11 +377,7 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
             }
 
         }
-    }//GEN-LAST:event_jBuscarActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jComboMeseroItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -350,18 +385,19 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton inactivo;
     private javax.swing.JRadioButton jActivo;
     private javax.swing.JButton jAgregar;
-    private javax.swing.JButton jBuscar;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<Integer> jComboMesero;
     private javax.swing.JTextField jDni;
+    private javax.swing.JTextField jId;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JButton jLimpiar;
     private javax.swing.JTextField jNombre;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jSalir;
+    private javax.swing.JButton modificar;
     // End of variables declaration//GEN-END:variables
 
     public void carcarcombo() {

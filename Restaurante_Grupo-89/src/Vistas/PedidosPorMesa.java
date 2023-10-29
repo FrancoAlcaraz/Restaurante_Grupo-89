@@ -8,7 +8,9 @@ import Entidades.Mesero;
 import Entidades.Pedidos;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -18,7 +20,15 @@ import javax.swing.table.DefaultTableModel;
 
 public class PedidosPorMesa extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modelo = new DefaultTableModel();
+    DefaultTableModel modelo = new DefaultTableModel() {
+    @Override
+    public boolean isCellEditable(int fila, int columna) {
+        if (columna == 4) {
+            return true;  
+        }
+        return false;
+    }
+};
     JComboBox jestado = new JComboBox();
     PanelImagen fondo = new PanelImagen();
 
@@ -28,6 +38,7 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
         CargarCombo();
         cabecera();
         boxEstado();
+        mostrar();
     }
 
     class PanelImagen extends JPanel {
@@ -136,6 +147,11 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
         });
 
         jMesa.setFont(new java.awt.Font("Serif", 0, 11)); // NOI18N
+        jMesa.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jMesaItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -202,128 +218,140 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-      int fila = jTablePorMesa.getSelectedRow();
-    if (fila < 0) {
-        JOptionPane.showMessageDialog(null, "Seleccione el pedido a modificar");
-        return;
-    }
-    PedidosData pd = new PedidosData();
-    boolean est = false;
-    int nropedido = Integer.parseInt(jTablePorMesa.getValueAt(fila, 0).toString());
-
-    // Itera sobre la lista de pedidos para encontrar todos los pedidos con el mismo número de pedido
-    List<Pedidos> lista = pd.ListarPedidos();
-    for (Pedidos pedido : lista) {
-        if (nropedido == pedido.getNroPedido()) {
-            String estado = (String) jestado.getSelectedItem();
-
-            if (estado.equalsIgnoreCase("Realizada")) {
-                est = true;
-            } else if (estado.equalsIgnoreCase("Pendiente")) {
-                est = false;
-            }
-
-            // Modifica el estado de cada pedido con el mismo número de pedido
-            pd.ModificarEstado(est, nropedido );
+        int fila = jTablePorMesa.getSelectedRow();
+        if (fila < 0) {
+            JOptionPane.showMessageDialog(null, "Seleccione el pedido a modificar");
+            return;
         }
-    }
+        PedidosData pd = new PedidosData();
+        boolean est = false;
+        int nropedido = Integer.parseInt(jTablePorMesa.getValueAt(fila, 0).toString());
+
+        // Itera sobre la lista de pedidos para encontrar todos los pedidos con el mismo número de pedido
+        List<Pedidos> lista = pd.ListarPedidos();
+        for (Pedidos pedido : lista) {
+            if (nropedido == pedido.getNroPedido()) {
+                String estado = (String) jestado.getSelectedItem();
+
+                if (estado.equalsIgnoreCase("Realizada")) {
+                    est = true;
+                } else if (estado.equalsIgnoreCase("Pendiente")) {
+                    est = false;
+                }
+
+                // Modifica el estado de cada pedido con el mismo número de pedido
+                pd.ModificarEstado(est, nropedido);
+            }
+        }
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void rbnPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnPendientesActionPerformed
-        Mesa seleccionado = (Mesa) jMesa.getSelectedItem();
-        if (seleccionado != null) {
-            modelo.setRowCount(0);
-            int idmesa = seleccionado.getIdMesa();
-            boolean estado = true;
-            PedidosData pd = new PedidosData();
-
-            List<Pedidos> lista = pd.ListarPedidos();
-            if (rbnPendientes.isSelected()) {
-                estado = false;
-            }
-
-            int nroPedidoProcesado = -1; // Variable para llevar un seguimiento del número de pedido actual
-            double precioTotal = 0.0; // Variable para el precio total de productos en el mismo número de pedido
-            String nombreMesero = ""; // Variable para el nombre del mesero
-            int contadorProductos = 0; // Contador de productos en el pedido actual
-
-            for (Pedidos pedido : lista) {
-                if (pedido != null && pedido.isEstado() == estado && pedido.getMesa().getIdMesa() == idmesa) {
-                    int nroPedido = pedido.getNroPedido();
-                    if (nroPedido != nroPedidoProcesado) {
-                        // Este es un nuevo número de pedido, agrega la información a la tabla y reinicia el contador de productos y el precio total
-                        if (nroPedidoProcesado != -1) {
-                            // Solo agrega el precio total si no es el primer número de pedido
-                            modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, nombreMesero, "Pendiente"});
-                        }
-                        nroPedidoProcesado = nroPedido;
-                        precioTotal = 0.0;
-                        contadorProductos = 0;
-                        nombreMesero = pedido.getMesero().getNombre();
-                    }
-
-                    Double precio = pedido.getProducto().getPrecio();
-                    precioTotal += precio;
-                    contadorProductos++;
-                }
-            }
-
-            // Agrega la última entrada correspondiente al último número de pedido
-            if (nroPedidoProcesado != -1) {
-                modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, nombreMesero, "Pendiente"});
-            }
-        }
+//        Mesa seleccionado = (Mesa) jMesa.getSelectedItem();
+//        if (seleccionado != null) {
+//            modelo.setRowCount(0);
+//            int idmesa = seleccionado.getIdMesa();
+//            boolean estado = true;
+//            PedidosData pd = new PedidosData();
+//
+//            List<Pedidos> lista = pd.ListarPedidos();
+//            if (rbnPendientes.isSelected()) {
+//                estado = false;
+//            }
+//
+//            int nroPedidoProcesado = -1; // Variable para llevar un seguimiento del número de pedido actual
+//            double precioTotal = 0.0; // Variable para el precio total de productos en el mismo número de pedido
+//            String nombreMesero = ""; // Variable para el nombre del mesero
+//            int contadorProductos = 0; // Contador de productos en el pedido actual
+//
+//            for (Pedidos pedido : lista) {
+//                if (pedido != null && pedido.isEstado() == estado && pedido.getMesa().getIdMesa() == idmesa) {
+//                    int nroPedido = pedido.getNroPedido();
+//                    if (nroPedido != nroPedidoProcesado) {
+//                        // Este es un nuevo número de pedido, agrega la información a la tabla y reinicia el contador de productos y el precio total
+//                        if (nroPedidoProcesado != -1) {
+//                            // Solo agrega el precio total si no es el primer número de pedido
+//                            modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, nombreMesero, "Pendiente"});
+//                        }
+//                        nroPedidoProcesado = nroPedido;
+//                        precioTotal = 0.0;
+//                        contadorProductos = 0;
+//                        nombreMesero = pedido.getMesero().getNombre();
+//                    }
+//
+//                    Double precio = pedido.getProducto().getPrecio();
+//                    precioTotal += precio;
+//                    contadorProductos++;
+//                }
+//            }
+//
+//            // Agrega la última entrada correspondiente al último número de pedido
+//            if (nroPedidoProcesado != -1) {
+//                modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, nombreMesero, "Pendiente"});
+//            }
+//        }
+        pendiente();
     }//GEN-LAST:event_rbnPendientesActionPerformed
 
     private void rbnRealizadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnRealizadasActionPerformed
-        Mesa seleccionado = (Mesa) jMesa.getSelectedItem();
-        if (seleccionado != null) {
-            modelo.setRowCount(0);
-            int idmesa = seleccionado.getIdMesa();
-            boolean estado = true;
-            PedidosData pd = new PedidosData();
-
-            List<Pedidos> lista = pd.ListarPedidos();
-            if (rbnRealizadas.isSelected()) {
-                estado = true;
-            }
-
-            int nroPedidoProcesado = -1; // Variable para llevar un seguimiento del número de pedido actual
-            double precioTotal = 0.0; // Variable para el precio total de productos en el mismo número de pedido
-            String NombreMesero = ""; // Variable para el nombre del mesero
-            int contadorProductos = 0; // Contador de productos en el pedido actual
-
-            for (Pedidos pedido : lista) {
-                if (pedido != null && pedido.isEstado() == estado && pedido.getMesa().getIdMesa() == idmesa) {
-                    int nropedido = pedido.getNroPedido();
-                    if (nropedido != nroPedidoProcesado) {
-                        // Este es un nuevo número de pedido, agrega la información a la tabla y reinicia el contador de productos y el precio total
-                        if (nroPedidoProcesado != -1) {
-                            // Solo agrega el precio total si no es el primer número de pedido
-                            modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, NombreMesero, "Realizada"});
-                        }
-                        nroPedidoProcesado = nropedido;
-                        precioTotal = 0.0;
-                        contadorProductos = 0;
-                        NombreMesero = pedido.getMesero().getNombre();
-                    }
-
-                    Double precio = pedido.getProducto().getPrecio();
-                    precioTotal += precio;
-                    contadorProductos++;
-                }
-            }
-
-            // Agrega la última entrada correspondiente al último número de pedido
-            if (nroPedidoProcesado != -1) {
-                modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, NombreMesero, "Realizada"});
-            }
-        }
+//        Mesa seleccionado = (Mesa) jMesa.getSelectedItem();
+//        if (seleccionado != null) {
+//            modelo.setRowCount(0);
+//            int idmesa = seleccionado.getIdMesa();
+//            boolean estado = true;
+//            PedidosData pd = new PedidosData();
+//
+//            List<Pedidos> lista = pd.ListarPedidos();
+//            if (rbnRealizadas.isSelected()) {
+//                estado = true;
+//            }
+//
+//            int nroPedidoProcesado = -1; // Variable para llevar un seguimiento del número de pedido actual
+//            double precioTotal = 0.0; // Variable para el precio total de productos en el mismo número de pedido
+//            String NombreMesero = ""; // Variable para el nombre del mesero
+//            int contadorProductos = 0; // Contador de productos en el pedido actual
+//
+//            for (Pedidos pedido : lista) {
+//                if (pedido != null && pedido.isEstado() == estado && pedido.getMesa().getIdMesa() == idmesa) {
+//                    int nropedido = pedido.getNroPedido();
+//                    if (nropedido != nroPedidoProcesado) {
+//                        // Este es un nuevo número de pedido, agrega la información a la tabla y reinicia el contador de productos y el precio total
+//                        if (nroPedidoProcesado != -1) {
+//                            // Solo agrega el precio total si no es el primer número de pedido
+//                            modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, NombreMesero, "Realizada"});
+//                        }
+//                        nroPedidoProcesado = nropedido;
+//                        precioTotal = 0.0;
+//                        contadorProductos = 0;
+//                        NombreMesero = pedido.getMesero().getNombre();
+//                    }
+//
+//                    Double precio = pedido.getProducto().getPrecio();
+//                    precioTotal += precio;
+//                    contadorProductos++;
+//                }
+//            }
+//
+//            // Agrega la última entrada correspondiente al último número de pedido
+//            if (nroPedidoProcesado != -1) {
+//                modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, NombreMesero, "Realizada"});
+//            }
+//        }
+        realizado();
     }//GEN-LAST:event_rbnRealizadasActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMesaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jMesaItemStateChanged
+        if (rbnRealizadas.isSelected() && !rbnPendientes.isSelected()) {
+        realizado();
+    } else if (rbnPendientes.isSelected() && !rbnRealizadas.isSelected()) {
+        pendiente();
+    } else {
+        mostrar();
+    }
+    }//GEN-LAST:event_jMesaItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -367,4 +395,135 @@ public class PedidosPorMesa extends javax.swing.JInternalFrame {
         jTablePorMesa.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(jestado));
     }
 
+    public void mostrar() {
+        Mesa seleccionado = (Mesa) jMesa.getSelectedItem();
+        if (seleccionado != null) {
+            modelo.setRowCount(0); // Limpia la tabla
+            int idmesa = seleccionado.getIdMesa();
+            PedidosData pd = new PedidosData();
+            List<Pedidos> lista = pd.ListarPedidos();
+
+            int nroPedidoProcesado = -1;
+            double precioTotal = 0.0;
+            String nombreMesero = "";
+            int contadorProductos = 0;
+
+            for (Pedidos pedido : lista) {
+                if (pedido != null && pedido.getMesa().getIdMesa() == idmesa) {
+                    int nroPedido = pedido.getNroPedido();
+                    if (nroPedido != nroPedidoProcesado) {
+                        if (nroPedidoProcesado != -1) {
+                            String estadoPedido = pedido.isEstado() ? "Realizado" : "Pendiente";
+                            modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, nombreMesero, estadoPedido});
+                        }
+                        nroPedidoProcesado = nroPedido;
+                        precioTotal = 0.0;
+                        contadorProductos = 0;
+                        nombreMesero = pedido.getMesero().getNombre();
+                    }
+
+                    Double precio = pedido.getProducto().getPrecio();
+                    precioTotal += precio;
+                    contadorProductos++;
+                }
+            }
+
+            if (nroPedidoProcesado != -1) {
+                String estadoPedido = lista.get(lista.size() - 1).isEstado() ? "Realizado" : "Pendiente";
+                modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, nombreMesero, estadoPedido});
+            }
+        }
+    }
+
+    private void pendiente() {
+       Mesa seleccionado = (Mesa) jMesa.getSelectedItem();
+        if (seleccionado != null) {
+            modelo.setRowCount(0);
+            int idmesa = seleccionado.getIdMesa();
+            boolean estado = true;
+            PedidosData pd = new PedidosData();
+
+            List<Pedidos> lista = pd.ListarPedidos();
+            if (rbnPendientes.isSelected()) {
+                estado = false;
+            }
+
+            int nroPedidoProcesado = -1; // Variable para llevar un seguimiento del número de pedido actual
+            double precioTotal = 0.0; // Variable para el precio total de productos en el mismo número de pedido
+            String nombreMesero = ""; // Variable para el nombre del mesero
+            int contadorProductos = 0; // Contador de productos en el pedido actual
+
+            for (Pedidos pedido : lista) {
+                if (pedido != null && pedido.isEstado() == estado && pedido.getMesa().getIdMesa() == idmesa) {
+                    int nroPedido = pedido.getNroPedido();
+                    if (nroPedido != nroPedidoProcesado) {
+                        // Este es un nuevo número de pedido, agrega la información a la tabla y reinicia el contador de productos y el precio total
+                        if (nroPedidoProcesado != -1) {
+                            // Solo agrega el precio total si no es el primer número de pedido
+                            modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, nombreMesero, "Pendiente"});
+                        }
+                        nroPedidoProcesado = nroPedido;
+                        precioTotal = 0.0;
+                        contadorProductos = 0;
+                        nombreMesero = pedido.getMesero().getNombre();
+                    }
+
+                    Double precio = pedido.getProducto().getPrecio();
+                    precioTotal += precio;
+                    contadorProductos++;
+                }
+            }
+
+            // Agrega la última entrada correspondiente al último número de pedido
+            if (nroPedidoProcesado != -1) {
+                modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, nombreMesero, "Pendiente"});
+            }
+        }
+    }
+
+    private void realizado() {
+        Mesa seleccionado = (Mesa) jMesa.getSelectedItem();
+        if (seleccionado != null) {
+            modelo.setRowCount(0);
+            int idmesa = seleccionado.getIdMesa();
+            boolean estado = true;
+            PedidosData pd = new PedidosData();
+
+            List<Pedidos> lista = pd.ListarPedidos();
+            if (rbnRealizadas.isSelected()) {
+                estado = true;
+            }
+
+            int nroPedidoProcesado = -1; // Variable para llevar un seguimiento del número de pedido actual
+            double precioTotal = 0.0; // Variable para el precio total de productos en el mismo número de pedido
+            String NombreMesero = ""; // Variable para el nombre del mesero
+            int contadorProductos = 0; // Contador de productos en el pedido actual
+
+            for (Pedidos pedido : lista) {
+                if (pedido != null && pedido.isEstado() == estado && pedido.getMesa().getIdMesa() == idmesa) {
+                    int nropedido = pedido.getNroPedido();
+                    if (nropedido != nroPedidoProcesado) {
+                        // Este es un nuevo número de pedido, agrega la información a la tabla y reinicia el contador de productos y el precio total
+                        if (nroPedidoProcesado != -1) {
+                            // Solo agrega el precio total si no es el primer número de pedido
+                            modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, NombreMesero, "Realizada"});
+                        }
+                        nroPedidoProcesado = nropedido;
+                        precioTotal = 0.0;
+                        contadorProductos = 0;
+                        NombreMesero = pedido.getMesero().getNombre();
+                    }
+
+                    Double precio = pedido.getProducto().getPrecio();
+                    precioTotal += precio;
+                    contadorProductos++;
+                }
+            }
+
+            // Agrega la última entrada correspondiente al último número de pedido
+            if (nroPedidoProcesado != -1) {
+                modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, NombreMesero, "Realizada"});
+            }
+        }
+    }
 }

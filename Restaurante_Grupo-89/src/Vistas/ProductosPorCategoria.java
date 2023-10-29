@@ -21,9 +21,15 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 public class ProductosPorCategoria extends javax.swing.JInternalFrame {
-  PanelImagen fondo=new PanelImagen();
+
+    PanelImagen fondo = new PanelImagen();
     ProductoData pd = new ProductoData();
-    DefaultTableModel modelo = new DefaultTableModel();
+    DefaultTableModel modelo = new DefaultTableModel() {
+        public boolean isCellEditable(int f, int c) {
+            return false;
+        }
+
+    };
     JComboBox c = new JComboBox();
 
     public ProductosPorCategoria() {
@@ -32,6 +38,7 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
         CargarCombos();
         CabeceraLista();
         boxTable();
+        armarTabla();
     }
 
     /**
@@ -49,8 +56,6 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jcategoria = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        btnmodificarLista = new javax.swing.JButton();
-        btnEliminarProd = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 255, 255)));
@@ -90,20 +95,6 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Categoria:");
 
-        btnmodificarLista.setText("Modificar");
-        btnmodificarLista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmodificarListaActionPerformed(evt);
-            }
-        });
-
-        btnEliminarProd.setText("Eliminar");
-        btnEliminarProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarProdActionPerformed(evt);
-            }
-        });
-
         jButton3.setText("Salir");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -111,15 +102,8 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(btnmodificarLista)
-                        .addGap(164, 164, 164)
-                        .addComponent(btnEliminarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(67, 67, 67)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(89, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -147,11 +131,7 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnmodificarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addContainerGap())
         );
@@ -174,80 +154,8 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
         armarTabla();
     }//GEN-LAST:event_jcategoriaActionPerformed
 
-    private void btnmodificarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarListaActionPerformed
-        int fila = jlistaCategoria.getSelectedRow();
-        String nNombre = jlistaCategoria.getValueAt(fila, 1).toString();
-        int nCantidad = Integer.parseInt(jlistaCategoria.getValueAt(fila, 2).toString());
-        double nPrecio = Double.parseDouble(jlistaCategoria.getValueAt(fila, 3).toString());
-        String nCategoria = c.getSelectedItem().toString();
-        if (nNombre.isEmpty() || nCantidad == -1 || nPrecio < -1 || nCategoria.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Complete los cambpos a modificar");
-            return;
-        }
-        try {
-            if (fila == -1) {
-                JOptionPane.showMessageDialog(null, "Seleccione el producto que desea modificar");
-                return;
-            }
-
-            Categoria cat = (Categoria) jcategoria.getSelectedItem();
-            if (cat == null) {
-                JOptionPane.showMessageDialog(null, "Seleccione una categoría válida");
-                return;
-            }
-
-            int idcategoria = 0;
-            if (nCategoria.equalsIgnoreCase("BEBIDA NA")) {
-                idcategoria = 4;
-            } else if (nCategoria.equalsIgnoreCase("COMIDA")) {
-                idcategoria = 5;
-            } else if (nCategoria.equalsIgnoreCase("BEBIDA")) {
-                idcategoria = 6;
-            }
-
-            int id = (int) jlistaCategoria.getValueAt(fila, 0);
-            for (Producto producto : pd.obtenerProductos()) {
-                if (producto.getIdProducto() == id) {
-
-                    producto.setNombre(nNombre);
-                    producto.setCantidad(nCantidad);
-                    producto.setPrecio(nPrecio);
-
-                    if (!producto.getCategoria().equals(nCategoria)) {
-                        Categoria cate = new Categoria(idcategoria, nCategoria);
-                        producto.setCategoria(cate);
-                    }
-
-                    pd.modificarProducto(producto);
-
-                    armarTabla();
-                    break;
-                }
-            }
-        } catch (NumberFormatException nf) {
-            JOptionPane.showMessageDialog(this, "Ingrese correctamente los datos");
-        }
-
-    }//GEN-LAST:event_btnmodificarListaActionPerformed
-
-    private void btnEliminarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProdActionPerformed
-        int filaseleccionada = jlistaCategoria.getSelectedRow();
-        List<Producto> pr = new ArrayList<>(pd.obtenerProductos());
-        if (filaseleccionada != -1) {
-            int idproducto = -1;
-            for (Producto producto : pr) {
-                idproducto = producto.getIdProducto();
-            }
-            if (idproducto != -1) {
-                pd.eliminarProducto(idproducto);
-            }
-        }
-    }//GEN-LAST:event_btnEliminarProdActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEliminarProd;
-    private javax.swing.JButton btnmodificarLista;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -302,14 +210,14 @@ public class ProductosPorCategoria extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-        class PanelImagen extends JPanel {
+
+    class PanelImagen extends JPanel {
 
         Image imagen;
 
         @Override
         public void paint(Graphics g) {
-            imagen=new ImageIcon(getClass().getResource("/Imagen/Generales.png")).getImage();
+            imagen = new ImageIcon(getClass().getResource("/Imagen/Generales.png")).getImage();
             g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);

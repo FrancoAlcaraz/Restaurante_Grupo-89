@@ -187,8 +187,15 @@ public class PedidosXNumero extends javax.swing.JInternalFrame {
             double pr=0.0;
             for (Pedidos pedidos : lista) {
                 if (pedidos != null && pedidos.getNroPedido() == numero) {
+                    precio = pedidos.getProducto().getPrecio() * pedidos.getCantidadProducto();
+                       
+                        pr += precio;
+                        SimpleDateFormat g=new SimpleDateFormat("dd/MM/yyyy");
+                        jFecha.setText(pedidos.getFecha().toString());
+                        jHora.setText(pedidos.getHora().toString());
 
                     if (pedidos.isEstado() == false) {
+                        
                         estado = "Pendiente";
                     } else if (pedidos.isEstado() == true) {
                          precio = pedidos.getProducto().getPrecio() * pedidos.getCantidadProducto();

@@ -83,12 +83,8 @@ public class PedidosData {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setBoolean(1, estado);
             ps.setInt(2, nroPedido);
-            int exito = ps.executeUpdate();
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Estado del Pedido Modificado Exitosamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "El Pedido no existe");
-            }
+            ps.executeUpdate();
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de pedidos generales " + ex.getMessage());
         }

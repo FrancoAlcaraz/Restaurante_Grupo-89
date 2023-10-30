@@ -9,10 +9,14 @@ import AccesoADatos.MeseroData;
 import AccesoADatos.PedidosData;
 import Entidades.Mesero;
 import Entidades.Pedidos;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,13 +24,37 @@ import javax.swing.table.DefaultTableModel;
  * @author Bel
  */
 public class PedidosPorMesero extends javax.swing.JInternalFrame {
-    DefaultTableModel modelo = new DefaultTableModel();
+    DefaultTableModel modelo = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int fila, int columna) {
+            if (columna == 4) {
+                return true;
+            }
+            return false;
+        }
+    };
     JComboBox jestado = new JComboBox();
-    /**
-     * Creates new form PedidosPorMesero
-     */
+    PanelImagen fondo = new PanelImagen();
+
     public PedidosPorMesero() {
         initComponents();
+        CargarCombo();
+        cabecera();
+        boxEstado();
+        mostrar();
+    }
+    
+    class PanelImagen extends JPanel {
+
+        Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+            imagen = new ImageIcon(getClass().getResource("/Imagen/Generales.png")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
     }
 
     /**
@@ -38,17 +66,24 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        rbnGrouppedidos = new javax.swing.ButtonGroup();
+        jPanel2 = new PanelImagen();
         jMesero = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePorMesa = new javax.swing.JTable();
-        rbnRealizadas = new javax.swing.JRadioButton();
-        rbnPendientes = new javax.swing.JRadioButton();
         jbModificar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        rbnRealizadas = new javax.swing.JRadioButton();
+        rbnPendientes = new javax.swing.JRadioButton();
 
         jMesero.setFont(new java.awt.Font("Serif", 0, 11)); // NOI18N
+        jMesero.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jMeseroItemStateChanged(evt);
+            }
+        });
         jMesero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMeseroActionPerformed(evt);
@@ -75,7 +110,7 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Pedido", "Precio", "Cantidad de Productos", "Mesero", "Estado"
+                "Pedido", "Precio", "Cantidad de Productos", "Mesa", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -90,24 +125,6 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
         jTablePorMesa.setSelectionBackground(new java.awt.Color(255, 153, 153));
         jTablePorMesa.setSelectionForeground(new java.awt.Color(255, 204, 204));
         jScrollPane1.setViewportView(jTablePorMesa);
-
-        rbnRealizadas.setBackground(new java.awt.Color(255, 255, 255));
-        rbnRealizadas.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
-        rbnRealizadas.setText("Pedidos Realizados");
-        rbnRealizadas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbnRealizadasActionPerformed(evt);
-            }
-        });
-
-        rbnPendientes.setBackground(new java.awt.Color(255, 255, 255));
-        rbnPendientes.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
-        rbnPendientes.setText("Pedidos Pendientes");
-        rbnPendientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbnPendientesActionPerformed(evt);
-            }
-        });
 
         jbModificar.setBackground(new java.awt.Color(255, 255, 255));
         jbModificar.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
@@ -129,150 +146,91 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        rbnRealizadas.setBackground(new java.awt.Color(255, 255, 255));
+        rbnGrouppedidos.add(rbnRealizadas);
+        rbnRealizadas.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        rbnRealizadas.setText("Pedidos Realizados");
+        rbnRealizadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbnRealizadasActionPerformed(evt);
+            }
+        });
+
+        rbnPendientes.setBackground(new java.awt.Color(255, 255, 255));
+        rbnGrouppedidos.add(rbnPendientes);
+        rbnPendientes.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        rbnPendientes.setText("Pedidos Pendientes");
+        rbnPendientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbnPendientesActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jbModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(496, 496, 496)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(205, 205, 205)
+                                .addComponent(jLabel1)))
+                        .addGap(31, 31, 31))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel2)
                         .addGap(35, 35, 35)
                         .addComponent(jMesero, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rbnRealizadas)
                         .addGap(20, 20, 20)
-                        .addComponent(rbnPendientes)
-                        .addGap(30, 30, 30))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(255, 255, 255)
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(rbnPendientes)))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jMesero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rbnRealizadas)
-                    .addComponent(rbnPendientes))
-                .addGap(47, 47, 47)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rbnRealizadas)
+                        .addComponent(rbnPendientes)))
+                .addGap(40, 40, 40)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
         );
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void rbnRealizadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnRealizadasActionPerformed
-        Mesero seleccionado = (Mesero) jMesero.getSelectedItem();
-        if (seleccionado != null) {
-            modelo.setRowCount(0);
-            int idmesero = seleccionado.getIdMesero();
-            boolean estado = true;
-            PedidosData pd = new PedidosData();
-
-            List<Pedidos> lista = pd.ListarPedidos();
-            if (rbnRealizadas.isSelected()) {
-                estado = true;
-            }
-
-            int nroPedidoProcesado = -1; // Variable para llevar un seguimiento del número de pedido actual
-            double precioTotal = 0.0; // Variable para el precio total de productos en el mismo número de pedido
-            int NroMesa = 0; // Variable para el nombre del mesero
-            int contadorProductos = 0; // Contador de productos en el pedido actual
-
-            for (Pedidos pedido : lista) {
-                if (pedido != null && pedido.isEstado() == estado && pedido.getMesa().getIdMesa() == idmesero) {
-                    int nropedido = pedido.getNroPedido();
-                    if (nropedido != nroPedidoProcesado) {
-                        // Este es un nuevo número de pedido, agrega la información a la tabla y reinicia el contador de productos y el precio total
-                        if (nroPedidoProcesado != -1) {
-                            // Solo agrega el precio total si no es el primer número de pedido
-                            modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, NroMesa, "Realizada"});
-                        }
-                        nroPedidoProcesado = nropedido;
-                        precioTotal = 0.0;
-                        contadorProductos = 0;
-                        NroMesa = pedido.getMesa().getNumero();
-                    }
-
-                    Double precio = pedido.getProducto().getPrecio();
-                    precioTotal += precio;
-                    contadorProductos++;
-                }
-            }
-
-            // Agrega la última entrada correspondiente al último número de pedido
-            if (nroPedidoProcesado != -1) {
-                modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, NroMesa, "Realizada"});
-            }
-        }
-    }//GEN-LAST:event_rbnRealizadasActionPerformed
-
-    private void rbnPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnPendientesActionPerformed
-        Mesero seleccionado = (Mesero) jMesero.getSelectedItem();
-        if (seleccionado != null) {
-            modelo.setRowCount(0);
-            int idmesa = seleccionado.getIdMesero();
-            boolean estado = true;
-            PedidosData pd = new PedidosData();
-
-            List<Pedidos> lista = pd.ListarPedidos();
-            if (rbnPendientes.isSelected()) {
-                estado = false;
-            }
-
-            int nroPedidoProcesado = -1; // Variable para llevar un seguimiento del número de pedido actual
-            double precioTotal = 0.0; // Variable para el precio total de productos en el mismo número de pedido
-            String nombreMesero = ""; // Variable para el nombre del mesero
-            int contadorProductos = 0; // Contador de productos en el pedido actual
-
-            for (Pedidos pedido : lista) {
-                if (pedido != null && pedido.isEstado() == estado && pedido.getMesa().getIdMesa() == idmesa) {
-                    int nroPedido = pedido.getNroPedido();
-                    if (nroPedido != nroPedidoProcesado) {
-                        // Este es un nuevo número de pedido, agrega la información a la tabla y reinicia el contador de productos y el precio total
-                        if (nroPedidoProcesado != -1) {
-                            // Solo agrega el precio total si no es el primer número de pedido
-                            modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, nombreMesero, "Pendiente"});
-                        }
-                        nroPedidoProcesado = nroPedido;
-                        precioTotal = 0.0;
-                        contadorProductos = 0;
-                        nombreMesero = pedido.getMesero().getNombre();
-                    }
-
-                    Double precio = pedido.getProducto().getPrecio();
-                    precioTotal += precio;
-                    contadorProductos++;
-                }
-            }
-
-            // Agrega la última entrada correspondiente al último número de pedido
-            if (nroPedidoProcesado != -1) {
-                modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, nombreMesero, "Pendiente"});
-            }
-        }
-    }//GEN-LAST:event_rbnPendientesActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
         int fila = jTablePorMesa.getSelectedRow();
@@ -284,7 +242,6 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
         boolean est = false;
         int nropedido = Integer.parseInt(jTablePorMesa.getValueAt(fila, 0).toString());
 
-        // Itera sobre la lista de pedidos para encontrar todos los pedidos con el mismo número de pedido
         List<Pedidos> lista = pd.ListarPedidos();
         for (Pedidos pedido : lista) {
             if (nropedido == pedido.getNroPedido()) {
@@ -300,6 +257,7 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
                 pd.ModificarEstado(est, nropedido );
             }
         }
+        JOptionPane.showMessageDialog(null, "El estado del pedido se ha modificado correctamente.");
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -310,15 +268,35 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMeseroActionPerformed
 
+    private void jMeseroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jMeseroItemStateChanged
+        if (rbnRealizadas.isSelected() && !rbnPendientes.isSelected()) {
+            realizado();
+        } else if (rbnPendientes.isSelected() && !rbnRealizadas.isSelected()) {
+            pendiente();
+        } else {
+            mostrar();
+        }
+    }//GEN-LAST:event_jMeseroItemStateChanged
+
+    private void rbnRealizadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnRealizadasActionPerformed
+        realizado();
+    }//GEN-LAST:event_rbnRealizadasActionPerformed
+
+    private void rbnPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnPendientesActionPerformed
+        pendiente();
+    }//GEN-LAST:event_rbnPendientesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JComboBox<Mesero> jMesero;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePorMesa;
     private javax.swing.JButton jbModificar;
+    private javax.swing.ButtonGroup rbnGrouppedidos;
     private javax.swing.JRadioButton rbnPendientes;
     private javax.swing.JRadioButton rbnRealizadas;
     // End of variables declaration//GEN-END:variables
@@ -342,5 +320,138 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
         jestado.addItem(estado[0]);
         jestado.addItem(estado[1]);
         jTablePorMesa.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(jestado));
+    }
+    
+    private void CargarCombo() {
+        MeseroData md = new MeseroData();
+        List<Mesero> lista = md.obtenerMeseros();
+        for (Mesero mesero : lista) {
+            jMesero.addItem(mesero);
+        }
+    }
+    
+    public void mostrar() {
+        Mesero seleccionado = (Mesero) jMesero.getSelectedItem();
+        if (seleccionado != null) {
+            modelo.setRowCount(0);
+            int idmesero = seleccionado.getIdMesero();
+            PedidosData pd = new PedidosData();
+            List<Pedidos> lista = pd.ListarPedidos();
+
+            int nroPedidoProcesado = -1;
+            double precioTotal = 0.0;
+            int NroMesa = 0;
+            int contadorProductos = 0;
+
+            for (Pedidos pedido : lista) {
+                if (pedido != null && pedido.getMesero().getIdMesero() == idmesero) {
+                    int nroPedido = pedido.getNroPedido();
+                    if (nroPedido != nroPedidoProcesado) {
+                        if (nroPedidoProcesado != -1) {
+                            String estadoPedido = pedido.isEstado() ? "Realizado" : "Pendiente";
+                            modelo.addRow(new Object[]{nroPedidoProcesado,
+                                precioTotal, contadorProductos, NroMesa, estadoPedido});
+                        }
+                        nroPedidoProcesado = nroPedido;
+                        precioTotal = 0.0;
+                        contadorProductos = 0;
+                        NroMesa = pedido.getMesa().getNumero();
+                    }
+
+                    Double precio = pedido.getProducto().getPrecio();
+                    precioTotal += precio;
+                    contadorProductos++;
+                }
+            }
+
+            if (nroPedidoProcesado != -1) {
+                String estadoPedido = lista.get(lista.size() - 1).isEstado() ? "Realizado" : "Pendiente";
+                modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal,
+                    contadorProductos, NroMesa, estadoPedido});
+            }
+        }
+    }
+    
+    private void pendiente() {
+        Mesero seleccionado = (Mesero) jMesero.getSelectedItem();
+        if (seleccionado != null) {
+            modelo.setRowCount(0);
+            int idmesa = seleccionado.getIdMesero();
+            boolean estado = true;
+            PedidosData pd = new PedidosData();
+
+            List<Pedidos> lista = pd.ListarPedidos();
+            if (rbnPendientes.isSelected()) {
+                estado = false;
+            }
+
+            int nroPedidoProcesado = -1; 
+            double precioTotal = 0.0; 
+            int NroMesa = 0; 
+            int contadorProductos = 0; 
+
+            for (Pedidos pedido : lista) {
+                if (pedido != null && pedido.isEstado() == estado && pedido.getMesero().getIdMesero() == idmesa) {
+                    int nroPedido = pedido.getNroPedido();
+                    if (nroPedido != nroPedidoProcesado) {
+                        if (nroPedidoProcesado != -1) {
+                            modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, NroMesa, "Pendiente"});
+                        }
+                        nroPedidoProcesado = nroPedido;
+                        precioTotal = 0.0;
+                        contadorProductos = 0;
+                        NroMesa = pedido.getMesa().getNumero();
+                    }
+
+                    Double precio = pedido.getProducto().getPrecio();
+                    precioTotal += precio;
+                    contadorProductos++;
+                }
+            }
+            if (nroPedidoProcesado != -1) {
+                modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, NroMesa, "Pendiente"});
+            }
+        }
+    }
+
+    private void realizado() {
+        Mesero seleccionado = (Mesero) jMesero.getSelectedItem();
+        if (seleccionado != null) {
+            modelo.setRowCount(0);
+            int idmesero = seleccionado.getIdMesero();
+            boolean estado = true;
+            PedidosData pd = new PedidosData();
+
+            List<Pedidos> lista = pd.ListarPedidos();
+            if (rbnRealizadas.isSelected()) {
+                estado = true;
+            }
+            int nroPedidoProcesado = -1; 
+            double precioTotal = 0.0; 
+            int NroMesa = 0;
+            int contadorProductos = 0; 
+
+            for (Pedidos pedido : lista) {
+                if (pedido != null && pedido.isEstado() == estado && pedido.getMesero().getIdMesero() == idmesero) {
+                    int nropedido = pedido.getNroPedido();
+                    if (nropedido != nroPedidoProcesado) {
+                        if (nroPedidoProcesado != -1) {
+                            modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, NroMesa, "Realizada"});
+                        }
+                        nroPedidoProcesado = nropedido;
+                        precioTotal = 0.0;
+                        contadorProductos = 0;
+                        NroMesa = pedido.getMesa().getNumero();
+                    }
+                    
+                    Double precio = pedido.getProducto().getPrecio();
+                    precioTotal += precio;
+                    contadorProductos++;
+                }
+            }
+            if (nroPedidoProcesado != -1) {
+                modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, NroMesa, "Realizada"});
+            }
+        }
     }
 }

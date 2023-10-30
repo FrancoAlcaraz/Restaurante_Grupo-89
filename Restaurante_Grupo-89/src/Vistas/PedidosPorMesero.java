@@ -5,8 +5,10 @@
  */
 package Vistas;
 
+import AccesoADatos.MesaData;
 import AccesoADatos.MeseroData;
 import AccesoADatos.PedidosData;
+import Entidades.Mesa;
 import Entidades.Mesero;
 import Entidades.Pedidos;
 import java.awt.Graphics;
@@ -24,7 +26,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Bel
  */
 public class PedidosPorMesero extends javax.swing.JInternalFrame {
-    DefaultTableModel modelo = new DefaultTableModel(){
+
+    DefaultTableModel modelo = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int fila, int columna) {
             if (columna == 4) {
@@ -43,7 +46,7 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
         boxEstado();
         mostrar();
     }
-    
+
     class PanelImagen extends JPanel {
 
         Image imagen;
@@ -201,12 +204,13 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
                 .addGap(30, 30, 30)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jMesero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(rbnRealizadas)
-                        .addComponent(rbnPendientes)))
+                        .addComponent(rbnPendientes))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jMesero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -254,7 +258,7 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
                 }
 
                 // Modifica el estado de cada pedido con el mismo número de pedido
-                pd.ModificarEstado(est, nropedido );
+                pd.ModificarEstado(est, nropedido);
             }
         }
         JOptionPane.showMessageDialog(null, "El estado del pedido se ha modificado correctamente.");
@@ -300,7 +304,7 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rbnPendientes;
     private javax.swing.JRadioButton rbnRealizadas;
     // End of variables declaration//GEN-END:variables
-    
+
     private void cabecera() {
         modelo.addColumn("Nro Pedido");
         modelo.addColumn("Precio");
@@ -321,7 +325,7 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
         jestado.addItem(estado[1]);
         jTablePorMesa.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(jestado));
     }
-    
+
     private void CargarCombo() {
         MeseroData md = new MeseroData();
         List<Mesero> lista = md.obtenerMeseros();
@@ -329,23 +333,30 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
             jMesero.addItem(mesero);
         }
     }
-    
+
     public void mostrar() {
         Mesero seleccionado = (Mesero) jMesero.getSelectedItem();
         if (seleccionado != null) {
             modelo.setRowCount(0);
             int idmesero = seleccionado.getIdMesero();
             PedidosData pd = new PedidosData();
+            MesaData md = new MesaData();
             List<Pedidos> lista = pd.ListarPedidos();
-
+            List<Mesa> listamesa = md.ObtenerMesas();
             int nroPedidoProcesado = -1;
             double precioTotal = 0.0;
             int NroMesa = 0;
             int contadorProductos = 0;
-
+          int nroPedido =0;
+            
             for (Pedidos pedido : lista) {
+                 for (Mesa mesa : listamesa) {
+                            if (mesa != null && pedido.getMesa().getIdMesa() == mesa.getIdMesa()) {
+                                NroMesa = mesa.getNumero();
+                            }
+
                 if (pedido != null && pedido.getMesero().getIdMesero() == idmesero) {
-                    int nroPedido = pedido.getNroPedido();
+                     nroPedido = pedido.getNroPedido();
                     if (nroPedido != nroPedidoProcesado) {
                         if (nroPedidoProcesado != -1) {
                             String estadoPedido = pedido.isEstado() ? "Realizado" : "Pendiente";
@@ -355,12 +366,15 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
                         nroPedidoProcesado = nroPedido;
                         precioTotal = 0.0;
                         contadorProductos = 0;
-                        NroMesa = pedido.getMesa().getNumero();
+                      
+                        }
+
                     }
 
                     Double precio = pedido.getProducto().getPrecio();
                     precioTotal += precio;
-                    contadorProductos++;
+                    if(nroPedido==nroPedidoProcesado){
+                    contadorProductos++;}
                 }
             }
 
@@ -371,7 +385,7 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     private void pendiente() {
         Mesero seleccionado = (Mesero) jMesero.getSelectedItem();
         if (seleccionado != null) {
@@ -385,10 +399,10 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
                 estado = false;
             }
 
-            int nroPedidoProcesado = -1; 
-            double precioTotal = 0.0; 
-            int NroMesa = 0; 
-            int contadorProductos = 0; 
+            int nroPedidoProcesado = -1;
+            double precioTotal = 0.0;
+            int NroMesa = 0;
+            int contadorProductos = 0;
 
             for (Pedidos pedido : lista) {
                 if (pedido != null && pedido.isEstado() == estado && pedido.getMesero().getIdMesero() == idmesa) {
@@ -426,10 +440,10 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
             if (rbnRealizadas.isSelected()) {
                 estado = true;
             }
-            int nroPedidoProcesado = -1; 
-            double precioTotal = 0.0; 
+            int nroPedidoProcesado = -1;
+            double precioTotal = 0.0;
             int NroMesa = 0;
-            int contadorProductos = 0; 
+            int contadorProductos = 0;
 
             for (Pedidos pedido : lista) {
                 if (pedido != null && pedido.isEstado() == estado && pedido.getMesero().getIdMesero() == idmesero) {
@@ -443,7 +457,7 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
                         contadorProductos = 0;
                         NroMesa = pedido.getMesa().getNumero();
                     }
-                    
+
                     Double precio = pedido.getProducto().getPrecio();
                     precioTotal += precio;
                     contadorProductos++;

@@ -347,37 +347,34 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
             double precioTotal = 0.0;
             int NroMesa = 0;
             int contadorProductos = 0;
-          int nroPedido =0;
-            
+            int nroPedido=0;
             for (Pedidos pedido : lista) {
-                 for (Mesa mesa : listamesa) {
-                            if (mesa != null && pedido.getMesa().getIdMesa() == mesa.getIdMesa()) {
-                                NroMesa = mesa.getNumero();
+                for (Mesa mesa : listamesa) {
+                    if (pedido != null && pedido.getMesero().getIdMesero() == idmesero && mesa != null && pedido.getMesa().getIdMesa() == mesa.getIdMesa()) {
+                         nroPedido = pedido.getNroPedido();
+                        if (nroPedido != nroPedidoProcesado) {
+                            if (nroPedidoProcesado != -1) {
+                                String estadoPedido = pedido.isEstado() ? "Realizado" : "Pendiente";
+                                modelo.addRow(new Object[]{nroPedidoProcesado,
+                                    precioTotal, contadorProductos, NroMesa, estadoPedido});
                             }
+                            nroPedidoProcesado = nroPedido;
+                            precioTotal = 0.0;
+                            contadorProductos = 0;
+                            NroMesa = mesa.getNumero();
 
-                if (pedido != null && pedido.getMesero().getIdMesero() == idmesero) {
-                     nroPedido = pedido.getNroPedido();
-                    if (nroPedido != nroPedidoProcesado) {
-                        if (nroPedidoProcesado != -1) {
-                            String estadoPedido = pedido.isEstado() ? "Realizado" : "Pendiente";
-                            modelo.addRow(new Object[]{nroPedidoProcesado,
-                                precioTotal, contadorProductos, NroMesa, estadoPedido});
                         }
-                        nroPedidoProcesado = nroPedido;
-                        precioTotal = 0.0;
-                        contadorProductos = 0;
-                      
-                        }
+ Double precio = pedido.getProducto().getPrecio();
+                precioTotal += precio;
+                if(nroPedido==nroPedidoProcesado){
+                contadorProductos++;}
+            }
 
                     }
 
-                    Double precio = pedido.getProducto().getPrecio();
-                    precioTotal += precio;
-                    if(nroPedido==nroPedidoProcesado){
-                    contadorProductos++;}
                 }
-            }
 
+               
             if (nroPedidoProcesado != -1) {
                 String estadoPedido = lista.get(lista.size() - 1).isEstado() ? "Realizado" : "Pendiente";
                 modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal,
@@ -403,10 +400,10 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
             double precioTotal = 0.0;
             int NroMesa = 0;
             int contadorProductos = 0;
-
+            int nroPedido = 0;
             for (Pedidos pedido : lista) {
                 if (pedido != null && pedido.isEstado() == estado && pedido.getMesero().getIdMesero() == idmesa) {
-                    int nroPedido = pedido.getNroPedido();
+
                     if (nroPedido != nroPedidoProcesado) {
                         if (nroPedidoProcesado != -1) {
                             modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, NroMesa, "Pendiente"});
@@ -419,7 +416,9 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
 
                     Double precio = pedido.getProducto().getPrecio();
                     precioTotal += precio;
-                    contadorProductos++;
+                    if (nroPedido == nroPedidoProcesado) {
+                        contadorProductos++;
+                    }
                 }
             }
             if (nroPedidoProcesado != -1) {
@@ -444,10 +443,10 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
             double precioTotal = 0.0;
             int NroMesa = 0;
             int contadorProductos = 0;
-
+            int nropedido = 0;
             for (Pedidos pedido : lista) {
                 if (pedido != null && pedido.isEstado() == estado && pedido.getMesero().getIdMesero() == idmesero) {
-                    int nropedido = pedido.getNroPedido();
+                    nropedido = pedido.getNroPedido();
                     if (nropedido != nroPedidoProcesado) {
                         if (nroPedidoProcesado != -1) {
                             modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, NroMesa, "Realizada"});
@@ -460,7 +459,9 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
 
                     Double precio = pedido.getProducto().getPrecio();
                     precioTotal += precio;
-                    contadorProductos++;
+                    if (nropedido == nroPedidoProcesado) {
+                        contadorProductos++;
+                    }
                 }
             }
             if (nroPedidoProcesado != -1) {

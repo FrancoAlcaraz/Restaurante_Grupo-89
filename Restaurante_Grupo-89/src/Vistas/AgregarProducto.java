@@ -502,7 +502,7 @@ private void cargarcombo() {
         List<Categoria> list = cd.listarCategorias();
         for (Categoria cat : list) {
             jcategoria.addItem(cat);
-            System.out.println(cat.getIdcategoria());
+           
         }
     }
 

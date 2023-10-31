@@ -266,7 +266,6 @@ private void combo() {
                 System.out.println(pedido);
                 jnumeros.addItem(pedido);
                 numero = pedido.getNroPedido();
-                System.out.println("Numero"+numero);
                 
             }
         }

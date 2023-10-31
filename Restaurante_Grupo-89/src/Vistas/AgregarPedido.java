@@ -489,7 +489,7 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
             }
         }
         if (pedidoReali > 0) {
-            JOptionPane.showMessageDialog(null, "Su pedido es el numero: "+nroPedido+"");
+            JOptionPane.showMessageDialog(null, "Su pedido es el numero: " + nroPedido + "");
             modelo.setRowCount(0);
             jTabla.setModel(modelo);
 

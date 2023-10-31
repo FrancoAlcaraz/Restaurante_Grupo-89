@@ -284,12 +284,12 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
     private void jmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmodificarActionPerformed
         Mesa mesa = (Mesa) jComboBox1.getSelectedItem();
         if (mesa != null) {
-            if (jNumero.getText().isEmpty() && jcapacidad.getText().isEmpty() && !rbnLibre.isSelected() || !rbnOcupada.isSelected()) {
+            if (jNumero.getText().isEmpty() && jcapacidad.getText().isEmpty() ) {
                 JOptionPane.showMessageDialog(null, "No deje campos vacios al modificar");
             }
             try {
                 
-                boolean estado = true;
+                boolean estado = false;
                 int idmesa = mesa.getIdMesa();
                 int numeroMesa=mesa.getNumero();
                 int nMesa = Integer.parseInt(jNumero.getText());

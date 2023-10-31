@@ -19,10 +19,9 @@ public class MesaData {
     }
 
     public void AgregarMesa(Mesa mesa) {
-        String sql = "INSERT INTO `mesa`( `numero`, `capacidad`, `estado`,`idMesa`) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO `mesa`(`numero`, `capacidad`, `estado`) VALUES (?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(4, mesa.getIdMesa());
             ps.setInt(1, mesa.getNumero());
             ps.setInt(2, mesa.getCapacidad());
             ps.setBoolean(3, mesa.isEstado());
@@ -65,7 +64,7 @@ public class MesaData {
 
     public List<Mesa> ObtenerMesas() {
         List<Mesa> mesas = new ArrayList<>();
-        String sql = "SELECT * FROM mesa ";
+        String sql = "SELECT `idMesa`, `numero`, `capacidad`, `estado` FROM `mesa` ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();

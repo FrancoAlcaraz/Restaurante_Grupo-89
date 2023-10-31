@@ -21,8 +21,8 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
         initComponents();
         combo();
         LimpiarVentanas();
-        num(jNumero);
         num(jcapacidad);
+        num(jNumero);
 
     }
 
@@ -42,11 +42,11 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jNumero = new javax.swing.JTextField();
+        jcapacidad = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jcapacidad = new javax.swing.JTextField();
+        jNumero = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jmodificar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -83,7 +83,7 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
         jLabel3.setText("Numero:");
         jLabel3.setOpaque(true);
 
-        jNumero.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jcapacidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         btnLimpiar.setBackground(java.awt.Color.white);
         btnLimpiar.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
@@ -111,7 +111,7 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Agregar Mesa");
 
-        jcapacidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jNumero.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jComboBox1.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
@@ -163,11 +163,11 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jNumero))
+                                .addComponent(jcapacidad))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jcapacidad)))
+                                .addComponent(jNumero)))
                         .addGap(38, 38, 38)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,7 +194,7 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
                 .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +202,7 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jcapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(rbnOcupada, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,7 +237,7 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         try {
-            if (jNumero.getText().isEmpty() || jcapacidad.getText().isEmpty() || !rbnLibre.isSelected() && !rbnOcupada.isSelected()) {
+            if (jcapacidad.getText().isEmpty() || jNumero.getText().isEmpty() || !rbnLibre.isSelected() && !rbnOcupada.isSelected()) {
                 JOptionPane.showMessageDialog(null, "No deje campos vacíos");
                 return;
             }
@@ -247,20 +247,25 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
 
             MesaData md = new MesaData();
             List<Mesa> m = md.ObtenerMesas();
+            
             if (rbnLibre.isSelected()) {
                 estadoMesa = true;
             } else if (rbnOcupada.isSelected()) {
                 estadoMesa = false;
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione el estado de la Mesa");
+                return;
             }
             for (Mesa mesas : m) {
-                if (numero == mesas.getNumero() && mesas.isEstado() == true) {
-                    estadoMesa = true;
-                    break;
+                if (mesas != null && mesas.getNumero() == numero) {
+                    JOptionPane.showMessageDialog(null, "La Mesa ya Existe");
+                    return;
                 }
 
             }
             Mesa mesa = new Mesa(numero, capacidad, estadoMesa);
             md.AgregarMesa(mesa);
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error: El número no es válido.");
         } catch (Exception e) {
@@ -279,7 +284,7 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
     private void jmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmodificarActionPerformed
         Mesa mesa = (Mesa) jComboBox1.getSelectedItem();
         if (mesa != null) {
-            if (jcapacidad.getText().isEmpty() && jNumero.getText().isEmpty() && !rbnLibre.isSelected() || !rbnOcupada.isSelected()) {
+            if (jNumero.getText().isEmpty() && jcapacidad.getText().isEmpty() && rbnLibre.isSelected()==false || !rbnOcupada.isSelected()==false) {
                 JOptionPane.showMessageDialog(null, "No deje campos vacios al modificar");
             }
             try {
@@ -350,10 +355,9 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rbnOcupada;
     // End of variables declaration//GEN-END:variables
  public void LimpiarVentanas() {
-        jNumero.setText("");
         jcapacidad.setText("");
-        rbnLibre.setSelected(false);
-        rbnOcupada.setSelected(false);
+        jNumero.setText("");
+        GroupEstado1.clearSelection();
     }
 
     public void num(JTextField a) {
@@ -374,6 +378,7 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
         MesaData md = new MesaData();
         List<Mesa> list = md.ObtenerMesas();
         for (Mesa mesa : list) {
+            
             jComboBox1.addItem(mesa);
 
         }

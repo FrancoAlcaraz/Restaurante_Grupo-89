@@ -22,8 +22,7 @@ public class ProductoData {
     CategoriaData ct = new CategoriaData();
 
     public void agregarProducto(Producto producto) {
-        String sql = "INSERT INTO `producto`( `nombre`, `cantidad`, `precio`, `idCategoria`, `estado`) "
-                + "VALUES (?,?,?,?)";
+        String sql = "INSERT INTO `producto`(`nombre`, `cantidad`, `precio`, `idCategoria`, `estado`) VALUES (?,?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

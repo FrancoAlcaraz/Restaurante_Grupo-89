@@ -169,6 +169,11 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
                 jComboMeseroItemStateChanged(evt);
             }
         });
+        jComboMesero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboMeseroActionPerformed(evt);
+            }
+        });
 
         jLabel5.setBackground(java.awt.Color.white);
         jLabel5.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
@@ -412,6 +417,10 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
             jActivo.setSelected(false);
         }
     }//GEN-LAST:event_inactivoActionPerformed
+
+    private void jComboMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboMeseroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboMeseroActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

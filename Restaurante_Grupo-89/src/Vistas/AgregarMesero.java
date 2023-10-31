@@ -89,34 +89,37 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
         setClosable(true);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Agregar Mesero");
 
         jLabel2.setBackground(java.awt.Color.white);
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Nombre:");
-        jLabel2.setBorder(new javax.swing.border.MatteBorder(null));
+        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel2.setOpaque(true);
 
-        jDni.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jDni.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Estado:");
-        jLabel3.setBorder(new javax.swing.border.MatteBorder(null));
+        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel3.setOpaque(true);
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("DNI:");
-        jLabel4.setBorder(new javax.swing.border.MatteBorder(null));
+        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel4.setOpaque(true);
 
-        jNombre.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jNombre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         jAgregar.setBackground(java.awt.Color.white);
-        jAgregar.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jAgregar.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
         jAgregar.setText("Agregar");
         jAgregar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +129,7 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
         });
 
         jLimpiar.setBackground(java.awt.Color.white);
-        jLimpiar.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jLimpiar.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
         jLimpiar.setText("Limpiar");
         jLimpiar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +139,7 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
         });
 
         jSalir.setBackground(java.awt.Color.white);
-        jSalir.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jSalir.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
         jSalir.setText("Salir");
         jSalir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +149,7 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
         });
 
         modificar.setBackground(java.awt.Color.white);
-        modificar.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        modificar.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
         modificar.setText("Modificar");
         modificar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         modificar.addActionListener(new java.awt.event.ActionListener() {
@@ -155,7 +158,7 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
             }
         });
 
-        jComboMesero.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jComboMesero.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
         jComboMesero.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboMeseroItemStateChanged(evt);
@@ -163,16 +166,29 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
         });
 
         jLabel5.setBackground(java.awt.Color.white);
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("ID:");
-        jLabel5.setBorder(new javax.swing.border.MatteBorder(null));
+        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel5.setOpaque(true);
 
+        jActivo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jActivo.setText("Activo");
+        jActivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jActivoActionPerformed(evt);
+            }
+        });
 
+        inactivo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         inactivo.setText("Inactivo");
+        inactivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inactivoActionPerformed(evt);
+            }
+        });
 
-        jId.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jId.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -202,33 +218,33 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
                         .addComponent(jActivo)
                         .addGap(50, 50, 50)
                         .addComponent(inactivo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(modificar, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                     .addComponent(jComboMesero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(50, 50, 50))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(227, 227, 227)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(200, 200, 200))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(223, 223, 223)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(72, 72, 72)
+                .addGap(60, 60, 60)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jId)
                     .addComponent(jComboMesero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -378,6 +394,18 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_jComboMeseroItemStateChanged
+
+    private void jActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jActivoActionPerformed
+        if(jActivo.isSelected()){
+            inactivo.setSelected(false);
+        }
+    }//GEN-LAST:event_jActivoActionPerformed
+
+    private void inactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inactivoActionPerformed
+         if(inactivo.isSelected()){
+            jActivo.setSelected(false);
+        }
+    }//GEN-LAST:event_inactivoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

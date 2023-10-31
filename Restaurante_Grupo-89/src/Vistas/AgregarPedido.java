@@ -75,7 +75,6 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jbRealizarPedido = new javax.swing.JButton();
         jbAgregarProducto = new javax.swing.JButton();
-        jcMesa = new javax.swing.JComboBox<>();
         jcProducto = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jbEliminarProducto = new javax.swing.JButton();
@@ -84,6 +83,9 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
         jcCantidad = new javax.swing.JComboBox<>();
         jdFecha = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
+        jcMesa = new javax.swing.JComboBox<>();
+
+        setClosable(true);
 
         jPanel1.setBackground(java.awt.Color.white);
 
@@ -92,6 +94,7 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
 
         jLabel2.setBackground(java.awt.Color.white);
         jLabel2.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/MesasYSillas.png"))); // NOI18N
         jLabel2.setText("Mesa:");
         jLabel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -100,6 +103,7 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
 
         jLabel3.setBackground(java.awt.Color.white);
         jLabel3.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/hora.png"))); // NOI18N
         jLabel3.setText("Hora:");
         jLabel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -107,6 +111,7 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
 
         jLabel4.setBackground(java.awt.Color.white);
         jLabel4.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/CopaTenedor.png"))); // NOI18N
         jLabel4.setText("Producto:");
         jLabel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -114,6 +119,7 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
 
         jLabel5.setBackground(java.awt.Color.white);
         jLabel5.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Cantidad:");
         jLabel5.setAutoscrolls(true);
         jLabel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -175,14 +181,6 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
             }
         });
 
-        jcMesa.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
-        jcMesa.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jcMesa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcMesaActionPerformed(evt);
-            }
-        });
-
         jcProducto.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
         jcProducto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jcProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -193,6 +191,7 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
 
         jLabel6.setBackground(java.awt.Color.white);
         jLabel6.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel6.setText("Precio total:");
 
         jbEliminarProducto.setBackground(java.awt.Color.white);
@@ -205,7 +204,6 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
             }
         });
 
-        jtPrecioTotal.setBackground(java.awt.Color.white);
         jtPrecioTotal.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
         jtPrecioTotal.setText("0.0");
 
@@ -220,10 +218,14 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
 
         jLabel7.setBackground(java.awt.Color.white);
         jLabel7.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fecha.png"))); // NOI18N
         jLabel7.setText("Fecha:");
         jLabel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel7.setOpaque(true);
+
+        jcMesa.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
+        jcMesa.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -232,29 +234,6 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jcMesa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jcProducto, 0, 201, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel3))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jcHora, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jcCantidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
                         .addGap(3, 3, 3))
@@ -278,7 +257,30 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(251, 251, 251)
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcMesa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel3))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jcHora, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jcCantidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(57, 57, 57))
         );
         jPanel1Layout.setVerticalGroup(
@@ -292,9 +294,9 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                    .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -330,7 +332,8 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarProductoActionPerformed
-        try {if (jcMesa.getSelectedItem() == null || jcProducto.getSelectedItem() == null || jcHora.getSelectedItem() == null || jdFecha.getDate()== null) {
+        try {
+            if (jcMesa.getSelectedItem() == null || jcProducto.getSelectedItem() == null || jcHora.getSelectedItem() == null || jdFecha.getDate() == null) {
                 JOptionPane.showMessageDialog(null, "Seleccione todos los campos");
                 return;
             }
@@ -345,7 +348,7 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Seleccione la cantidad de productos que desea agregar");
                 return;
             }
-            
+
             LocalDate hoy = LocalDate.now();
             LocalTime ahora = LocalTime.now();
             if (fecha.equals(hoy) && hora.isBefore(ahora)) {
@@ -406,101 +409,97 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarProductoActionPerformed
 
     private void jbRealizarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRealizarPedidoActionPerformed
-
-   if (modelo.getRowCount() == 0) {
-        JOptionPane.showMessageDialog(null, "Ingrese productos para su pedido");
-        return;
-    }
-
-    Mesa mesa = (Mesa) jcMesa.getSelectedItem();
-    MesaData md = new MesaData();
-    PedidosData pd = new PedidosData();
-    ProductoData prd = new ProductoData();
-    MeseroData med = new MeseroData();
-    String horaStr = (String) jcHora.getSelectedItem();
-    LocalTime hora = LocalTime.parse(horaStr);
-    LocalDate fecha = jdFecha.getDate().toInstant()
-            .atZone(ZoneId.systemDefault()).toLocalDate();
-    int pedidoReali = 0;
-    int cont = modelo.getRowCount();
-    List<String> productos = new ArrayList<>();
-    List<Integer> cantidades = new ArrayList();
-
-    for (int i = 0; i < cont; i++) {
-        String nombreProducto = (String) modelo.getValueAt(i, 0);
-        int cantidadProducto = (Integer) modelo.getValueAt(i, 1);
-        productos.add(nombreProducto);
-        cantidades.add(cantidadProducto);
-    }
-
-    Mesa mesaSeleccionada = md.ObtenerMesaxID(mesa.getIdMesa());
-
-    if (mesaSeleccionada == null || !mesaSeleccionada.isEstado()) {
-        JOptionPane.showMessageDialog(null, "La mesa no está disponible.");
-        return;
-    }
-
-    int nroPedido;
-    List<Pedidos> listaPedidos = pd.ListarPedidos();
-    if (listaPedidos.isEmpty()) {
-        nroPedido = 1;
-    } else {
-        int ultimoNroPedido = listaPedidos.get(listaPedidos.size() - 1).getNroPedido();
-        nroPedido = ultimoNroPedido + 1;
-
-        // Verificar si la mesa está ocupada en la fecha y hora especificadas.
-        for (Pedidos pedido : listaPedidos) {
-            if (pedido.getMesa().getNumero()==(mesaSeleccionada.getNumero()) && pedido.getFecha().equals(fecha) && pedido.getHora().equals(hora)) {
-                JOptionPane.showMessageDialog(null, "La mesa seleccionada está ocupada en la fecha y hora especificadas, seleccione otra.");
-                return; // No agregar el pedido si la mesa está ocupada en la misma fecha y hora.
-            }
+        if (modelo.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Ingrese productos para su pedido");
+            return;
         }
+        Mesa mesa = (Mesa) jcMesa.getSelectedItem();
+        MesaData md = new MesaData();
+        PedidosData pd = new PedidosData();
+        ProductoData prd = new ProductoData();
+        MeseroData med = new MeseroData();
+        String horaStr = (String) jcHora.getSelectedItem();
+        LocalTime hora = LocalTime.parse(horaStr);
+        LocalDate fecha = jdFecha.getDate().toInstant()
+                .atZone(ZoneId.systemDefault()).toLocalDate();
+        int pedidoReali = 0;
+        int cont = modelo.getRowCount();
+        List<String> productos = new ArrayList<>();
+        List<Integer> cantidades = new ArrayList();
 
-        for (int i = 0; i < productos.size(); i++) {
-            String nomP = productos.get(i);
-            int cantidadProducto = cantidades.get(i);
+        for (int i = 0; i < cont; i++) {
+            String nombreProducto = (String) modelo.getValueAt(i, 0);
+            int cantidadProducto = (Integer) modelo.getValueAt(i, 1);
+            productos.add(nombreProducto);
+            cantidades.add(cantidadProducto);
+        }
+        Mesa mesaSeleccionada = md.ObtenerMesaxID(mesa.getIdMesa());
+        if (mesaSeleccionada == null || !mesaSeleccionada.isEstado()) {
+            JOptionPane.showMessageDialog(null, "La mesa no está disponible.");
+            return;
+        }
+        int nroPedido = 0;
+        List<Pedidos> listaPedidos = pd.ListarPedidos();
+        if (listaPedidos.isEmpty()) {
+            nroPedido = 1;
+        } else {
+            int ultimoNroPedido = listaPedidos.get(listaPedidos.size() - 1).getNroPedido();
+            nroPedido = ultimoNroPedido + 1;
+            boolean mesaOcupada = false;
 
-            List<Producto> productosEncontrados = prd.obtenerProductosxNombre(nomP);
-            if (!productosEncontrados.isEmpty()) {
-                Producto producto = productosEncontrados.get(0);
+            for (Pedidos pedido : listaPedidos) {
+                if (pedido.getMesa().getNumero() == (mesaSeleccionada.getNumero()) && pedido.getFecha().equals(fecha) && pedido.getHora().equals(hora)) {
+                    mesaOcupada = true;
+                    break;
+                }
+            }
+            if (mesaOcupada) {
+                JOptionPane.showMessageDialog(null, "La mesa seleccionada está ocupada en la fecha y hora especificadas, seleccione otra.");
+                return;
+            }
+            for (int i = 0; i < productos.size(); i++) {
+                String nomP = productos.get(i);
+                int cantidadProducto = cantidades.get(i);
 
-                if (producto.getCantidad() >= cantidadProducto) {
-                    List<Mesero> meserosDisponibles = med.obtenerMeseros();
-                    if (!meserosDisponibles.isEmpty()) {
-                        int indiceAleatorio = new Random().nextInt(meserosDisponibles.size());
-                        Mesero meseroAsignado = meserosDisponibles.get(indiceAleatorio);
-                        Pedidos pedido = new Pedidos(producto, meseroAsignado,
-                                mesaSeleccionada, true, nroPedido, cantidadProducto, fecha, hora);
-                        pd.AgregarPedido(pedido); // Agregar el pedido a la base de datos
-                        pedidoReali++;
-                        // Descontar la cantidad del producto en el inventario después de agregar el pedido a la base de datos
-                        producto.setCantidad(producto.getCantidad() - cantidadProducto);
-                        prd.modificarProducto(producto);
+                List<Producto> productosEncontrados = prd.obtenerProductosxNombre(nomP);
+                if (!productosEncontrados.isEmpty()) {
+                    Producto producto = productosEncontrados.get(0);
+                    if (producto.getCantidad() >= cantidadProducto) {
+                        List<Mesero> meserosDisponibles = med.obtenerMeseros();
+                        if (!meserosDisponibles.isEmpty()) {
+                            int indiceAleatorio = new Random().nextInt(meserosDisponibles.size());
+                            Mesero meseroAsignado = meserosDisponibles.get(indiceAleatorio);
+                            Pedidos pedido = new Pedidos(producto, meseroAsignado,
+                                    mesaSeleccionada, true, nroPedido, cantidadProducto, fecha, hora);
+                            pd.AgregarPedido(pedido);
+                            pedidoReali++;
+                            producto.setCantidad(producto.getCantidad() - cantidadProducto);
+                            prd.modificarProducto(producto);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No hay meseros disponibles para asignar al pedido.");
+                        }
                     } else {
-                        JOptionPane.showMessageDialog(null, "No hay meseros disponibles para asignar al pedido.");
+                        JOptionPane.showMessageDialog(null, "No hay suficiente cantidad del producto: " + nomP + " en el inventario.");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "No hay suficiente cantidad del producto: " + nomP + " en el inventario.");
+                    JOptionPane.showMessageDialog(null, "No se encontró el producto: " + nomP);
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontró el producto: " + nomP);
             }
         }
-    }
-    if (pedidoReali > 0) {
-        JOptionPane.showMessageDialog(null, "Su pedido fue agregado");
-        modelo.setRowCount(0);
-        jTabla.setModel(modelo);
+        if (pedidoReali > 0) {
+            JOptionPane.showMessageDialog(null, "Su pedido fue agregado");
+            modelo.setRowCount(0);
+            jTabla.setModel(modelo);
 
-        if ((modelo.getRowCount() == 0)) {
-            jtPrecioTotal.setText("0.0");
-            jcMesa.setEnabled(true);
-            jcHora.setEnabled(true);
-            jdFecha.setEnabled(true);
+            if ((modelo.getRowCount() == 0)) {
+                jtPrecioTotal.setText("0.0");
+                jcMesa.setEnabled(true);
+                jcHora.setEnabled(true);
+                jdFecha.setEnabled(true);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo agregar el pedido");
         }
-    } else {
-        JOptionPane.showMessageDialog(null, "No se pudo agregar el pedido");
-    }
     }//GEN-LAST:event_jbRealizarPedidoActionPerformed
 
     private void jcProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcProductoActionPerformed
@@ -510,10 +509,6 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
-
-    private void jcMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcMesaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcMesaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -41,8 +41,9 @@ public class MesaData {
     public Mesa ObtenerMesaxID(int idmesa) {
         Mesa mesa = null;
         try {
-            Statement ps = con.createStatement();
-            ResultSet rs = ps.executeQuery("SELECT * FROM mesa WHERE Estado = 1 ");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM mesa WHERE idMesa = ? AND Estado = 1");
+            ps.setInt(1, idmesa);
+            ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 mesa = new Mesa();
@@ -51,12 +52,12 @@ public class MesaData {
                 mesa.setCapacidad(rs.getInt("Capacidad"));
                 mesa.setEstado(true);
             } else {
-                System.out.println("La Mesa no existe");
-                ps.close();
+                System.out.println("La Mesa no existe o está ocupada");
             }
 
+            ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Mesa " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa: " + ex.getMessage());
         }
 
         return mesa;
@@ -92,9 +93,9 @@ public class MesaData {
             ps.setInt(1, IdMesa);
             int res = ps.executeUpdate();
             if (res > 0) {
-                JOptionPane.showMessageDialog(null,"Mesa Eliminada");
+                JOptionPane.showMessageDialog(null, "Mesa Eliminada");
             } else {
-                JOptionPane.showMessageDialog(null,"Error al eliminar");
+                JOptionPane.showMessageDialog(null, "Error al eliminar");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a eliminar la Mesa " + ex.getMessage());

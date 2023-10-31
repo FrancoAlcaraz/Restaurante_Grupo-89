@@ -10,7 +10,6 @@ import Entidades.Pedidos;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;

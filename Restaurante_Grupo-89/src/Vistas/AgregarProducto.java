@@ -6,7 +6,6 @@
 package Vistas;
 
 import AccesoADatos.CategoriaData;
-import AccesoADatos.PedidosData;
 import AccesoADatos.ProductoData;
 import Entidades.Categoria;
 import Entidades.Producto;
@@ -34,6 +33,11 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         initComponents();
         cargarcombo();
         cargarProducto();
+        jTextNombre.setText("");
+        jTextPrecio.setText("");
+        jTextStock.setText("");
+        jrActivo.setSelected(false);
+        jrDesactivo.setSelected(false);
         num(jTextPrecio);
         num(jTextStock);
     }
@@ -283,12 +287,10 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         jTextStock.setText("");
         jrActivo.setSelected(false);
         jrDesactivo.setSelected(false);
-
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
-
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -376,7 +378,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                     idcategoria = 6;
                 }
                 boolean productoEncontrado = false;
-                
+
                 for (Producto producto : lista) {
                     if (producto != null && idproducto == producto.getIdProducto()) {
                         producto.setNombre(nNombre);
@@ -443,13 +445,13 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jproductoAgregadosItemStateChanged
 
     private void jrActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrActivoActionPerformed
-        if(jrActivo.isSelected()){
+        if (jrActivo.isSelected()) {
             jrDesactivo.setSelected(false);
         }
     }//GEN-LAST:event_jrActivoActionPerformed
 
     private void jrDesactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrDesactivoActionPerformed
-       if(jrDesactivo.isSelected()){
+        if (jrDesactivo.isSelected()) {
             jrActivo.setSelected(false);
         }
     }//GEN-LAST:event_jrDesactivoActionPerformed

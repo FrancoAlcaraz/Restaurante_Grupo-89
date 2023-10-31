@@ -71,7 +71,7 @@ public class Menu extends javax.swing.JFrame {
         bAgregarMesero.setBackground(java.awt.Color.white);
         bAgregarMesero.setFont(new java.awt.Font("DejaVu Serif", 0, 12)); // NOI18N
         bAgregarMesero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/camarero.png"))); // NOI18N
-        bAgregarMesero.setText("Agregar Mesero");
+        bAgregarMesero.setText("Mesero");
         bAgregarMesero.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
         bAgregarMesero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,7 +82,7 @@ public class Menu extends javax.swing.JFrame {
         btnAgregarMesa.setBackground(java.awt.Color.white);
         btnAgregarMesa.setFont(new java.awt.Font("DejaVu Serif", 0, 12)); // NOI18N
         btnAgregarMesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/MesasYSillas.png"))); // NOI18N
-        btnAgregarMesa.setText("Agregar Mesa");
+        btnAgregarMesa.setText(" Mesa");
         btnAgregarMesa.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
         btnAgregarMesa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +93,7 @@ public class Menu extends javax.swing.JFrame {
         btnAgregarP.setBackground(java.awt.Color.white);
         btnAgregarP.setFont(new java.awt.Font("DejaVu Serif", 0, 12)); // NOI18N
         btnAgregarP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/CopaTenedor.png"))); // NOI18N
-        btnAgregarP.setText("Agregar Producto");
+        btnAgregarP.setText("Producto");
         btnAgregarP.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
         btnAgregarP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

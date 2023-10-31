@@ -28,7 +28,12 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
     public AgregarMesero() {
         this.setContentPane(fondo);
         initComponents();
-        carcarcombo();
+        cargarcombo();
+        jNombre.setText("");
+        jDni.setText("");
+        jId.setText("");
+        inactivo.setSelected(false);
+        jActivo.setSelected(false);
         num(jDni);
         validarLetra(jNombre);
     }
@@ -91,7 +96,7 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Agregar Mesero");
+        jLabel1.setText("Mesero");
 
         jLabel2.setBackground(java.awt.Color.white);
         jLabel2.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
@@ -172,7 +177,7 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
         jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel5.setOpaque(true);
 
-        jActivo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jActivo.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
         jActivo.setText("Activo");
         jActivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,7 +185,7 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
             }
         });
 
-        inactivo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        inactivo.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
         inactivo.setText("Inactivo");
         inactivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,11 +219,11 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
                         .addGap(44, 44, 44))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
+                        .addGap(49, 49, 49)
                         .addComponent(jActivo)
-                        .addGap(50, 50, 50)
+                        .addGap(46, 46, 46)
                         .addComponent(inactivo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -244,7 +249,7 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jId)
                     .addComponent(jComboMesero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,7 +296,6 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
                 String nombre = jNombre.getText();
                 int dni = Integer.parseInt(jDni.getText());
 
-                // Verifica si el DNI ya existe en la lista de Meseros
                 boolean dniExistente = false;
                 for (Mesero mesero : listaMeseros) {
                     if (mesero.getDni() == dni) {
@@ -326,14 +330,14 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
         jNombre.setText("");
         jDni.setText("");
         jId.setText("");
-        btngrupo.clearSelection();
+        inactivo.setSelected(false);
+        jActivo.setSelected(false);
     }//GEN-LAST:event_jLimpiarActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
         MeseroData ms = new MeseroData();
         List<Mesero> meseros = ms.obtenerMeseros();
 
-        // Verificar si jId es un número válido
         try {
             int id = Integer.parseInt(jId.getText());
 
@@ -344,11 +348,11 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
                 String nombre = jNombre.getText();
                 int dni = Integer.parseInt(jDni.getText());
 
-                boolean encontrado = false; // Variable para verificar si se ha encontrado el Mesero
+                boolean encontrado = false;
                 for (Mesero mesero : meseros) {
                     if (id == mesero.getIdMesero()) {
                         encontrado = true;
-                        break; // Salir del bucle una vez que se ha encontrado el Mesero
+                        break; 
                     }
                 }
 
@@ -382,9 +386,11 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
                         jId.setText(String.valueOf(mesero1.getIdMesero()));
                         if (mesero1.isEstado() == true) {
                             jActivo.setSelected(true);
+                             inactivo.setSelected(false);
                         }
                         if (mesero1.isEstado() == false) {
                             inactivo.setSelected(true);
+                            jActivo.setSelected(false);
                         }
                     }
                 }
@@ -428,7 +434,7 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
     private javax.swing.JButton modificar;
     // End of variables declaration//GEN-END:variables
 
-    public void carcarcombo() {
+    public void cargarcombo() {
         MeseroData md = new MeseroData();
         List<Mesero> list = md.obtenerMeseros();
         for (int i = 0; i < list.size(); i++) {

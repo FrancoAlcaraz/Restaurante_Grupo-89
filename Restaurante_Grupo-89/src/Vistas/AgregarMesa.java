@@ -20,8 +20,10 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
         this.setContentPane(fondo);
         initComponents();
         combo();
+        LimpiarVentanas();
         num(jNumero);
         num(jcapacidad);
+        
     }
 
     /**
@@ -267,7 +269,7 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        LimpiarVentadas();
+        LimpiarVentanas();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -347,10 +349,11 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rbnLibre;
     private javax.swing.JRadioButton rbnOcupada;
     // End of variables declaration//GEN-END:variables
- public void LimpiarVentadas() {
+ public void LimpiarVentanas() {
         jNumero.setText("");
         jcapacidad.setText("");
-        GroupEstado1.clearSelection();
+        rbnLibre.setSelected(false);
+        rbnOcupada.setSelected(false);
     }
 
     public void num(JTextField a) {

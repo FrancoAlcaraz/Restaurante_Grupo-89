@@ -169,6 +169,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="14" style="0"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Ingrese DNI sin punto &quot;.&quot; "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -212,6 +213,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="14" style="0"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Ingrese Nombre"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jAgregar">
@@ -352,6 +354,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="14" style="0"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Al agregar un nuevo Mesero,por favor deje el campo &quot;ID&quot; vacio"/>
           </Properties>
         </Component>
       </SubComponents>

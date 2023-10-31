@@ -106,6 +106,7 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
         jLabel2.setOpaque(true);
 
         jDni.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jDni.setToolTipText("Ingrese DNI sin punto \".\" ");
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
@@ -122,6 +123,7 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
         jLabel4.setOpaque(true);
 
         jNombre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jNombre.setToolTipText("Ingrese Nombre");
 
         jAgregar.setBackground(java.awt.Color.white);
         jAgregar.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
@@ -199,6 +201,7 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
         });
 
         jId.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jId.setToolTipText("Al agregar un nuevo Mesero,por favor deje el campo \"ID\" vacio");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

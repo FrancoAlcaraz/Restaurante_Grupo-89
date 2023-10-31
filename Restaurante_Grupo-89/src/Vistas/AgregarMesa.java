@@ -284,12 +284,12 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
     private void jmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmodificarActionPerformed
         Mesa mesa = (Mesa) jComboBox1.getSelectedItem();
         if (mesa != null) {
-            if (jNumero.getText().isEmpty() && jcapacidad.getText().isEmpty() ) {
+            if (jNumero.getText().isEmpty() && jcapacidad.getText().isEmpty() && !rbnLibre.isSelected() || !rbnOcupada.isSelected()) {
                 JOptionPane.showMessageDialog(null, "No deje campos vacios al modificar");
             }
             try {
                 
-                boolean estado = false;
+                boolean estado = true;
                 int idmesa = mesa.getIdMesa();
                 int numeroMesa=mesa.getNumero();
                 int nMesa = Integer.parseInt(jNumero.getText());
@@ -303,15 +303,11 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
                 List<Mesa> list = md.ObtenerMesas();
                 for (Mesa mesa1 : list) {
                     if (idmesa == mesa1.getIdMesa()&& mesa1 != null) {
-                      if(mesa1.getNumero()==numeroMesa){
-                      JOptionPane.showMessageDialog(null, "La mesa a modificar ya existe");
-                      return;
-                      }else{
-                        mesa1.setIdMesa(idmesa);
+                       mesa1.setIdMesa(idmesa);
                         mesa1.setNumero(nMesa);
                         mesa1.setCapacidad(nCapacidad);
                         mesa1.setEstado(estado);
-                        md.ModificarMesa(mesa1);}
+                        md.ModificarMesa(mesa1);
                     }
                 }
             } catch (NumberFormatException e) {

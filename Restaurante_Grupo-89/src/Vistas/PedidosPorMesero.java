@@ -333,145 +333,194 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
             jMesero.addItem(mesero);
         }
     }
-
+    
     public void mostrar() {
-        Mesero seleccionado = (Mesero) jMesero.getSelectedItem();
-        if (seleccionado != null) {
-            modelo.setRowCount(0);
-            int idmesero = seleccionado.getIdMesero();
-            PedidosData pd = new PedidosData();
-            MesaData md = new MesaData();
-            List<Pedidos> lista = pd.ListarPedidos();
-            List<Mesa> listamesa = md.ObtenerMesas();
+    Mesero seleccionado = (Mesero) jMesero.getSelectedItem();
+    if (seleccionado != null) {
+        modelo.setRowCount(0);
+        int idmesero = seleccionado.getIdMesero();
+        PedidosData pd = new PedidosData();
+        MesaData md = new MesaData();
+        List<Pedidos> lista = pd.ListarPedidos();
+        List<Mesa> listamesa = md.ObtenerMesas();
 
-            for (int i = 0; i < lista.size(); i++) {
-                Pedidos pedido = lista.get(i);
-                if (pedido.getMesero().getIdMesero() == idmesero) {
-                    int nroPedido = pedido.getNroPedido();
-                    boolean yaProcesado = false;
+        for (int i = 0; i < lista.size(); i++) {
+            Pedidos pedido = lista.get(i);
+            if (pedido.getMesero().getIdMesero() == idmesero) {
+                int nroPedido = pedido.getNroPedido();
+                boolean yaProcesado = false;
 
-                    for (int j = 0; j < i; j++) {
-                        if (lista.get(j).getNroPedido() == nroPedido) {
-                            yaProcesado = true;
-                            break;
-                        }
+                for (int j = 0; j < i; j++) {
+                    if (lista.get(j).getNroPedido() == nroPedido) {
+                        yaProcesado = true;
+                        break;
                     }
-                    if (!yaProcesado) {
-                        for (Mesa mesa : listamesa) {
-                            if (mesa != null && pedido.getMesa().getIdMesa() == mesa.getIdMesa()) {
-                                int NroMesa = mesa.getNumero();
-                                String estadoPedido = pedido.isEstado() ? "Realizado" : "Pendiente";
-                                double precioTotal = 0.0;
-                                int contadorProductos = 0;
+                }
 
-                                for (Pedidos pedido2 : lista) {
-                                    if (pedido2.getNroPedido() == nroPedido) {
-                                        Double precio = pedido2.getProducto().getPrecio();
-                                        precioTotal += precio;
-                                        contadorProductos++;
-                                    }
+                if (!yaProcesado) {
+                    for (Mesa mesa : listamesa) {
+                        if (mesa != null && pedido.getMesa().getIdMesa() == mesa.getIdMesa()) {
+                            int NroMesa = mesa.getNumero();
+                            String estadoPedido = pedido.isEstado() ? "Realizado" : "Pendiente";
+                            double precioTotal = 0.0;
+                            int contadorProductos = 0;
+
+                            for (Pedidos pedido2 : lista) {
+                                if (pedido2.getNroPedido() == nroPedido) {
+                                    Double precio = pedido2.getProducto().getPrecio();
+                                    precioTotal += precio;
+                                    contadorProductos++;
                                 }
-                                modelo.addRow(new Object[]{nroPedido, precioTotal, contadorProductos, NroMesa, estadoPedido});
-                                break; 
                             }
+
+                            modelo.addRow(new Object[]{nroPedido, precioTotal, contadorProductos, NroMesa, estadoPedido});
+                            break; // Salir del bucle para evitar duplicados con el mismo número de pedido
                         }
                     }
                 }
             }
         }
     }
+}
 
+
+//    private void pendiente() {
+//        Mesero seleccionado = (Mesero) jMesero.getSelectedItem();
+//        if (seleccionado != null) {
+//            modelo.setRowCount(0);
+//            int idmesa = seleccionado.getIdMesero();
+//            boolean estado = true;
+//            PedidosData pd = new PedidosData();
+//
+//            List<Pedidos> lista = pd.ListarPedidos();
+//            if (rbnPendientes.isSelected()) {
+//                estado = false;
+//            }
+//
+//            int nroPedidoProcesado = -1;
+//            double precioTotal = 0.0;
+//            int NroMesa = 0;
+//            int contadorProductos = 0;
+//
+//            for (Pedidos pedido : lista) {
+//                if (pedido != null && pedido.isEstado() == estado && pedido.getMesero().getIdMesero() == idmesa) {
+//                    int nroPedido = pedido.getNroPedido();
+//                    if (nroPedido != nroPedidoProcesado) {
+//                        if (nroPedidoProcesado != -1) {
+//                            modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, NroMesa, "Pendiente"});
+//                        }
+//                        nroPedidoProcesado = nroPedido;
+//                        precioTotal = 0.0;
+//                        contadorProductos = 0;
+//                        NroMesa = pedido.getMesa().getNumero();
+//                    }
+//
+//                    Double precio = pedido.getProducto().getPrecio();
+//                    precioTotal += precio;
+//                    contadorProductos++;
+//                }
+//            }
+//            if (nroPedidoProcesado != -1) {
+//                modelo.addRow(new Object[]{nroPedidoProcesado, precioTotal, contadorProductos, NroMesa, "Pendiente"});
+//            }
+//        }
+//    }
     private void pendiente() {
-        Mesero seleccionado = (Mesero) jMesero.getSelectedItem();
-        if (seleccionado != null) {
-            modelo.setRowCount(0);
-            int idmesero = seleccionado.getIdMesero();
-            PedidosData pd = new PedidosData();
-            MesaData md = new MesaData();
-            List<Pedidos> lista = pd.ListarPedidos();
-            List<Mesa> listamesa = md.ObtenerMesas();
+    Mesero seleccionado = (Mesero) jMesero.getSelectedItem();
+    if (seleccionado != null) {
+        modelo.setRowCount(0);
+        int idmesero = seleccionado.getIdMesero();
+        PedidosData pd = new PedidosData();
+        MesaData md = new MesaData();
+        List<Pedidos> lista = pd.ListarPedidos();
+        List<Mesa> listamesa = md.ObtenerMesas();
 
-            for (int i = 0; i < lista.size(); i++) {
-                Pedidos pedido = lista.get(i);
-                if (pedido.getMesero().getIdMesero() == idmesero && pedido.isEstado()) {
-                    int nroPedido = pedido.getNroPedido();
-                    boolean yaProcesado = false;
+        for (int i = 0; i < lista.size(); i++) {
+            Pedidos pedido = lista.get(i);
+            if (pedido.getMesero().getIdMesero() == idmesero && pedido.isEstado()) {
+                int nroPedido = pedido.getNroPedido();
+                boolean yaProcesado = false;
 
-                    for (int j = 0; j < i; j++) {
-                        if (lista.get(j).getNroPedido() == nroPedido) {
-                            yaProcesado = true;
-                            break;
-                        }
+                for (int j = 0; j < i; j++) {
+                    if (lista.get(j).getNroPedido() == nroPedido) {
+                        yaProcesado = true;
+                        break;
                     }
-                    if (!yaProcesado) {
-                        for (Mesa mesa : listamesa) {
-                            if (mesa != null && pedido.getMesa().getIdMesa() == mesa.getIdMesa()) {
-                                int NroMesa = mesa.getNumero();
-                                String estadoPedido = "Pendiente";
-                                double precioTotal = 0.0;
-                                int contadorProductos = 0;
+                }
 
-                                for (Pedidos pedido2 : lista) {
-                                    if (pedido2.getNroPedido() == nroPedido) {
-                                        Double precio = pedido2.getProducto().getPrecio();
-                                        precioTotal += precio;
-                                        contadorProductos++;
-                                    }
+                if (!yaProcesado) {
+                    for (Mesa mesa : listamesa) {
+                        if (mesa != null && pedido.getMesa().getIdMesa() == mesa.getIdMesa()) {
+                            int NroMesa = mesa.getNumero();
+                            String estadoPedido = "Pendiente";
+                            double precioTotal = 0.0;
+                            int contadorProductos = 0;
+
+                            for (Pedidos pedido2 : lista) {
+                                if (pedido2.getNroPedido() == nroPedido) {
+                                    Double precio = pedido2.getProducto().getPrecio();
+                                    precioTotal += precio;
+                                    contadorProductos++;
                                 }
-                                modelo.addRow(new Object[]{nroPedido, precioTotal, contadorProductos, NroMesa, estadoPedido});
-                                break; 
                             }
+
+                            modelo.addRow(new Object[]{nroPedido, precioTotal, contadorProductos, NroMesa, estadoPedido});
+                            break; // Salir del bucle para evitar duplicados con el mismo número de pedido
                         }
                     }
                 }
             }
         }
     }
+}
+
 
     private void realizado() {
-        Mesero seleccionado = (Mesero) jMesero.getSelectedItem();
-        if (seleccionado != null) {
-            modelo.setRowCount(0);
-            int idmesero = seleccionado.getIdMesero();
-            PedidosData pd = new PedidosData();
-            MesaData md = new MesaData();
-            List<Pedidos> lista = pd.ListarPedidos();
-            List<Mesa> listamesa = md.ObtenerMesas();
+         Mesero seleccionado = (Mesero) jMesero.getSelectedItem();
+    if (seleccionado != null) {
+        modelo.setRowCount(0);
+        int idmesero = seleccionado.getIdMesero();
+        PedidosData pd = new PedidosData();
+        MesaData md = new MesaData();
+        List<Pedidos> lista = pd.ListarPedidos();
+        List<Mesa> listamesa = md.ObtenerMesas();
 
-            for (int i = 0; i < lista.size(); i++) {
-                Pedidos pedido = lista.get(i);
-                if (pedido.getMesero().getIdMesero() == idmesero && !pedido.isEstado()) {
-                    int nroPedido = pedido.getNroPedido();
-                    boolean yaProcesado = false;
+        for (int i = 0; i < lista.size(); i++) {
+            Pedidos pedido = lista.get(i);
+            if (pedido.getMesero().getIdMesero() == idmesero && !pedido.isEstado()) {
+                int nroPedido = pedido.getNroPedido();
+                boolean yaProcesado = false;
 
-                    for (int j = 0; j < i; j++) {
-                        if (lista.get(j).getNroPedido() == nroPedido) {
-                            yaProcesado = true;
-                            break;
-                        }
+                for (int j = 0; j < i; j++) {
+                    if (lista.get(j).getNroPedido() == nroPedido) {
+                        yaProcesado = true;
+                        break;
                     }
-                    if (!yaProcesado) {
-                        for (Mesa mesa : listamesa) {
-                            if (mesa != null && pedido.getMesa().getIdMesa() == mesa.getIdMesa()) {
-                                int NroMesa = mesa.getNumero();
-                                String estadoPedido = "Realizado";
-                                double precioTotal = 0.0;
-                                int contadorProductos = 0;
+                }
 
-                                for (Pedidos pedido2 : lista) {
-                                    if (pedido2.getNroPedido() == nroPedido) {
-                                        Double precio = pedido2.getProducto().getPrecio();
-                                        precioTotal += precio;
-                                        contadorProductos++;
-                                    }
+                if (!yaProcesado) {
+                    for (Mesa mesa : listamesa) {
+                        if (mesa != null && pedido.getMesa().getIdMesa() == mesa.getIdMesa()) {
+                            int NroMesa = mesa.getNumero();
+                            String estadoPedido = "Realizado";
+                            double precioTotal = 0.0;
+                            int contadorProductos = 0;
+
+                            for (Pedidos pedido2 : lista) {
+                                if (pedido2.getNroPedido() == nroPedido) {
+                                    Double precio = pedido2.getProducto().getPrecio();
+                                    precioTotal += precio;
+                                    contadorProductos++;
                                 }
-                                modelo.addRow(new Object[]{nroPedido, precioTotal, contadorProductos, NroMesa, estadoPedido});
-                                break;
                             }
+
+                            modelo.addRow(new Object[]{nroPedido, precioTotal, contadorProductos, NroMesa, estadoPedido});
+                            break; // Salir del bucle para evitar duplicados con el mismo número de pedido
                         }
                     }
                 }
             }
         }
     }
+}
 }

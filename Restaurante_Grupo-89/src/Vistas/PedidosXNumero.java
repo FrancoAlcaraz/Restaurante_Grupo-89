@@ -10,7 +10,6 @@ import Entidades.Pedidos;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -262,9 +261,13 @@ private void combo() {
         List<Pedidos> lista = pd.ListarPedidos();
         int numero = 0;
         for (Pedidos pedido : lista) {
+            
             if (pedido.getNroPedido() != numero) {
+                System.out.println(pedido);
                 jnumeros.addItem(pedido);
-                numero = numero + 1;
+                numero = pedido.getNroPedido();
+                System.out.println("Numero"+numero);
+                
             }
         }
     }

@@ -271,7 +271,7 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMeseroActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jMeseroActionPerformed
 
     private void jMeseroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jMeseroItemStateChanged

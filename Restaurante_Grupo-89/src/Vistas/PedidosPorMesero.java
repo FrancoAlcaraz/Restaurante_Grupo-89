@@ -156,7 +156,7 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
         rbnRealizadas.setBackground(new java.awt.Color(255, 255, 255));
         rbnGrouppedidos.add(rbnRealizadas);
         rbnRealizadas.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
-        rbnRealizadas.setText("Pedidos Realizados");
+        rbnRealizadas.setText("Pedidos Pendientes");
         rbnRealizadas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         rbnRealizadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,7 +167,7 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
         rbnPendientes.setBackground(new java.awt.Color(255, 255, 255));
         rbnGrouppedidos.add(rbnPendientes);
         rbnPendientes.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
-        rbnPendientes.setText("Pedidos Pendientes");
+        rbnPendientes.setText("Pedidos Realizados");
         rbnPendientes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         rbnPendientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,15 +189,15 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(191, 191, 191))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jMesero, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(rbnPendientes, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(28, 28, 28)
-                                .addComponent(rbnRealizadas)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(rbnPendientes, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(rbnRealizadas))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(59, Short.MAX_VALUE))))
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -213,13 +213,13 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
                 .addGap(43, 43, 43)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jMesero)
                         .addComponent(rbnRealizadas)
                         .addComponent(rbnPendientes))
-                    .addComponent(jMesero)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -410,7 +410,7 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
                         for (Mesa mesa : listamesa) {
                             if (mesa != null && pedido.getMesa().getIdMesa() == mesa.getIdMesa()) {
                                 int NroMesa = mesa.getNumero();
-                                String estadoPedido = "Pendiente";
+                                String estadoPedido = "Realizado";
                                 double precioTotal = 0.0;
                                 int contadorProductos = 0;
 
@@ -458,7 +458,7 @@ public class PedidosPorMesero extends javax.swing.JInternalFrame {
                         for (Mesa mesa : listamesa) {
                             if (mesa != null && pedido.getMesa().getIdMesa() == mesa.getIdMesa()) {
                                 int NroMesa = mesa.getNumero();
-                                String estadoPedido = "Realizado";
+                                String estadoPedido = "Pendiente";
                                 double precioTotal = 0.0;
                                 int contadorProductos = 0;
 

@@ -350,7 +350,6 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Seleccione la cantidad de productos que desea agregar");
                 return;
             }
-
             LocalDate hoy = LocalDate.now();
             LocalTime ahora = LocalTime.now();
             if (fecha.equals(hoy) && hora.isBefore(ahora)) {
@@ -376,7 +375,6 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
             for (int i = 0; i <= cantidadDisponible - cantidadSeleccionada; i++) {
                 jcCantidad.addItem(i);
             }
-
             pre += precioTotal;
             jtPrecioTotal.setText(String.valueOf(pre));
 
@@ -426,6 +424,7 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
                 .atZone(ZoneId.systemDefault()).toLocalDate();
         int pedidoReali = 0;
         int cont = modelo.getRowCount();
+        Mesero meseroAsignado = new Mesero();
         List<String> productos = new ArrayList<>();
         List<Integer> cantidades = new ArrayList();
 
@@ -470,7 +469,7 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
                         List<Mesero> meserosDisponibles = med.obtenerMeseros();
                         if (!meserosDisponibles.isEmpty()) {
                             int indiceAleatorio = new Random().nextInt(meserosDisponibles.size());
-                            Mesero meseroAsignado = meserosDisponibles.get(indiceAleatorio);
+                            meseroAsignado = meserosDisponibles.get(indiceAleatorio);
                             Pedidos pedido = new Pedidos(producto, meseroAsignado,
                                     mesaSeleccionada, true, nroPedido, cantidadProducto, fecha, hora);
                             pd.AgregarPedido(pedido);
@@ -489,7 +488,8 @@ public class AgregarPedido extends javax.swing.JInternalFrame {
             }
         }
         if (pedidoReali > 0) {
-            JOptionPane.showMessageDialog(null, "Su pedido es el numero: " + nroPedido + "");
+            JOptionPane.showMessageDialog(null, "Su pedido es el numero: "
+                    + nroPedido + " y su mesero sera: " + meseroAsignado + " Disfrute su comida.");
             modelo.setRowCount(0);
             jTabla.setModel(modelo);
 

@@ -60,7 +60,8 @@ public class PedidosXNumero extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
-        jTablaPedidos.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
+        jTablaPedidos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTablaPedidos.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
         jTablaPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},

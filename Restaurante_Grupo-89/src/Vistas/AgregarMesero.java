@@ -295,7 +295,6 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
     private void jAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAgregarActionPerformed
         MeseroData ms = new MeseroData();
         List<Mesero> listaMeseros = ms.obtenerMeseros();
-
         if (jNombre.getText().isEmpty() || jDni.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "No dejes campos vacíos.");
         } else {
@@ -303,7 +302,6 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
                 boolean estado = true;
                 String nombre = jNombre.getText();
                 int dni = Integer.parseInt(jDni.getText());
-
                 boolean dniExistente = false;
                 for (Mesero mesero : listaMeseros) {
                     if (mesero.getDni() == dni) {
@@ -311,7 +309,6 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
                         break;
                     }
                 }
-
                 if (dniExistente) {
                     JOptionPane.showMessageDialog(null, "El DNI ya existe en la lista de Meseros.");
                 } else {
@@ -320,12 +317,14 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
                     } else if (inactivo.isSelected()) {
                         estado = false;
                     }
-
                     Mesero m = new Mesero(dni, nombre, estado);
-                    ms.AgregarMesero(m);
+                    int idMesero = ms.AgregarMesero(m);
+                    cargarcombo();
+
+                    JOptionPane.showMessageDialog(null, "Numero de ID es : " + idMesero);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "El id se ingresara automatico, deje el campo vacio");
+                JOptionPane.showMessageDialog(null, "El ID se ingresara automatico, deje el campo vacio");
             }
         }
     }//GEN-LAST:event_jAgregarActionPerformed
@@ -345,25 +344,21 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
         MeseroData ms = new MeseroData();
         List<Mesero> meseros = ms.obtenerMeseros();
-
         try {
             int id = Integer.parseInt(jId.getText());
-
             if (jNombre.getText().isEmpty() || jDni.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "No dejes campos vacíos.");
             } else {
                 boolean estado = true;
                 String nombre = jNombre.getText();
                 int dni = Integer.parseInt(jDni.getText());
-
                 boolean encontrado = false;
                 for (Mesero mesero : meseros) {
                     if (id == mesero.getIdMesero()) {
                         encontrado = true;
-                        break; 
+                        break;
                     }
                 }
-
                 if (!encontrado) {
                     JOptionPane.showMessageDialog(null, "No se ha encontrado un Mesero con el ID proporcionado.");
                 } else {
@@ -384,7 +379,6 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
         Integer dni = jComboMesero.getItemAt(jComboMesero.getSelectedIndex());
         if (dni != null) {
             try {
-
                 MeseroData ms = new MeseroData();
                 List<Mesero> list = ms.obtenerMeseros();
                 for (Mesero mesero1 : list) {
@@ -394,7 +388,7 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
                         jId.setText(String.valueOf(mesero1.getIdMesero()));
                         if (mesero1.isEstado() == true) {
                             jActivo.setSelected(true);
-                             inactivo.setSelected(false);
+                            inactivo.setSelected(false);
                         }
                         if (mesero1.isEstado() == false) {
                             inactivo.setSelected(true);
@@ -405,18 +399,17 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "ERROR numero");
             }
-
         }
     }//GEN-LAST:event_jComboMeseroItemStateChanged
 
     private void jActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jActivoActionPerformed
-        if(jActivo.isSelected()){
+        if (jActivo.isSelected()) {
             inactivo.setSelected(false);
         }
     }//GEN-LAST:event_jActivoActionPerformed
 
     private void inactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inactivoActionPerformed
-         if(inactivo.isSelected()){
+        if (inactivo.isSelected()) {
             jActivo.setSelected(false);
         }
     }//GEN-LAST:event_inactivoActionPerformed
@@ -453,7 +446,6 @@ public class AgregarMesero extends javax.swing.JInternalFrame {
 
             jComboMesero.addItem(list.get(i).getDni());
         }
-
     }
 
     class PanelImagen extends JPanel {

@@ -247,7 +247,7 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
 
             MesaData md = new MesaData();
             List<Mesa> m = md.ObtenerMesas();
-            
+
             if (rbnLibre.isSelected()) {
                 estadoMesa = true;
             } else if (rbnOcupada.isSelected()) {
@@ -261,11 +261,9 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "La Mesa ya Existe");
                     return;
                 }
-
             }
             Mesa mesa = new Mesa(numero, capacidad, estadoMesa);
             md.AgregarMesa(mesa);
-
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error: El número no es válido.");
         } catch (Exception e) {
@@ -284,35 +282,38 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
     private void jmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmodificarActionPerformed
         Mesa mesa = (Mesa) jComboBox1.getSelectedItem();
         if (mesa != null) {
-            if (jNumero.getText().isEmpty() && jcapacidad.getText().isEmpty() && !rbnLibre.isSelected() || !rbnOcupada.isSelected()) {
-                JOptionPane.showMessageDialog(null, "No deje campos vacios al modificar");
-            }
-            try {
-                
-                boolean estado = true;
-                int idmesa = mesa.getIdMesa();
-                int numeroMesa=mesa.getNumero();
-                int nMesa = Integer.parseInt(jNumero.getText());
-                int nCapacidad = Integer.parseInt(jcapacidad.getText());
-                if (rbnLibre.isSelected()) {
-                    estado = true;
-                } else if (rbnOcupada.isSelected()) {
-                    estado = false;
-                }
-                MesaData md = new MesaData();
-                List<Mesa> list = md.ObtenerMesas();
-                for (Mesa mesa1 : list) {
-                    if (idmesa == mesa1.getIdMesa()&& mesa1 != null) {
-                       mesa1.setIdMesa(idmesa);
-                        mesa1.setNumero(nMesa);
-                        mesa1.setCapacidad(nCapacidad);
-                        mesa1.setEstado(estado);
-                        md.ModificarMesa(mesa1);
-                    }
-                }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "El formato es en numero ");
+            String numeroTexto = jNumero.getText();
+            String capacidadTexto = jcapacidad.getText();
+            boolean estado = rbnLibre.isSelected();
 
+            if (numeroTexto.isEmpty() || capacidadTexto.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No deje campos vacíos al modificar.");
+            } else {
+                try {
+                    int idMesa = mesa.getIdMesa();
+                    int nuevoNumeroMesa = Integer.parseInt(numeroTexto);
+                    int nuevaCapacidad = Integer.parseInt(capacidadTexto);
+
+                    MesaData md = new MesaData();
+                    List<Mesa> list = md.ObtenerMesas();
+                    boolean numeroRepetido = false;
+                    for (Mesa mesa1 : list) {
+                        if (mesa1.getNumero() == nuevoNumeroMesa && mesa1.getIdMesa() != idMesa) {
+                            numeroRepetido = true;
+                            break;
+                        }
+                    }
+                    if (numeroRepetido) {
+                        JOptionPane.showMessageDialog(null, "El número de mesa ya existe.");
+                    } else {
+                        mesa.setNumero(nuevoNumeroMesa);
+                        mesa.setCapacidad(nuevaCapacidad);
+                        mesa.setEstado(estado);
+                        md.ModificarMesa(mesa);
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "El formato debe ser un número.");
+                }
             }
         }
     }//GEN-LAST:event_jmodificarActionPerformed
@@ -380,7 +381,7 @@ public class AgregarMesa extends javax.swing.JInternalFrame {
         MesaData md = new MesaData();
         List<Mesa> list = md.ObtenerMesas();
         for (Mesa mesa : list) {
-            
+
             jComboBox1.addItem(mesa);
 
         }

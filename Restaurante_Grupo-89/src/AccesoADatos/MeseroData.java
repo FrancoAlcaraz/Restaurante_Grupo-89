@@ -22,25 +22,27 @@ public class MeseroData {
         con = Conexion.getConexion();
     }
 
-    public void AgregarMesero(Mesero mesero) {
-        String sql = "INSERT INTO `mesero`(`dni`, `nombre`, `estado`) VALUES (?,?,?)";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+    public int AgregarMesero(Mesero mesero) {
+    String sql = "INSERT INTO `mesero`(`dni`, `nombre`, `estado`) VALUES (?,?,?)";
+    try {
+        PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setInt(1, mesero.getDni());
-            ps.setString(2, mesero.getNombre());
-            ps.setBoolean(3, mesero.isEstado());
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                mesero.setIdMesero(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Mesero Agregado");
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos ");
+        ps.setInt(1, mesero.getDni());
+        ps.setString(2, mesero.getNombre());
+        ps.setBoolean(3, mesero.isEstado());
+        ps.executeUpdate();
+        ResultSet rs = ps.getGeneratedKeys();
+        if (rs.next()) {
+            mesero.setIdMesero(rs.getInt(1));
+            return mesero.getIdMesero(); // Devuelve el ID generado
         }
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos ");
     }
+    
+    return -1; // Devuelve un valor predeterminado en caso de error
+}
 
     public Mesero ObtenerMesero(int idmesero) {
         Mesero mesero = null;

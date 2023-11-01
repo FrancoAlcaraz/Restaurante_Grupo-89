@@ -62,28 +62,51 @@ public class MesaData {
         return mesa;
     }
 
+//    public List<Mesa> ObtenerMesas() {
+//        List<Mesa> mesas = new ArrayList<>();
+//        String sql = "SELECT `idMesa`, `numero`, `capacidad`, `estado` FROM `mesa` ";
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ResultSet rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                Mesa mesa = new Mesa();
+//                mesa.setNumero(rs.getInt("numero"));
+//                mesa.setCapacidad(rs.getInt("capacidad"));
+//                mesa.setIdMesa(rs.getInt("idMesa"));
+//                mesa.setEstado(rs.getBoolean("estado"));
+//                mesas.add(mesa);
+//            }
+//            ps.close();
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Mesa " + ex.getMessage());
+//        }
+//
+//        return mesas;
+//    }
     public List<Mesa> ObtenerMesas() {
-        List<Mesa> mesas = new ArrayList<>();
-        String sql = "SELECT `idMesa`, `numero`, `capacidad`, `estado` FROM `mesa` ";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+    List<Mesa> mesas = new ArrayList<>();
+    String sql = "SELECT `idMesa`, `numero`, `capacidad`, `estado` FROM `mesa` ";
+    
+    try (PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
 
-            while (rs.next()) {
-                Mesa mesa = new Mesa();
-                mesa.setNumero(rs.getInt("numero"));
-                mesa.setCapacidad(rs.getInt("capacidad"));
-                mesa.setIdMesa(rs.getInt("idMesa"));
-                mesa.setEstado(rs.getBoolean("estado"));
-                mesas.add(mesa);
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Mesa " + ex.getMessage());
+        while (rs.next()) {
+            Mesa mesa = new Mesa();
+            mesa.setNumero(rs.getInt("numero"));
+            mesa.setCapacidad(rs.getInt("capacidad"));
+            mesa.setIdMesa(rs.getInt("idMesa"));
+            mesa.setEstado(rs.getBoolean("estado"));
+            mesas.add(mesa);
         }
 
-        return mesas;
+    } catch (SQLException ex) {
+        // Manejo de excepciones: Puedes registrar el error o notificar de otra manera.
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa: " + ex.getMessage());
     }
+
+    return mesas;
+}
 
     public void EliminarMesa(int IdMesa) {
         String sql = "DELETE FROM `mesa` WHERE idMesa=?";

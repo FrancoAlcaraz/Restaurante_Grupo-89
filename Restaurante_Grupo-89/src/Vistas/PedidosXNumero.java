@@ -264,7 +264,6 @@ private void combo() {
         for (Pedidos pedido : lista) {
             
             if (pedido.getNroPedido() != numero) {
-                System.out.println(pedido);
                 jnumeros.addItem(pedido);
                 numero = pedido.getNroPedido();
                 
